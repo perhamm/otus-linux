@@ -45,6 +45,7 @@ grub2-mkconfig -o /boot/grub2/grub.cfg
 grub2-install /dev/sdb
 ```
 [пример](https://yadi.sk/i/tPBgyCykIQ_LmA)
+
 <br><br><br>
 ---
 Домашнее задание
