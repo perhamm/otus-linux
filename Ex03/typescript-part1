@@ -1,0 +1,1171 @@
+Script started on 2019-08-12 13:53:30+0300
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3[00m$ vagrunt[K[K[Kant ssh
+]0;vagrant@otuslinux:~[?1034h[vagrant@otuslinux ~]$ sudo -i
+]0;root@otuslinux:~[?1034h[root@otuslinux ~]# pvcreate /dev/sdb
+  Physical volume "/dev/sdb" successfully created.
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+├─sda1                    8:1    0    1M  0 part 
+├─sda2                    8:2    0    1G  0 part /boot
+└─sda3                    8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00 253:0    0 37,5G  0 lvm  /
+  └─VolGroup00-LogVol01 253:1    0  1,5G  0 lvm  [SWAP]
+sdb                       8:16   0   10G  0 disk 
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+sdf                       8:80   0   40G  0 disk 
+sdg                       8:96   0   40G  0 disk 
+sdh                       8:112  0   40G  0 disk 
+sdi                       8:128  0   40G  0 disk 
+sdj                       8:144  0   40G  0 disk 
+sdk                       8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# yum install lvm2 grub2 xfsdump -y
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: dedic.sh
+ * extras: dedic.sh
+ * updates: centos-mirror.rbc.ru
+Resolving Dependencies
+--> Running transaction check
+---> Package grub2.x86_64 1:2.02-0.65.el7.centos.2 will be obsoleted
+---> Package grub2.x86_64 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2.x86_64 1:2.02-0.76.el7.centos.1 will be obsoleting
+--> Processing Dependency: grub2-pc = 1:2.02-0.76.el7.centos.1 for package: 1:grub2-2.02-0.76.el7.centos.1.x86_64
+---> Package lvm2.x86_64 7:2.02.177-4.el7 will be updated
+---> Package lvm2.x86_64 7:2.02.180-10.el7_6.8 will be an update
+--> Processing Dependency: lvm2-libs = 7:2.02.180-10.el7_6.8 for package: 7:lvm2-2.02.180-10.el7_6.8.x86_64
+---> Package xfsdump.x86_64 0:3.1.7-1.el7 will be installed
+--> Processing Dependency: attr >= 2.0.0 for package: xfsdump-3.1.7-1.el7.x86_64
+--> Running transaction check
+---> Package attr.x86_64 0:2.4.46-13.el7 will be installed
+---> Package grub2-pc.x86_64 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2-pc.x86_64 1:2.02-0.76.el7.centos.1 will be an update
+--> Processing Dependency: grub2-tools-minimal = 1:2.02-0.76.el7.centos.1 for package: 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64
+--> Processing Dependency: grub2-tools-extra = 1:2.02-0.76.el7.centos.1 for package: 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64
+--> Processing Dependency: grub2-tools = 1:2.02-0.76.el7.centos.1 for package: 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64
+--> Processing Dependency: grub2-pc-modules = 1:2.02-0.76.el7.centos.1 for package: 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64
+--> Processing Dependency: grub2-common = 1:2.02-0.76.el7.centos.1 for package: 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64
+---> Package lvm2-libs.x86_64 7:2.02.177-4.el7 will be updated
+---> Package lvm2-libs.x86_64 7:2.02.180-10.el7_6.8 will be an update
+--> Processing Dependency: device-mapper-event = 7:1.02.149-10.el7_6.8 for package: 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64
+--> Running transaction check
+---> Package device-mapper-event.x86_64 7:1.02.146-4.el7 will be updated
+---> Package device-mapper-event.x86_64 7:1.02.149-10.el7_6.8 will be an update
+--> Processing Dependency: device-mapper-event-libs = 7:1.02.149-10.el7_6.8 for package: 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64
+--> Processing Dependency: device-mapper = 7:1.02.149-10.el7_6.8 for package: 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64
+---> Package grub2-common.noarch 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2-common.noarch 1:2.02-0.76.el7.centos.1 will be an update
+---> Package grub2-pc-modules.noarch 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2-pc-modules.noarch 1:2.02-0.76.el7.centos.1 will be an update
+---> Package grub2-tools.x86_64 1:2.02-0.65.el7.centos.2 will be obsoleted
+---> Package grub2-tools.x86_64 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2-tools.x86_64 1:2.02-0.76.el7.centos.1 will be obsoleting
+---> Package grub2-tools-extra.x86_64 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2-tools-extra.x86_64 1:2.02-0.76.el7.centos.1 will be obsoleting
+---> Package grub2-tools-minimal.x86_64 1:2.02-0.65.el7.centos.2 will be updated
+---> Package grub2-tools-minimal.x86_64 1:2.02-0.76.el7.centos.1 will be obsoleting
+--> Running transaction check
+---> Package device-mapper.x86_64 7:1.02.146-4.el7 will be updated
+--> Processing Dependency: device-mapper = 7:1.02.146-4.el7 for package: 7:device-mapper-libs-1.02.146-4.el7.x86_64
+---> Package device-mapper.x86_64 7:1.02.149-10.el7_6.8 will be an update
+---> Package device-mapper-event-libs.x86_64 7:1.02.146-4.el7 will be updated
+---> Package device-mapper-event-libs.x86_64 7:1.02.149-10.el7_6.8 will be an update
+--> Running transaction check
+---> Package device-mapper-libs.x86_64 7:1.02.146-4.el7 will be updated
+---> Package device-mapper-libs.x86_64 7:1.02.149-10.el7_6.8 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=============================================================================================================================================
+ Package                                   Arch                    Version                                    Repository                Size
+=============================================================================================================================================
+Installing:
+ grub2                                     x86_64                  1:2.02-0.76.el7.centos.1                   updates                   31 k
+     replacing  grub2.x86_64 1:2.02-0.65.el7.centos.2
+ grub2-tools                               x86_64                  1:2.02-0.76.el7.centos.1                   updates                  1.8 M
+     replacing  grub2-tools.x86_64 1:2.02-0.65.el7.centos.2
+ grub2-tools-extra                         x86_64                  1:2.02-0.76.el7.centos.1                   updates                  995 k
+     replacing  grub2-tools.x86_64 1:2.02-0.65.el7.centos.2
+ grub2-tools-minimal                       x86_64                  1:2.02-0.76.el7.centos.1                   updates                  172 k
+     replacing  grub2-tools.x86_64 1:2.02-0.65.el7.centos.2
+ xfsdump                                   x86_64                  3.1.7-1.el7                                base                     308 k
+Updating:
+ lvm2                                      x86_64                  7:2.02.180-10.el7_6.8                      updates                  1.3 M
+Installing for dependencies:
+ attr                                      x86_64                  2.4.46-13.el7                              base                      66 k
+Updating for dependencies:
+ device-mapper                             x86_64                  7:1.02.149-10.el7_6.8                      updates                  293 k
+ device-mapper-event                       x86_64                  7:1.02.149-10.el7_6.8                      updates                  189 k
+ device-mapper-event-libs                  x86_64                  7:1.02.149-10.el7_6.8                      updates                  188 k
+ device-mapper-libs                        x86_64                  7:1.02.149-10.el7_6.8                      updates                  321 k
+ grub2-common                              noarch                  1:2.02-0.76.el7.centos.1                   updates                  728 k
+ grub2-pc                                  x86_64                  1:2.02-0.76.el7.centos.1                   updates                   31 k
+ grub2-pc-modules                          noarch                  1:2.02-0.76.el7.centos.1                   updates                  846 k
+ lvm2-libs                                 x86_64                  7:2.02.180-10.el7_6.8                      updates                  1.1 M
+
+Transaction Summary
+=============================================================================================================================================
+Install  5 Packages (+1 Dependent package)
+Upgrade  1 Package  (+8 Dependent packages)
+
+Total download size: 8.2 M
+Downloading packages:
+Delta RPMs reduced 2.9 M of updates to 1.1 M (64% saved)
+(1/15): grub2-pc-modules-2.02-0.65.el7.centos.2_2.02-0.76.el7.centos.1.noarch.drpm                                    | 110 kB  00:00:00     
+(2/15): grub2-common-2.02-0.65.el7.centos.2_2.02-0.76.el7.centos.1.noarch.drpm                                        |  38 kB  00:00:00     
+(3/15): device-mapper-libs-1.02.146-4.el7_1.02.149-10.el7_6.8.x86_64.drpm                                             | 210 kB  00:00:00     
+/usr/share/doc/grub2-common-2.02/INSTALL: No such file or directory
+cannot reconstruct rpm from disk files
+(4/15): device-mapper-1.02.149-10.el7_6.8.x86_64.rpm                                                                  | 293 kB  00:00:00     
+(5/15): attr-2.4.46-13.el7.x86_64.rpm                                                                                 |  66 kB  00:00:00     
+(6/15): device-mapper-event-1.02.149-10.el7_6.8.x86_64.rpm                                                            | 189 kB  00:00:00     
+(8/15): device-mapper-event-libs-1.02.149-10.el7_6.8.x8 23% [===========                                   ]  0.0 B/s | 1.5 MB  --:--:-- ETA (7/15): grub2-2.02-0.76.el7.centos.1.x86_64.rpm                                                                       |  31 kB  00:00:00     
+(8/15): device-mapper-event-libs-1.02.149-10.el7_6.8.x86_64.rpm                                                       | 188 kB  00:00:00     
+(9/15): grub2-pc-2.02-0.76.el7.centos.1.x86_64.rpm                                                                    |  31 kB  00:00:00     
+(10/15): lvm2-libs-2.02.177-4.el7_2.02.180-10.el7_6.8.x86_64.drpm                                                     | 718 kB  00:00:00     
+(11/15): grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64.rpm                                                        | 172 kB  00:00:00     
+(12/15): grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64.rpm                                                          | 995 kB  00:00:00     
+(13/15): lvm2-2.02.180-10.el7_6.8.x86_64.rpm                                                                          | 1.3 MB  00:00:00     
+(14/15): xfsdump-3.1.7-1.el7.x86_64.rpm                                                                               | 308 kB  00:00:00     
+(15/15): grub2-tools-2.02-0.76.el7.centos.1.x86_64.rpm  75% [==================================-           ] 3.0 MB/s | 4.8 MB  00:00:00 ETA (15/15): grub2-tools-2.02-0.76.el7.centos.1.x86_64.rpm  77% [===================================-          ] 2.8 MB/s | 4.9 MB  00:00:00 ETA (15/15): grub2-tools-2.02-0.76.el7.centos.1.x86_64.rpm  94% [===========================================   ] 2.8 MB/s | 6.0 MB  00:00:00 ETA (15/15): grub2-tools-2.02-0.76.el7.centos.1.x86_64.rpm                                                                | 1.8 MB  00:00:01     
+Some delta RPMs failed to download or rebuild. Retrying..
+grub2-common-2.02-0.76.el7.centos.1.noarch.rpm          96% [============================================  ]  0.0 B/s | 701 kB  --:--:-- ETA grub2-common-2.02-0.76.el7.centos.1.noarch.rpm                                                                        | 728 kB  00:00:00     
+---------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                        2.8 MB/s | 7.1 MB  00:00:02     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [                                                                          ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#                                                                         ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [##                                                                        ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#####                                                                     ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#########                                                                 ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#######################                                                   ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#####################################                                     ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [##########################################                                ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [###############################################                           ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [####################################################                      ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#####################################################                     ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [###################################################################       ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [####################################################################      ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#####################################################################     ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [#######################################################################   ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64 [######################################################################### ]  1/28  Updating   : 7:device-mapper-1.02.149-10.el7_6.8.x86_64                                                                               1/28 
+  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [                                                                     ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [###########                                                          ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [######################                                               ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [#################################                                    ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [############################################                         ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [#######################################################              ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [############################################################         ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [################################################################     ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64 [#################################################################### ]  2/28  Updating   : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64                                                                          2/28 
+  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [                                                                        ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##                                                                      ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [####                                                                    ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#####                                                                   ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [######                                                                  ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#######                                                                 ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#########                                                               ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##########                                                              ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###########                                                             ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [############                                                            ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#############                                                           ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##############                                                          ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###############                                                         ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [################                                                        ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#################                                                       ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##################                                                      ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [####################                                                    ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#####################                                                   ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#######################                                                 ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#########################                                               ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##########################                                              ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [############################                                            ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#############################                                           ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##############################                                          ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###############################                                         ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [################################                                        ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#################################                                       ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##################################                                      ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###################################                                     ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [####################################                                    ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#####################################                                   ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [######################################                                  ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#######################################                                 ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#########################################                               ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##########################################                              ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###########################################                             ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [############################################                            ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##############################################                          ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [################################################                        ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#################################################                       ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###################################################                     ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [####################################################                    ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#####################################################                   ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [######################################################                  ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [########################################################                ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#########################################################               ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##########################################################              ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###########################################################             ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [############################################################            ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#############################################################           ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###############################################################         ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [################################################################        ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#################################################################       ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [##################################################################      ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [###################################################################     ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [####################################################################    ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [#####################################################################   ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [######################################################################  ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch [####################################################################### ]  3/28  Updating   : 1:grub2-common-2.02-0.76.el7.centos.1.noarch                                                                             3/28 
+  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [                                                                 ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [#####                                                            ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [############                                                     ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [##################                                               ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [########################                                         ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [##############################                                   ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [#####################################                            ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [###########################################                      ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [##################################################               ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [########################################################         ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [##############################################################   ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [###############################################################  ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64 [################################################################ ]  4/28  Installing : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64                                                                      4/28 
+  Updating   : 7:device-mapper-event-libs-1.02.149-10.el7_6.8.x86_64 [                                                               ]  5/28  Updating   : 7:device-mapper-event-libs-1.02.149-10.el7_6.8.x86_64 [#############################                                  ]  5/28  Updating   : 7:device-mapper-event-libs-1.02.149-10.el7_6.8.x86_64 [############################################################## ]  5/28  Updating   : 7:device-mapper-event-libs-1.02.149-10.el7_6.8.x86_64                                                                    5/28 
+  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [                                                                         ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#                                                                        ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##                                                                       ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###                                                                      ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [####                                                                     ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#####                                                                    ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [######                                                                   ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#######                                                                  ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [########                                                                 ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#########                                                                ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##########                                                               ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###########                                                              ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [############                                                             ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#############                                                            ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##############                                                           ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###############                                                          ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [################                                                         ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#################                                                        ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##################                                                       ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###################                                                      ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [####################                                                     ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#####################                                                    ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [######################                                                   ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#######################                                                  ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [########################                                                 ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#########################                                                ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##########################                                               ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###########################                                              ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [############################                                             ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#############################                                            ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##############################                                           ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###############################                                          ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [################################                                         ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#################################                                        ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##################################                                       ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###################################                                      ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [####################################                                     ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#####################################                                    ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [######################################                                   ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#######################################                                  ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [########################################                                 ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#########################################                                ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##########################################                               ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###########################################                              ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [############################################                             ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#############################################                            ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##############################################                           ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###############################################                          ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [################################################                         ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#################################################                        ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##################################################                       ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###################################################                      ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [####################################################                     ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#####################################################                    ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [######################################################                   ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#######################################################                  ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [########################################################                 ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#########################################################                ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##########################################################               ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###########################################################              ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [############################################################             ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#############################################################            ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##############################################################           ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###############################################################          ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [################################################################         ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#################################################################        ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [##################################################################       ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [###################################################################      ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [####################################################################     ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#####################################################################    ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [######################################################################   ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [#######################################################################  ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64 [######################################################################## ]  6/28  Installing : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64                                                                              6/28 
+  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [                                                                   ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#                                                                  ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##                                                                 ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###                                                                ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [####                                                               ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#####                                                              ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [######                                                             ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#######                                                            ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [########                                                           ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#########                                                          ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##########                                                         ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###########                                                        ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [############                                                       ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#############                                                      ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##############                                                     ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###############                                                    ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [################                                                   ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#################                                                  ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##################                                                 ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###################                                                ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [####################                                               ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#####################                                              ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [######################                                             ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#######################                                            ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [########################                                           ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#########################                                          ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##########################                                         ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###########################                                        ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [############################                                       ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#############################                                      ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##############################                                     ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###############################                                    ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [################################                                   ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#################################                                  ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##################################                                 ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###################################                                ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [####################################                               ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#####################################                              ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [######################################                             ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#######################################                            ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [########################################                           ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#########################################                          ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##########################################                         ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [############################################                       ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#############################################                      ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##############################################                     ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###############################################                    ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [################################################                   ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#################################################                  ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##################################################                 ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###################################################                ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [####################################################               ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#####################################################              ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [######################################################             ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [########################################################           ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#########################################################          ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##########################################################         ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###########################################################        ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [############################################################       ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#############################################################      ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [##############################################################     ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [###############################################################    ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [################################################################   ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [#################################################################  ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64 [################################################################## ]  7/28  Installing : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64                                                                        7/28 
+  Updating   : 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64 [                                                                    ]  8/28  Updating   : 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64 [#                                                                   ]  8/28  Updating   : 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64 [################################################################    ]  8/28  Updating   : 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64 [################################################################### ]  8/28  Updating   : 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64                                                                         8/28 
+  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [                                                                              ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#                                                                             ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##                                                                            ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###                                                                           ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#####                                                                         ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#######                                                                       ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#########                                                                     ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##########                                                                    ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [############                                                                  ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#############                                                                 ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##############                                                                ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [################                                                              ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#################                                                             ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##################                                                            ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [####################                                                          ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#####################                                                         ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [######################                                                        ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [########################                                                      ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#########################                                                     ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###########################                                                   ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [############################                                                  ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#############################                                                 ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###############################                                               ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#################################                                             ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##################################                                            ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###################################                                           ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#####################################                                         ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#######################################                                       ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#########################################                                     ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##########################################                                    ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###########################################                                   ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#############################################                                 ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##############################################                                ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [################################################                              ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#################################################                             ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##################################################                            ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [####################################################                          ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#####################################################                         ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [######################################################                        ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [########################################################                      ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#########################################################                     ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##########################################################                    ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [############################################################                  ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#############################################################                 ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###############################################################               ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#################################################################             ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [###################################################################           ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [####################################################################          ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#####################################################################         ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [######################################################################        ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [########################################################################      ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [#########################################################################     ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [##########################################################################    ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [############################################################################  ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64 [############################################################################# ]  9/28  Updating   : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64                                                                                   9/28 
+  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [                                                                    ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#                                                                   ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##                                                                  ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###                                                                 ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [####                                                                ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#####                                                               ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [######                                                              ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#######                                                             ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [########                                                            ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#########                                                           ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###########                                                         ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [############                                                        ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#############                                                       ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##############                                                      ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###############                                                     ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [################                                                    ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#################                                                   ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###################                                                 ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [####################                                                ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#####################                                               ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [######################                                              ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#######################                                             ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [########################                                            ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#########################                                           ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###########################                                         ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [############################                                        ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##############################                                      ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [################################                                    ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##################################                                  ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [####################################                                ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#####################################                               ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [######################################                              ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#######################################                             ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [########################################                            ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#########################################                           ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##########################################                          ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###########################################                         ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [############################################                        ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##############################################                      ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [################################################                    ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##################################################                  ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###################################################                 ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [####################################################                ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#####################################################               ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#######################################################             ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [########################################################            ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#########################################################           ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##########################################################          ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###########################################################         ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [############################################################        ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#############################################################       ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [##############################################################      ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [###############################################################     ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [################################################################    ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [#################################################################   ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch [################################################################### ] 10/28  Updating   : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch                                                                        10/28 
+  Updating   : 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64 [                                                                            ] 11/28  Updating   : 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64 [#########################################                                   ] 11/28  Updating   : 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64                                                                                11/28 
+  Installing : attr-2.4.46-13.el7.x86_64 [                                                                                           ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#####                                                                                      ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [################                                                                           ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [########################                                                                   ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [###########################                                                                ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [####################################                                                       ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [######################################                                                     ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#######################################                                                    ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#############################################                                              ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [################################################                                           ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################                                  ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [##########################################################                                 ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [###########################################################                                ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [############################################################                               ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [################################################################                           ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [###################################################################                        ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [######################################################################                     ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################################                  ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [############################################################################               ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [###############################################################################            ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [##################################################################################         ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#####################################################################################      ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#######################################################################################    ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [########################################################################################   ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [#########################################################################################  ] 12/28  Installing : attr-2.4.46-13.el7.x86_64 [########################################################################################## ] 12/28  Installing : attr-2.4.46-13.el7.x86_64                                                                                               12/28 
+  Installing : xfsdump-3.1.7-1.el7.x86_64 [                                                                                          ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#####                                                                                     ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [###########                                                                               ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [##################                                                                        ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################                                                                   ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [###########################                                                               ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#################################                                                         ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################################                                                   ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#############################################                                             ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [###################################################                                       ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#########################################################                                 ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [##############################################################                            ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [##################################################################                        ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#####################################################################                     ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################################################################                   ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [########################################################################                  ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#############################################################################             ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [################################################################################          ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#####################################################################################     ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [#######################################################################################   ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [########################################################################################  ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64 [######################################################################################### ] 13/28  Installing : xfsdump-3.1.7-1.el7.x86_64                                                                                              13/28 
+  Installing : 1:grub2-2.02-0.76.el7.centos.1.x86_64 [                                                                               ] 14/28  Installing : 1:grub2-2.02-0.76.el7.centos.1.x86_64                                                                                   14/28 
+  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [                                                                                   ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#                                                                                  ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##                                                                                 ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###                                                                                ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#####                                                                              ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#######                                                                            ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#########                                                                          ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##########                                                                         ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [############                                                                       ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##############                                                                     ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###############                                                                    ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#################                                                                  ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###################                                                                ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [####################                                                               ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [######################                                                             ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [########################                                                           ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##########################                                                         ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [############################                                                       ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#############################                                                      ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###############################                                                    ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#################################                                                  ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##################################                                                 ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [####################################                                               ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [######################################                                             ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#######################################                                            ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##########################################                                         ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###########################################                                        ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#############################################                                      ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###############################################                                    ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [################################################                                   ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##################################################                                 ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [####################################################                               ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#####################################################                              ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#######################################################                            ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#########################################################                          ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##########################################################                         ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#############################################################                      ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###############################################################                    ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [################################################################                   ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###################################################################                ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [####################################################################               ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [######################################################################             ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [########################################################################           ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#########################################################################          ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##########################################################################         ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###########################################################################        ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [############################################################################       ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#############################################################################      ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [##############################################################################     ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [###############################################################################    ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [################################################################################   ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [#################################################################################  ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64 [################################################################################## ] 15/28  Updating   : 7:lvm2-2.02.180-10.el7_6.8.x86_64                                                                                       15/28 
+  Cleanup    : 1:grub2-2.02-0.65.el7.centos.2.x86_64                                                                                   16/28 
+  Cleanup    : 1:grub2-pc-2.02-0.65.el7.centos.2.x86_64                                                                                17/28 
+  Cleanup    : 1:grub2-tools-extra-2.02-0.65.el7.centos.2.x86_64                                                                       18/28 
+  Cleanup    : 1:grub2-tools-2.02-0.65.el7.centos.2.x86_64                                                                             19/28 
+  Cleanup    : 7:lvm2-2.02.177-4.el7.x86_64                                                                                            20/28 
+  Cleanup    : 1:grub2-pc-modules-2.02-0.65.el7.centos.2.noarch                                                                        21/28 
+  Cleanup    : 7:lvm2-libs-2.02.177-4.el7.x86_64                                                                                       22/28 
+  Cleanup    : 7:device-mapper-event-1.02.146-4.el7.x86_64                                                                             23/28 
+  Cleanup    : 1:grub2-tools-minimal-2.02-0.65.el7.centos.2.x86_64                                                                     24/28 
+  Cleanup    : 7:device-mapper-event-libs-1.02.146-4.el7.x86_64                                                                        25/28 
+  Cleanup    : 1:grub2-common-2.02-0.65.el7.centos.2.noarch                                                                            26/28 
+  Cleanup    : 7:device-mapper-1.02.146-4.el7.x86_64                                                                                   27/28 
+  Cleanup    : 7:device-mapper-libs-1.02.146-4.el7.x86_64                                                                              28/28 
+  Verifying  : 7:device-mapper-libs-1.02.149-10.el7_6.8.x86_64                                                                          1/28 
+  Verifying  : 1:grub2-2.02-0.76.el7.centos.1.x86_64                                                                                    2/28 
+  Verifying  : 7:lvm2-2.02.180-10.el7_6.8.x86_64                                                                                        3/28 
+  Verifying  : 1:grub2-common-2.02-0.76.el7.centos.1.noarch                                                                             4/28 
+  Verifying  : 1:grub2-tools-2.02-0.76.el7.centos.1.x86_64                                                                              5/28 
+  Verifying  : attr-2.4.46-13.el7.x86_64                                                                                                6/28 
+  Verifying  : 7:device-mapper-1.02.149-10.el7_6.8.x86_64                                                                               7/28 
+  Verifying  : 7:device-mapper-event-1.02.149-10.el7_6.8.x86_64                                                                         8/28 
+  Verifying  : 1:grub2-tools-extra-2.02-0.76.el7.centos.1.x86_64                                                                        9/28 
+  Verifying  : xfsdump-3.1.7-1.el7.x86_64                                                                                              10/28 
+  Verifying  : 1:grub2-pc-modules-2.02-0.76.el7.centos.1.noarch                                                                        11/28 
+  Verifying  : 1:grub2-tools-minimal-2.02-0.76.el7.centos.1.x86_64                                                                     12/28 
+  Verifying  : 7:lvm2-libs-2.02.180-10.el7_6.8.x86_64                                                                                  13/28 
+  Verifying  : 1:grub2-pc-2.02-0.76.el7.centos.1.x86_64                                                                                14/28 
+  Verifying  : 7:device-mapper-event-libs-1.02.149-10.el7_6.8.x86_64                                                                   15/28 
+  Verifying  : 1:grub2-2.02-0.65.el7.centos.2.x86_64                                                                                   16/28 
+  Verifying  : 1:grub2-2.02-0.65.el7.centos.2.x86_64                                                                                   17/28 
+  Verifying  : 7:device-mapper-event-1.02.146-4.el7.x86_64                                                                             18/28 
+  Verifying  : 1:grub2-common-2.02-0.65.el7.centos.2.noarch                                                                            19/28 
+  Verifying  : 7:lvm2-2.02.177-4.el7.x86_64                                                                                            20/28 
+  Verifying  : 1:grub2-tools-extra-2.02-0.65.el7.centos.2.x86_64                                                                       21/28 
+  Verifying  : 7:device-mapper-event-libs-1.02.146-4.el7.x86_64                                                                        22/28 
+  Verifying  : 1:grub2-tools-2.02-0.65.el7.centos.2.x86_64                                                                             23/28 
+  Verifying  : 1:grub2-tools-2.02-0.65.el7.centos.2.x86_64                                                                             24/28 
+  Verifying  : 1:grub2-pc-2.02-0.65.el7.centos.2.x86_64                                                                                25/28 
+  Verifying  : 7:device-mapper-1.02.146-4.el7.x86_64                                                                                   26/28 
+  Verifying  : 1:grub2-pc-modules-2.02-0.65.el7.centos.2.noarch                                                                        27/28 
+  Verifying  : 1:grub2-tools-minimal-2.02-0.65.el7.centos.2.x86_64                                                                     28/28 
+  Verifying  : 7:lvm2-libs-2.02.177-4.el7.x86_64                                                                                       29/28 
+  Verifying  : 7:device-mapper-libs-1.02.146-4.el7.x86_64                                                                              30/28 
+
+Installed:
+  grub2.x86_64 1:2.02-0.76.el7.centos.1                                grub2-tools.x86_64 1:2.02-0.76.el7.centos.1                           
+  grub2-tools-extra.x86_64 1:2.02-0.76.el7.centos.1                    grub2-tools-minimal.x86_64 1:2.02-0.76.el7.centos.1                   
+  xfsdump.x86_64 0:3.1.7-1.el7                                        
+
+Dependency Installed:
+  attr.x86_64 0:2.4.46-13.el7                                                                                                                
+
+Updated:
+  lvm2.x86_64 7:2.02.180-10.el7_6.8                                                                                                          
+
+Dependency Updated:
+  device-mapper.x86_64 7:1.02.149-10.el7_6.8                              device-mapper-event.x86_64 7:1.02.149-10.el7_6.8                  
+  device-mapper-event-libs.x86_64 7:1.02.149-10.el7_6.8                   device-mapper-libs.x86_64 7:1.02.149-10.el7_6.8                   
+  grub2-common.noarch 1:2.02-0.76.el7.centos.1                            grub2-pc.x86_64 1:2.02-0.76.el7.centos.1                          
+  grub2-pc-modules.noarch 1:2.02-0.76.el7.centos.1                        lvm2-libs.x86_64 7:2.02.180-10.el7_6.8                            
+
+Replaced:
+  grub2.x86_64 1:2.02-0.65.el7.centos.2                              grub2-tools.x86_64 1:2.02-0.65.el7.centos.2                             
+
+Complete!
+]0;root@otuslinux:~[root@otuslinux ~]# vgcreate vg_root /dev/sdb
+  Volume group "vg_root" successfully created
+]0;root@otuslinux:~[root@otuslinux ~]# lc[Kvcreate -n lv_root -l +100%FREE /dev/vg-[K_root
+  Logical volume "lv_root" created.
+]0;root@otuslinux:~[root@otuslinux ~]# mkfs.xfs /dev/vg_root/lv_root 
+meta-data=/dev/vg_root/lv_root   isize=512    agcount=4, agsize=655104 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2620416, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;root@otuslinux:~[root@otuslinux ~]# mount /dev/vgr[K
+vga_arbiter  vg_root/     
+[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/[K[root@otuslinux ~]# mount /dev/vg_root/lv_root /mnt
+]0;root@otuslinux:~[root@otuslinux ~]# xfsdump -J -d [K[K /dev/VolGroup00/LogVol0
+LogVol00  LogVol01  
+[root@otuslinux ~]# xfsdump -J - /dev/VolGroup00/LogVol00 | xfsrestore -J - /mnt
+xfsdump: xfsrestore: using file dump (drive_simple) strategy
+using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsrestore: searching media for dump
+xfsdump: level 0 dump of otuslinux:/
+xfsdump: dump date: Mon Aug 12 10:56:17 2019
+xfsdump: session id: a698e290-20c1-4e86-be72-98d9152e8d89
+xfsdump: session label: ""
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 1610294336 bytes
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsrestore: examining media file 0
+xfsrestore: dump description: 
+xfsrestore: hostname: otuslinux
+xfsrestore: mount point: /
+xfsrestore: volume: /dev/mapper/VolGroup00-LogVol00
+xfsrestore: session time: Mon Aug 12 10:56:17 2019
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: b60e9498-0baa-4d9f-90aa-069048217fee
+xfsrestore: session id: a698e290-20c1-4e86-be72-98d9152e8d89
+xfsrestore: media id: b7276c28-78d0-4439-afa3-3f932aaf7bd1
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsdump: dumping non-directory files
+xfsrestore: 7122 directories and 44446 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsdump: ending media file
+xfsdump: media file size 1566547920 bytes
+xfsdump: dump size (non-dir files) : 1540052816 bytes
+xfsdump: dump complete: 27 seconds elapsed
+xfsdump: Dump Status: SUCCESS
+xfsrestore: restore complete: 27 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+]0;root@otuslinux:~[root@otuslinux ~]# ll /mnt
+total 16
+lrwxrwxrwx.  1 root    root       7 авг 12 10:56 [0m[38;5;51mbin[0m -> [38;5;27musr/bin[0m
+drwxr-xr-x.  2 root    root       6 май 12  2018 [38;5;27mboot[0m
+drwxr-xr-x.  2 root    root       6 май 12  2018 [38;5;27mdev[0m
+drwxr-xr-x. 78 root    root    8192 авг 12 10:54 [38;5;27metc[0m
+drwxr-xr-x.  3 root    root      21 май 12  2018 [38;5;27mhome[0m
+lrwxrwxrwx.  1 root    root       7 авг 12 10:56 [38;5;51mlib[0m -> [38;5;27musr/lib[0m
+lrwxrwxrwx.  1 root    root       9 авг 12 10:56 [38;5;51mlib64[0m -> [38;5;27musr/lib64[0m
+drwxr-xr-x.  2 root    root       6 апр 11  2018 [38;5;27mmedia[0m
+drwxr-xr-x.  2 root    root       6 апр 11  2018 [38;5;27mmnt[0m
+drwxr-xr-x.  3 root    root      39 авг 12 10:51 [38;5;27mopt[0m
+drwxr-xr-x.  2 root    root       6 май 12  2018 [38;5;27mproc[0m
+dr-xr-x---.  3 root    root     149 авг 12 10:53 [38;5;27mroot[0m
+drwxr-xr-x.  2 root    root       6 май 12  2018 [38;5;27mrun[0m
+lrwxrwxrwx.  1 root    root       8 авг 12 10:56 [38;5;51msbin[0m -> [38;5;27musr/sbin[0m
+drwxr-xr-x.  2 root    root       6 апр 11  2018 [38;5;27msrv[0m
+drwxr-xr-x.  2 root    root       6 май 12  2018 [38;5;27msys[0m
+drwxrwxrwt.  8 root    root    4096 авг 12 10:56 [48;5;10;38;5;16mtmp[0m
+drwxr-xr-x. 13 root    root     155 май 12  2018 [38;5;27musr[0m
+drwxrwxr-x.  2 vagrant vagrant  196 авг 12 10:49 [38;5;27mvagrant[0m
+drwxr-xr-x. 18 root    root     254 авг 12 10:49 [38;5;27mvar[0m
+]0;root@otuslinux:~[root@otuslinux ~]#  for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done[1P[C[C[C[C[C[C[1P[C[C[C[C[C[C[1P[C[C[C[C[C[C[1P[C[C[C[C[C[C[C[1P
+]0;root@otuslinux:~[root@otuslinux ~]# chro
+chronyc  chronyd  chroot   
+[root@otuslinux ~]# chroot /mnt
+]0;root@otuslinux:/[?1034h[root@otuslinux /]# grub2-mkconfig -o /boot/gru2[Kb2/grub.cfg 
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-862.2.3.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img
+done
+]0;root@otuslinux:/[root@otuslinux /]# cd /boot/
+]0;root@otuslinux:/boot[root@otuslinux boot]# for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g; s/.img//g"` --force; done
+Executing: /sbin/dracut -v initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64 --force
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+]0;root@otuslinux:/boot[root@otuslinux boot]# lsblk 
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+├─sda1                    8:1    0    1M  0 part 
+├─sda2                    8:2    0    1G  0 part /boot
+└─sda3                    8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00 253:0    0 37,5G  0 lvm  
+  └─VolGroup00-LogVol01 253:1    0  1,5G  0 lvm  [SWAP]
+sdb                       8:16   0   10G  0 disk 
+└─vg_root-lv_root       253:2    0   10G  0 lvm  /
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+sdf                       8:80   0   40G  0 disk 
+sdg                       8:96   0   40G  0 disk 
+sdh                       8:112  0   40G  0 disk 
+sdi                       8:128  0   40G  0 disk 
+sdj                       8:144  0   40G  0 disk 
+sdk                       8:160  0   40G  0 disk 
+]0;root@otuslinux:/boot[root@otuslinux boot]# vi /boot/grub2/grub.cfg 
+[?1049h[?1h=[1;62r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[62;1H"/boot/grub2/grub.cfg" 127L, 3658C[1;1H#
+# DO NOT EDIT THIS FILE
+#
+# It is automatically generated by grub2-mkconfig using templates
+# from /etc/grub.d and settings from /etc/default/grub
+#
+
+### BEGIN /etc/grub.d/00_header ###
+set pager=1
+
+if [ -s $prefix/grubenv ]; then
+  load_env
+fi
+if [ "${next_entry}" ] ; then
+   set default="${next_entry}"
+   set next_entry=
+   save_env next_entry
+   set boot_once=true
+else
+   set default="${saved_entry}"
+fi
+
+if [ x"${feature_menuentry_id}" = xy ]; then
+  menuentry_id_option="--id"
+else
+  menuentry_id_option=""
+fi
+
+export menuentry_id_option
+
+if [ "${prev_saved_entry}" ]; then
+  set saved_entry="${prev_saved_entry}"
+  save_env saved_entry
+  set prev_saved_entry=
+  save_env prev_saved_entry
+  set boot_once=true
+fi
+
+function savedefault {
+  if [ -z "${boot_once}" ]; then
+    saved_entry="${chosen}"
+    save_env saved_entry
+  fi
+}
+
+function load_video {
+  if [ x$feature_all_video_module = xy ]; then
+    insmod all_video
+  else
+    insmod efi_gop
+    insmod efi_uga
+    insmod ieee1275_fb
+    insmod vbe
+    insmod vga
+    insmod video_bochs
+    insmod video_cirrus
+  fi
+}
+
+terminal_output console
+if [ x$feature_timeout_style = xy ] ; then[1;1H[?12l[?25h[?25l[62;1H[K[62;1H/[?12l[?25hrd.lvm[?25l[27m[m[H[2J[2;1H### BEGIN /etc/grub.d/00_tuned ###
+set tuned_params=""
+set tuned_initrd=""
+### END /etc/grub.d/00_tuned ###
+
+### BEGIN /etc/grub.d/01_users ###
+if [ -f ${prefix}/user.cfg ]; then
+  source ${prefix}/user.cfg
+  if [ -n "${GRUB2_PASSWORD}" ]; then
+    set superusers="root"
+    export superusers
+    password_pbkdf2 root ${GRUB2_PASSWORD}
+  fi
+fi
+### END /etc/grub.d/01_users ###
+
+### BEGIN /etc/grub.d/10_linux ###
+menuentry 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' --class centos --class gnu-linux --class gnu --class os --unrestricted $menuentry_id_option 'gnulinux-33[20;1H.10.0-862.2.3.el7.x86_64-advanced-8caf090b-6108-4858-88de-b55619bc83b9' {[21;9Hload_video[22;9Hset gfxpayload=keep[23;9Hinsmod gzio[24;9Hinsmod part_msdos[25;9Hinsmod xfs[26;9Hset root='hd0,msdos2'[27;9Hif [ x$feature_platform_search_hint = xy ]; then[28;11Hsearch --no-floppy --fs-uuid --set=root --hint-bios=hd0,msdos2 --hint-efi=hd0,msdos2 --hint-baremetal=ahci0,msdos2  570897ca-e759-4c81-90cf-389da6eee4cc[29;9Helse[30;11Hsearch --no-floppy --fs-uuid --set=root 570897ca-e759-4c81-90cf-389da6eee4cc[31;9Hfi[32;9Hlinux16 /vmlinuz-3.10.0-862.2.3.el7.x86_64 root=/dev/mapper/vg_root-lv_root ro no_timer_check console=tty0 console=ttyS0,115200n8 net.ifnames=0 biosdevname=00[33;1H elevator=noop crashkernel=auto rd.lvm.lv=VolGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[34;9Hinitrd16 /initramfs-3.10.0-862.2.3.el7.x86_64.img
+}
+if [ "x$default" = 'CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7 (Core)' ]; then default='Advanced options for CentOS Linux>CentOS Linux (3.10.0-862.2.3.el7.x86_64) 7  [37;1H(Core)'; fi;
+### END /etc/grub.d/10_linux ###
+
+### BEGIN /etc/grub.d/20_linux_xen ###
+### END /etc/grub.d/20_linux_xen ###
+
+### BEGIN /etc/grub.d/20_ppc_terminfo ###
+### END /etc/grub.d/20_ppc_terminfo ###
+
+### BEGIN /etc/grub.d/30_os-prober ###
+### END /etc/grub.d/30_os-prober ###
+
+### BEGIN /etc/grub.d/40_custom ###
+# This file provides an easy way to add custom menu entries.  Simply type the
+# menu entries you want to add after this comment.  Be careful not to change
+# the 'exec tail' line above.
+### END /etc/grub.d/40_custom ###
+
+### BEGIN /etc/grub.d/41_custom ###
+if [ -f  ${config_directory}/custom.cfg ]; then
+  source ${config_directory}/custom.cfg
+elif [ -z "${config_directory}" -a -f  $prefix/custom.cfg ]; then
+  source $prefix/custom.cfg;
+fi
+### END /etc/grub.d/41_custom ###[33;33H[?12l[?25hrd.lvm.lv=VolGro[?25l[62;1H[1m-- INSERT --[33;45H[?12l[?25h[?25l[molGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25llGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25lGroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25lroup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25loup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25lup00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25lp00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25l00/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25l0/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25l/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;43H[?12l[?25h[?25lv/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;44H[?12l[?25h[?25lg/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;45H[?12l[?25h[?25l_/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;46H[?12l[?25h[?25lr/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;47H[?12l[?25h[?25lo/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;48H[?12l[?25h[?25lo/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;49H[?12l[?25h[?25lt/LogVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;50H[?12l[?25h/L[?25logVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25lgVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25lVol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25lol00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25ll00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25l00 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25l0 rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25l rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet [33;51H[?12l[?25h[?25ll rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;52H[?12l[?25h[?25lv rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;53H[?12l[?25h[?25l_ rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;54H[?12l[?25h[?25lr rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;55H[?12l[?25h[?25lo rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;56H[?12l[?25h[?25lo rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;57H[?12l[?25h[?25lt rd.lvm.lv=VolGroup00/LogVol01 rhgb quiet[33;58H[?12l[?25h[62;1H[K[33;57H[?25l[?12l[?25h[?25l[62;1H:[?12l[?25hx[?25l"grub2/grub.cfg" 127L, 3654C written
+[?1l>[?12l[?25h[?1049l]0;root@otuslinux:/boot[root@otuslinux boot]# reboot[K[K[K[K[K[Kexit
+exit
+]0;root@otuslinux:~[root@otuslinux ~]# reboot
+Connection to 127.0.0.1 closed by remote host.
+Connection to 127.0.0.1 closed.
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3[00m$ vagrant sshup && vagrant sshssh[K
+Last login: Mon Aug 12 10:53:41 2019 from 10.0.2.2
+]0;vagrant@otuslinux:~[?1034h[vagrant@otuslinux ~]$ sudo -i
+]0;root@otuslinux:~[?1034h[root@otuslinux ~]# lsblk 
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+├─sda1                    8:1    0    1M  0 part 
+├─sda2                    8:2    0    1G  0 part /boot
+└─sda3                    8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol01 253:1    0  1,5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol00 253:2    0 37,5G  0 lvm  
+sdb                       8:16   0   10G  0 disk 
+└─vg_root-lv_root       253:0    0   10G  0 lvm  /
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+sdf                       8:80   0   40G  0 disk 
+sdg                       8:96   0   40G  0 disk 
+sdh                       8:112  0   40G  0 disk 
+sdi                       8:128  0   40G  0 disk 
+sdj                       8:144  0   40G  0 disk 
+sdk                       8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# lvremove /dev/VolGroup00/LogVol00 /dev/[K[K[K[K[K
+Do you really want to remove active logical volume VolGroup00/LogVol00? [y/n]: y
+  Logical volume "LogVol00" successfully removed
+]0;root@otuslinux:~[root@otuslinux ~]# lvcreate VolGroup00 /dev/sd/ /dev/sdL /dev/sdo /dev/sdg /dev/sdV /dev/sdo /dev/sdl /dev/sd0 /dev/sd0 /dev/sd[C[1Pdev/sd[1Pev/sd[1Pv/sd[1P/sd[1Psd[1Pd[K[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1@ [1@-[1@n[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C-L 8G /dev/VolGroup00
+WARNING: xfs signature detected on /dev/VolGroup00/LogVol00 at offset 0. Wipe it? [y/n]: y
+  Wiping xfs signature on /dev/VolGroup00/LogVol00.
+  Logical volume "LogVol00" created.
+]0;root@otuslinux:~[root@otuslinux ~]# mkfs.xfs /dev/VolGroup00/LogVol0
+LogVol00  LogVol01  
+[root@otuslinux ~]# mkfs.xfs /dev/VolGroup00/LogVol00
+meta-data=/dev/VolGroup00/LogVol00 isize=512    agcount=4, agsize=524288 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=2097152, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;root@otuslinux:~[root@otuslinux ~]# mount /dev/VolGroup00/L[KLogVol0
+LogVol00  LogVol01  
+[root@otuslinux ~]# mount /dev/VolGroup00/LogVol0
+LogVol00  LogVol01  
+[root@otuslinux ~]# mount /dev/VolGroup00/LogVol00 /n[Kmnt
+]0;root@otuslinux:~[root@otuslinux ~]# xfsdump -J - /dev/vg_root/lv_root | xfsrestore -J - /mnt
+xfsrestore: using file dump (drive_simple) strategy
+xfsrestore: version 3.1.7 (dump format 3.0)
+xfsdump: using file dump (drive_simple) strategy
+xfsdump: version 3.1.7 (dump format 3.0)
+xfsdump: level 0 dump of otuslinux:/
+xfsdump: dump date: Mon Aug 12 11:39:56 2019
+xfsdump: session id: 0618f7da-1006-4b4d-ab13-79dbd06b62d0
+xfsdump: session label: ""
+xfsrestore: searching media for dump
+xfsdump: ino map phase 1: constructing initial dump list
+xfsdump: ino map phase 2: skipping (no pruning necessary)
+xfsdump: ino map phase 3: skipping (only one dump stream)
+xfsdump: ino map construction complete
+xfsdump: estimated dump size: 1609456576 bytes
+xfsdump: creating dump session media file 0 (media 0, file 0)
+xfsdump: dumping ino map
+xfsdump: dumping directories
+xfsrestore: examining media file 0
+xfsrestore: dump description: 
+xfsrestore: hostname: otuslinux
+xfsrestore: mount point: /
+xfsrestore: volume: /dev/mapper/vg_root-lv_root
+xfsrestore: session time: Mon Aug 12 11:39:56 2019
+xfsrestore: level: 0
+xfsrestore: session label: ""
+xfsrestore: media label: ""
+xfsrestore: file system id: 8caf090b-6108-4858-88de-b55619bc83b9
+xfsrestore: session id: 0618f7da-1006-4b4d-ab13-79dbd06b62d0
+xfsrestore: media id: 0b1e9010-7aa7-4123-82ab-06e88ea235e0
+xfsrestore: searching media for directory dump
+xfsrestore: reading directories
+xfsdump: dumping non-directory files
+xfsrestore: 7126 directories and 44452 entries processed
+xfsrestore: directory post-processing
+xfsrestore: restoring non-directory files
+xfsdump: ending media file
+xfsdump: media file size 1564946064 bytes
+xfsdump: dump size (non-dir files) : 1538446624 bytes
+xfsdump: dump complete: 31 seconds elapsed
+xfsdump: Dump Status: SUCCESS
+xfsrestore: restore complete: 32 seconds elapsed
+xfsrestore: Restore Status: SUCCESS
+]0;root@otuslinux:~[root@otuslinux ~]# for i in /r[Kproc /sys /dev /run /boot [K; do mount --bind $i /mnt/$i ; done
+]0;root@otuslinux:~[root@otuslinux ~]# chroot /mnt
+]0;root@otuslinux:/[?1034h[root@otuslinux /]# grub2-mkconfig -o /boot/grub2/grub
+grub.cfg  grubenv   
+[root@otuslinux /]# grub2-mkconfig -o /boot/grub2/grub.cfg 
+Generating grub configuration file ...
+Found linux image: /boot/vmlinuz-3.10.0-862.2.3.el7.x86_64
+Found initrd image: /boot/initramfs-3.10.0-862.2.3.el7.x86_64.img
+done
+]0;root@otuslinux:/[root@otuslinux /]# cd /boot/
+]0;root@otuslinux:/boot[root@otuslinux boot]# for i in[K[K[K[K[K[K[K[Kfor i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g; s/.img//g"` --force; done
+Executing: /sbin/dracut -v initramfs-3.10.0-862.2.3.el7.x86_64.img 3.10.0-862.2.3.el7.x86_64 --force
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+dracut module 'busybox' will not be installed, because command 'busybox' could not be found!
+dracut module 'crypt' will not be installed, because command 'cryptsetup' could not be found!
+dracut module 'dmraid' will not be installed, because command 'dmraid' could not be found!
+dracut module 'dmsquash-live-ntfs' will not be installed, because command 'ntfs-3g' could not be found!
+dracut module 'mdraid' will not be installed, because command 'mdadm' could not be found!
+dracut module 'multipath' will not be installed, because command 'multipath' could not be found!
+*** Including module: bash ***
+*** Including module: nss-softokn ***
+*** Including module: i18n ***
+*** Including module: drm ***
+*** Including module: plymouth ***
+*** Including module: dm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 60-persistent-storage-dm.rules
+Skipping udev rule: 55-dm.rules
+*** Including module: kernel-modules ***
+Omitting driver floppy
+*** Including module: lvm ***
+Skipping udev rule: 64-device-mapper.rules
+Skipping udev rule: 56-lvm.rules
+Skipping udev rule: 60-persistent-storage-lvm.rules
+*** Including module: qemu ***
+*** Including module: resume ***
+*** Including module: rootfs-block ***
+*** Including module: terminfo ***
+*** Including module: udev-rules ***
+Skipping udev rule: 40-redhat-cpu-hotplug.rules
+Skipping udev rule: 91-permissions.rules
+*** Including module: biosdevname ***
+*** Including module: systemd ***
+*** Including module: usrmount ***
+*** Including module: base ***
+*** Including module: fs-lib ***
+*** Including module: shutdown ***
+*** Including modules done ***
+*** Installing kernel module dependencies and firmware ***
+*** Installing kernel module dependencies and firmware done ***
+*** Resolving executable dependencies ***
+*** Resolving executable dependencies done***
+*** Hardlinking files ***
+*** Hardlinking files done ***
+*** Stripping files ***
+*** Stripping files done ***
+*** Generating early-microcode cpio image contents ***
+*** No early-microcode cpio image needed ***
+*** Store current command line parameters ***
+*** Creating image file ***
+*** Creating image file done ***
+*** Creating initramfs image file '/boot/initramfs-3.10.0-862.2.3.el7.x86_64.img' done ***
+]0;root@otuslinux:/boot[root@otuslinux boot]# pvcreate /dev/s[K[K[K[K[K[K[K[K[K[K[K[K[K[K[Klsblk 
+NAME                    MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                       8:0    0   40G  0 disk 
+├─sda1                    8:1    0    1M  0 part 
+├─sda2                    8:2    0    1G  0 part /boot
+└─sda3                    8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol01 253:1    0  1,5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol00 253:2    0    8G  0 lvm  /
+sdb                       8:16   0   10G  0 disk 
+└─vg_root-lv_root       253:0    0   10G  0 lvm  
+sdc                       8:32   0    2G  0 disk 
+sdd                       8:48   0    1G  0 disk 
+sde                       8:64   0    1G  0 disk 
+sdf                       8:80   0   40G  0 disk 
+sdg                       8:96   0   40G  0 disk 
+sdh                       8:112  0   40G  0 disk 
+sdi                       8:128  0   40G  0 disk 
+sdj                       8:144  0   40G  0 disk 
+sdk                       8:160  0   40G  0 disk 
+]0;root@otuslinux:/boot[root@otuslinux boot]# pvcreate /dev/sdd /dev/sde
+  Physical volume "/dev/sdd" successfully created.
+  Physical volume "/dev/sde" successfully created.
+]0;root@otuslinux:/boot[root@otuslinux boot]# vgcreate vg_var /dev/sdd /dev/sde
+  Volume group "vg_var" successfully created
+]0;root@otuslinux:/boot[root@otuslinux boot]# lvcreate -L 950M -m1 -n lv_var vg_var
+  Rounding up size to full physical extent 952,00 MiB
+  Logical volume "lv_var" created.
+]0;root@otuslinux:/boot[root@otuslinux boot]# vi /etc/selinux/config 
+[?1049h[?1h=[1;62r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[62;1H"/etc/selinux/config" 14L, 546C[2;1H# This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=enforcing
+# SELINUXTYPE= can take one of three two values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=targeted
+
+
+[94m~                                                                                                                                                                    [16;1H~                                                                                                                                                                    [17;1H~                                                                                                                                                                    [18;1H~                                                                                                                                                                    [19;1H~                                                                                                                                                                    [20;1H~                                                                                                                                                                    [21;1H~                                                                                                                                                                    [22;1H~                                                                                                                                                                    [23;1H~                                                                                                                                                                    [24;1H~                                                                                                                                                                    [25;1H~                                                                                                                                                                    [26;1H~                                                                                                                                                                    [27;1H~                                                                                                                                                                    [28;1H~                                                                                                                                                                    [29;1H~                                                                                                                                                                    [30;1H~                                                                                                                                                                    [31;1H~                                                                                                                                                                    [32;1H~                                                                                                                                                                    [33;1H~                                                                                                                                                                    [34;1H~                                                                                                                                                                    [35;1H~                                                                                                                                                                    [36;1H~                                                                                                                                                                    [37;1H~                                                                                                                                                                    [38;1H~                                                                                                                                                                    [39;1H~                                                                                                                                                                    [40;1H~                                                                                                                                                                    [41;1H~                                                                                                                                                                    [42;1H~                                                                                                                                                                    [43;1H~                                                                                                                                                                    [44;1H~                                                                                                                                                                    [45;1H~                                                                                                                                                                    [46;1H~                                                                                                                                                                    [47;1H~                                                                                                                                                                    [48;1H~                                                                                                                                                                    [49;1H~                                                                                                                                                                    [50;1H~                                                                                                                                                                    [51;1H~                                                                                                                                                                    [52;1H~                                                                                                                                                                    [53;1H~                                                                                                                                                                    [54;1H~                                                                                                                                                                    [55;1H~                                                                                                                                                                    [56;1H~                                                                                                                                                                    [57;1H~                                                                                                                                                                    [58;1H~                                                                                                                                                                    [59;1H~                                                                                                                                                                    [60;1H~                                                                                                                                                                    [61;1H~                                                                                                                                                                    [1;1H[?12l[?25h
+
+
+
+
+
+[16C[?25l[m[62;1H[1m-- INSERT --[m[62;13H[K[7;17H[?12l[?25hg[?25l[7;17H[K[7;17H[?12l[?25h[?25l[7;16H[K[7;16H[?12l[?25h[?25l[7;15H[K[7;15H[?12l[?25h[?25l[7;14H[K[7;14H[?12l[?25h[?25l[7;13H[K[7;13H[?12l[?25h[?25l[7;12H[K[7;12H[?12l[?25h[?25l[7;11H[K[7;11H[?12l[?25h[?25l[7;10H[K[7;10H[?12l[?25h[?25l[7;9H[K[7;9H[?12l[?25h[?25ld[?12l[?25h[?25li[?12l[?25h[?25ls[?12l[?25h[?25la[?12l[?25h[?25lb[?12l[?25h[?25ll[?12l[?25h[?25le[?12l[?25h[?25ld[?12l[?25h[62;1H[K[7;16H[?25l[?12l[?25h[?25l[62;1H:[?12l[?25hx[?25l"/etc/selinux/config" 14L, 545C written
+[?1l>[?12l[?25h[?1049l]0;root@otuslinux:/boot[root@otuslinux boot]# mkf
+mkfifo       mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs     
+[root@otuslinux boot]# mkf
+mkfifo       mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs     
+[root@otuslinux boot]# mkfs.xfs /dev/vg_var/lv_var 
+meta-data=/dev/vg_var/lv_var     isize=512    agcount=4, agsize=60928 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=243712, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=855, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;root@otuslinux:/boot[root@otuslinux boot]# mount /dev/vg_var/lv_var /mnt
+]0;root@otuslinux:/boot[root@otuslinux boot]# cp -aR /var/*  /mnt
+]0;root@otuslinux:/boot[root@otuslinux boot]# mkdir /tmp/oldvar && [K[K[K
+]0;root@otuslinux:/boot[root@otuslinux boot]# mv /var/* /tmp/oldvar/
+]0;root@otuslinux:/boot[root@otuslinux boot]# umount /mnt
+,ount /dev]0;root@otuslinux:/boot[root@otuslinux boot]# ,ount /dev/vg
+vga_arbiter  vg_root/     vg_var/      
+[root@otuslinux boot]# ,ount /dev/vg
+vga_arbiter  vg_root/     vg_var/      
+[root@otuslinux boot]# ,ount /dev/vg[1P[1@m[C[C[C[C[C[C[C[C[C[C[C[C_var/lv_var /var
+]0;root@otuslinux:/boot[root@otuslinux boot]# ll /var
+total 8
+drwxr-xr-x.  2 root root    6 апр 11  2018 [0m[38;5;27madm[0m
+drwxr-xr-x.  5 root root   44 май 12  2018 [38;5;27mcache[0m
+drwxr-xr-x.  3 root root   34 авг 12 10:51 [38;5;27mdb[0m
+drwxr-xr-x.  3 root root   18 май 12  2018 [38;5;27mempty[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27mgames[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27mgopher[0m
+drwxr-xr-x.  3 root root   18 май 12  2018 [38;5;27mkerberos[0m
+drwxr-xr-x. 29 root root 4096 авг 12 11:39 [38;5;27mlib[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27mlocal[0m
+lrwxrwxrwx.  1 root root   11 авг 12 11:40 [38;5;51mlock[0m -> [38;5;27m../run/lock[0m
+drwxr-xr-x.  8 root root 4096 авг 12 11:36 [38;5;27mlog[0m
+lrwxrwxrwx.  1 root root   10 авг 12 11:40 [38;5;51mmail[0m -> [38;5;27mspool/mail[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27mnis[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27mopt[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27mpreserve[0m
+lrwxrwxrwx.  1 root root    6 авг 12 11:40 [38;5;51mrun[0m -> [38;5;27m../run[0m
+drwxr-xr-x.  8 root root   87 май 12  2018 [38;5;27mspool[0m
+drwxrwxrwt.  5 root root  190 авг 12 11:42 [48;5;10;38;5;16mtmp[0m
+drwxr-xr-x.  2 root root    6 апр 11  2018 [38;5;27myp[0m
+]0;root@otuslinux:/boot[root@otuslinux boot]# cat /[K[K[K[K[Kblkid
+/dev/sdb: UUID="9lInNh-lUjD-gMwq-YeiB-JdGX-qc7O-jnvBL0" TYPE="LVM2_member" 
+/dev/sda2: UUID="570897ca-e759-4c81-90cf-389da6eee4cc" TYPE="xfs" 
+/dev/sda3: UUID="vrrtbx-g480-HcJI-5wLn-4aOf-Olld-rC03AY" TYPE="LVM2_member" 
+/dev/mapper/vg_root-lv_root: UUID="8caf090b-6108-4858-88de-b55619bc83b9" TYPE="xfs" 
+/dev/mapper/VolGroup00-LogVol01: UUID="c39c5bed-f37c-4263-bee8-aeb6a6659d7b" TYPE="swap" 
+/dev/mapper/VolGroup00-LogVol00: UUID="65b858ea-ee91-4360-8c11-4b1345092892" TYPE="xfs" 
+/dev/sdd: UUID="3EF276-oHLS-M9yr-TAPa-D0IX-9efj-zdOmEI" TYPE="LVM2_member" 
+/dev/sde: UUID="ExPylV-b1tE-h2xZ-a96e-nEd4-2oQC-5XTMb3" TYPE="LVM2_member" 
+/dev/mapper/vg_var-lv_var_rimage_0: UUID="a4546985-60f0-487d-8f59-b116b4e09fe9" TYPE="xfs" 
+/dev/mapper/vg_var-lv_var_rimage_1: UUID="a4546985-60f0-487d-8f59-b116b4e09fe9" TYPE="xfs" 
+/dev/mapper/vg_var-lv_var: UUID="a4546985-60f0-487d-8f59-b116b4e09fe9" TYPE="xfs" 
+]0;root@otuslinux:/boot[root@otuslinux boot]# vi /e[Ketc/fstab 
+[?1049h[?1h=[1;62r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[62;1H"/etc/fstab" 11L, 481C[2;1H#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /[23Cxfs     defaults[8C0 0
+UUID=570897ca-e759-4c81-90cf-389da6eee4cc /boot[19Cxfs     defaults[8C0 0
+/dev/mapper/VolGroup00-LogVol01 swap[20Cswap    defaults[8C0 0
+[94m~                                                                                                                                                                    [13;1H~                                                                                                                                                                    [14;1H~                                                                                                                                                                    [15;1H~                                                                                                                                                                    [16;1H~                                                                                                                                                                    [17;1H~                                                                                                                                                                    [18;1H~                                                                                                                                                                    [19;1H~                                                                                                                                                                    [20;1H~                                                                                                                                                                    [21;1H~                                                                                                                                                                    [22;1H~                                                                                                                                                                    [23;1H~                                                                                                                                                                    [24;1H~                                                                                                                                                                    [25;1H~                                                                                                                                                                    [26;1H~                                                                                                                                                                    [27;1H~                                                                                                                                                                    [28;1H~                                                                                                                                                                    [29;1H~                                                                                                                                                                    [30;1H~                                                                                                                                                                    [31;1H~                                                                                                                                                                    [32;1H~                                                                                                                                                                    [33;1H~                                                                                                                                                                    [34;1H~                                                                                                                                                                    [35;1H~                                                                                                                                                                    [36;1H~                                                                                                                                                                    [37;1H~                                                                                                                                                                    [38;1H~                                                                                                                                                                    [39;1H~                                                                                                                                                                    [40;1H~                                                                                                                                                                    [41;1H~                                                                                                                                                                    [42;1H~                                                                                                                                                                    [43;1H~                                                                                                                                                                    [44;1H~                                                                                                                                                                    [45;1H~                                                                                                                                                                    [46;1H~                                                                                                                                                                    [47;1H~                                                                                                                                                                    [48;1H~                                                                                                                                                                    [49;1H~                                                                                                                                                                    [50;1H~                                                                                                                                                                    [51;1H~                                                                                                                                                                    [52;1H~                                                                                                                                                                    [53;1H~                                                                                                                                                                    [54;1H~                                                                                                                                                                    [55;1H~                                                                                                                                                                    [56;1H~                                                                                                                                                                    [57;1H~                                                                                                                                                                    [58;1H~                                                                                                                                                                    [59;1H~                                                                                                                                                                    [60;1H~                                                                                                                                                                    [61;1H~                                                                                                                                                                    [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+[92C[?25l[m[62;1H[1m-- INSERT --[m[62;14H[K[10;93H[?12l[?25h0UUID=[?25l70897ca-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;93H[K[10;6H[?12l[?25h[?25l0897ca-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;92H[K[10;6H[?12l[?25h[?25l897ca-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;91H[K[10;6H[?12l[?25h[?25l97ca-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;90H[K[10;6H[?12l[?25h[?25l7ca-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;89H[K[10;6H[?12l[?25h[?25lca-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;88H[K[10;6H[?12l[?25h[?25la-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;87H[K[10;6H[?12l[?25h[?25l-e759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;86H[K[10;6H[?12l[?25h[?25le759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;85H[K[10;6H[?12l[?25h[?25l759-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;84H[K[10;6H[?12l[?25h[?25l59-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;83H[K[10;6H[?12l[?25h[?25l9-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;82H[K[10;6H[?12l[?25h[?25l-4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;81H[K[10;6H[?12l[?25h[?25l4c81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;80H[K[10;6H[?12l[?25h[?25lc81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;79H[K[10;6H[?12l[?25h[?25l81-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;78H[K[10;6H[?12l[?25h[?25l1-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;77H[K[10;6H[?12l[?25h[?25l-90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;76H[K[10;6H[?12l[?25h[?25l90cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;75H[K[10;6H[?12l[?25h[?25l0cf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;74H[K[10;6H[?12l[?25h[?25lcf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;73H[K[10;6H[?12l[?25h[?25lf-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;72H[K[10;6H[?12l[?25h[?25l-389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;71H[K[10;6H[?12l[?25h[?25l389da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;70H[K[10;6H[?12l[?25h[?25l89da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;69H[K[10;6H[?12l[?25h[?25l9da6eee4cc /boot [18Cxfs     defaults [7C0 0[10;68H[K[10;6H[?12l[?25h[?25lda6eee4cc /boot [18Cxfs     defaults [7C0 0[10;67H[K[10;6H[?12l[?25h[?25la6eee4cc /boot [18Cxfs     defaults [7C0 0[10;66H[K[10;6H[?12l[?25h[?25l6eee4cc /boot [18Cxfs     defaults [7C0 0[10;65H[K[10;6H[?12l[?25h[?25leee4cc /boot [18Cxfs     defaults [7C0 0[10;64H[K[10;6H[?12l[?25h[?25lee4cc /boot [18Cxfs     defaults [7C0 0[10;63H[K[10;6H[?12l[?25h[?25le4cc /boot [18Cxfs     defaults [7C0 0[10;62H[K[10;6H[?12l[?25h[?25l4cc /boot [18Cxfs     defaults [7C0 0[10;61H[K[10;6H[?12l[?25h[?25lcc /boot [18Cxfs     defaults [7C0 0[10;60H[K[10;6H[?12l[?25h[?25lc /boot [18Cxfs     defaults [7C0 0[10;59H[K[10;6H[?12l[?25h[?25l /boot [18Cxfs     defaults [7C0 0[10;58H[K[10;6H[?12l[?25h[?25la4546985-60f0-487d-8f59-b116b4e09fe9 /boot[7C   [9Cxfs     defaults[8C0 0[10;42H[?12l[?25h /[?25loot [18Cxfs     defaults [7C0 0[10;93H[K[10;44H[?12l[?25h[?25lot [18Cxfs     defaults [7C0 0[10;92H[K[10;44H[?12l[?25h[?25lt [18Cxfs     defaults [7C0 0[10;91H[K[10;44H[?12l[?25h[?25l [18Cxfs     defaults [7C0 0[10;90H[K[10;44H[?12l[?25h[?25lo[18C xfs     defaults[7C 0 0[10;45H[?12l[?25h[?25lp[18C xfs     defaults[7C 0 0[10;46H[?12l[?25h[?25lt[18C xfs     defaults[7C 0 0[10;47H[?12l[?25h[?25l [18Cxfs     defaults [7C0 0[10;92H[K[10;46H[?12l[?25h[?25l [18Cxfs     defaults [7C0 0[10;91H[K[10;45H[?12l[?25h[?25l [18Cxfs     defaults [7C0 0[10;90H[K[10;44H[?12l[?25h[?25lv[18C xfs     defaults[7C 0 0[10;45H[?12l[?25h[?25la[18C xfs     defaults[7C 0 0[10;46H[?12l[?25h[?25lr[18C xfs     defaults[7C 0 0[10;47H[?12l[?25h[62;1H[K[10;46H[?25l[?12l[?25h[?25l[62;1H:[?12l[?25hx[?25l"/etc/fstab" 11L, 480C written
+[?1l>[?12l[?25h[?1049l]0;root@otuslinux:/boot[root@otuslinux boot]# mount -a
+]0;root@otuslinux:/boot[root@otuslinux boot]# lvremove /dev/vg-r[K[K_root/lv_root 
+  Logical volume vg_root/lv_root contains a filesystem in use.
+]0;root@otuslinux:/boot[root@otuslinux boot]# lvremove /dev/vg_root/lv_root [C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P^C
+]0;root@otuslinux:/boot[root@otuslinux boot]# ^C
+]0;root@otuslinux:/boot[root@otuslinux boot]# reboot
+Running in chroot, ignoring request.
+]0;root@otuslinux:/boot[root@otuslinux boot]# exit
+exit
+]0;root@otuslinux:~[root@otuslinux ~]# reboot
+PolicyKit daemon disconnected from the bus.
+We are no longer a registered authentication agent.
+Connection to 127.0.0.1 closed by remote host.
+Connection to 127.0.0.1 closed.
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3[00m$ vagrant ssh
+Last login: Mon Aug 12 11:37:15 2019 from 10.0.2.2
+]0;vagrant@otuslinux:~[?1034h[vagrant@otuslinux ~]$ sudo -i
+]0;root@otuslinux:~[?1034h[root@otuslinux ~]# lsblk 
+NAME                     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                        8:0    0   40G  0 disk 
+├─sda1                     8:1    0    1M  0 part 
+├─sda2                     8:2    0    1G  0 part 
+└─sda3                     8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00  253:0    0    8G  0 lvm  /
+  └─VolGroup00-LogVol01  253:1    0  1,5G  0 lvm  [SWAP]
+sdb                        8:16   0   10G  0 disk 
+└─vg_root-lv_root        253:7    0   10G  0 lvm  
+sdc                        8:32   0    2G  0 disk 
+sdd                        8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0  253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0 253:3    0  952M  0 lvm  
+  └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+sde                        8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1  253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1 253:5    0  952M  0 lvm  
+  └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+sdf                        8:80   0   40G  0 disk 
+sdg                        8:96   0   40G  0 disk 
+sdh                        8:112  0   40G  0 disk 
+sdi                        8:128  0   40G  0 disk 
+sdj                        8:144  0   40G  0 disk 
+sdk                        8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# lvrem`[Kove /dev/vg_root/lv_root /dev/[K[K[K[K[K
+Do you really want to remove active logical volume vg_root/lv_root? [y/n]: y
+  Logical volume "lv_root" successfully removed
+]0;root@otuslinux:~[root@otuslinux ~]# vgre
+vgreduce  vgremove  vgrename  
+[root@otuslinux ~]# vgre
+vgreduce  vgremove  vgrename  
+[root@otuslinux ~]# vgrem[Kmove /dev/vg_ro[K[K[K_g[Kro[K[K[K-root
+  Volume group "vg-root" not found
+  Cannot process volume group vg-root
+]0;root@otuslinux:~[root@otuslinux ~]# vgremove /dev/vg-root[K[K[K[K[K_root
+  Volume group "vg_root" successfully removed
+]0;root@otuslinux:~[root@otuslinux ~]# pvre
+pvremove  pvresize  
+[root@otuslinux ~]# pvre
+pvremove  pvresize  
+[root@otuslinux ~]# pvre
+pvremove  pvresize  
+[root@otuslinux ~]# pvreem[K[Kmove /dev/sd[Kdb
+  Labels on physical volume "/dev/sdb" successfully wiped.
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                     MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                        8:0    0   40G  0 disk 
+├─sda1                     8:1    0    1M  0 part 
+├─sda2                     8:2    0    1G  0 part 
+└─sda3                     8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00  253:0    0    8G  0 lvm  /
+  └─VolGroup00-LogVol01  253:1    0  1,5G  0 lvm  [SWAP]
+sdb                        8:16   0   10G  0 disk 
+sdc                        8:32   0    2G  0 disk 
+sdd                        8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0  253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0 253:3    0  952M  0 lvm  
+  └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+sde                        8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1  253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1 253:5    0  952M  0 lvm  
+  └─vg_var-lv_var        253:6    0  952M  0 lvm  /var
+sdf                        8:80   0   40G  0 disk 
+sdg                        8:96   0   40G  0 disk 
+sdh                        8:112  0   40G  0 disk 
+sdi                        8:128  0   40G  0 disk 
+sdj                        8:144  0   40G  0 disk 
+sdk                        8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# lvcreate -n LogVol_Home -L 2G /de[Kev/VolGroup00
+  Logical volume "LogVol_Home" created.
+]0;root@otuslinux:~[root@otuslinux ~]# mkf
+mkfifo       mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs     
+[root@otuslinux ~]# mkf
+mkfifo       mkfs         mkfs.btrfs   mkfs.cramfs  mkfs.ext2    mkfs.ext3    mkfs.ext4    mkfs.minix   mkfs.xfs     
+[root@otuslinux ~]# mkfs.xfs /dev/VolGroup00/LogVol_Home 
+meta-data=/dev/VolGroup00/LogVol_Home isize=512    agcount=4, agsize=131072 blks
+         =                       sectsz=512   attr=2, projid32bit=1
+         =                       crc=1        finobt=0, sparse=0
+data     =                       bsize=4096   blocks=524288, imaxpct=25
+         =                       sunit=0      swidth=0 blks
+naming   =version 2              bsize=4096   ascii-ci=0 ftype=1
+log      =internal log           bsize=4096   blocks=2560, version=2
+         =                       sectsz=512   sunit=0 blks, lazy-count=1
+realtime =none                   extsz=4096   blocks=0, rtextents=0
+]0;root@otuslinux:~[root@otuslinux ~]# mount /dev/VolGroup00/LogVol_h[KHome /mnt
+]0;root@otuslinux:~[root@otuslinux ~]# cp -aR /home/* /mnt
+]0;root@otuslinux:~[root@otuslinux ~]# rm -rf /home
+rm: cannot remove ‘/home’: Device or resource busy
+]0;root@otuslinux:~[root@otuslinux ~]# rm -rf /home/*
+]0;root@otuslinux:~[root@otuslinux ~]# umount /mnt
+]0;root@otuslinux:~[root@otuslinux ~]# mount /dev/VolGroup00/LogVol_h[KHome /home/
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                       MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                          8:0    0   40G  0 disk 
+├─sda1                       8:1    0    1M  0 part 
+├─sda2                       8:2    0    1G  0 part 
+└─sda3                       8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00    253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01    253:1    0  1,5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol_Home 253:7    0    2G  0 lvm  /home
+sdb                          8:16   0   10G  0 disk 
+sdc                          8:32   0    2G  0 disk 
+sdd                          8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0    253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0   253:3    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sde                          8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1    253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1   253:5    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sdf                          8:80   0   40G  0 disk 
+sdg                          8:96   0   40G  0 disk 
+sdh                          8:112  0   40G  0 disk 
+sdi                          8:128  0   40G  0 disk 
+sdj                          8:144  0   40G  0 disk 
+sdk                          8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# bk[Klkid
+/dev/sda2: UUID="570897ca-e759-4c81-90cf-389da6eee4cc" TYPE="xfs" 
+/dev/sda3: UUID="vrrtbx-g480-HcJI-5wLn-4aOf-Olld-rC03AY" TYPE="LVM2_member" 
+/dev/sdd: UUID="3EF276-oHLS-M9yr-TAPa-D0IX-9efj-zdOmEI" TYPE="LVM2_member" 
+/dev/sde: UUID="ExPylV-b1tE-h2xZ-a96e-nEd4-2oQC-5XTMb3" TYPE="LVM2_member" 
+/dev/mapper/VolGroup00-LogVol00: UUID="65b858ea-ee91-4360-8c11-4b1345092892" TYPE="xfs" 
+/dev/mapper/VolGroup00-LogVol01: UUID="c39c5bed-f37c-4263-bee8-aeb6a6659d7b" TYPE="swap" 
+/dev/mapper/vg_var-lv_var_rimage_0: UUID="a4546985-60f0-487d-8f59-b116b4e09fe9" TYPE="xfs" 
+/dev/mapper/vg_var-lv_var_rimage_1: UUID="a4546985-60f0-487d-8f59-b116b4e09fe9" TYPE="xfs" 
+/dev/mapper/vg_var-lv_var: UUID="a4546985-60f0-487d-8f59-b116b4e09fe9" TYPE="xfs" 
+/dev/mapper/VolGroup00-LogVol_Home: UUID="a5fba1bf-ebb8-429c-affc-8674a7bd115f" TYPE="xfs" 
+]0;root@otuslinux:~[root@otuslinux ~]# vi /etc/fstab 
+[?1049h[?1h=[1;62r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[62;1H"/etc/fstab" 11L, 480C[2;1H#
+# /etc/fstab
+# Created by anaconda on Sat May 12 18:50:26 2018
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk'
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info
+#
+/dev/mapper/VolGroup00-LogVol00 /[23Cxfs     defaults[8C0 0
+UUID=a4546985-60f0-487d-8f59-b116b4e09fe9 /var[19Cxfs     defaults[8C0 0
+/dev/mapper/VolGroup00-LogVol01 swap[20Cswap    defaults[8C0 0
+[94m~                                                                                                                                                                    [13;1H~                                                                                                                                                                    [14;1H~                                                                                                                                                                    [15;1H~                                                                                                                                                                    [16;1H~                                                                                                                                                                    [17;1H~                                                                                                                                                                    [18;1H~                                                                                                                                                                    [19;1H~                                                                                                                                                                    [20;1H~                                                                                                                                                                    [21;1H~                                                                                                                                                                    [22;1H~                                                                                                                                                                    [23;1H~                                                                                                                                                                    [24;1H~                                                                                                                                                                    [25;1H~                                                                                                                                                                    [26;1H~                                                                                                                                                                    [27;1H~                                                                                                                                                                    [28;1H~                                                                                                                                                                    [29;1H~                                                                                                                                                                    [30;1H~                                                                                                                                                                    [31;1H~                                                                                                                                                                    [32;1H~                                                                                                                                                                    [33;1H~                                                                                                                                                                    [34;1H~                                                                                                                                                                    [35;1H~                                                                                                                                                                    [36;1H~                                                                                                                                                                    [37;1H~                                                                                                                                                                    [38;1H~                                                                                                                                                                    [39;1H~                                                                                                                                                                    [40;1H~                                                                                                                                                                    [41;1H~                                                                                                                                                                    [42;1H~                                                                                                                                                                    [43;1H~                                                                                                                                                                    [44;1H~                                                                                                                                                                    [45;1H~                                                                                                                                                                    [46;1H~                                                                                                                                                                    [47;1H~                                                                                                                                                                    [48;1H~                                                                                                                                                                    [49;1H~                                                                                                                                                                    [50;1H~                                                                                                                                                                    [51;1H~                                                                                                                                                                    [52;1H~                                                                                                                                                                    [53;1H~                                                                                                                                                                    [54;1H~                                                                                                                                                                    [55;1H~                                                                                                                                                                    [56;1H~                                                                                                                                                                    [57;1H~                                                                                                                                                                    [58;1H~                                                                                                                                                                    [59;1H~                                                                                                                                                                    [60;1H~                                                                                                                                                                    [61;1H~                                                                                                                                                                    [1;1H[?12l[?25h
+
+
+
+
+
+
+
+
+[?25l[11;61r[m[11;1H[L[1;62r[11;1HUUID=a4546985-60f0-487d-8f59-b116b4e09fe9 /var[19Cxfs     defaults[8C0 0[62;1H[K[11;1H[?12l[?25hUUID=a[?25l[62;1H[1m-- INSERT --[11;6H[?12l[?25h[?25l[m4546985-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;92H[K[11;6H[?12l[?25h[?25l546985-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;91H[K[11;6H[?12l[?25h[?25l46985-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;90H[K[11;6H[?12l[?25h[?25l6985-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;89H[K[11;6H[?12l[?25h[?25l985-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;88H[K[11;6H[?12l[?25h[?25l85-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;87H[K[11;6H[?12l[?25h[?25l5-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;86H[K[11;6H[?12l[?25h[?25l-60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;85H[K[11;6H[?12l[?25h[?25l60f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;84H[K[11;6H[?12l[?25h[?25l0f0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;83H[K[11;6H[?12l[?25h[?25lf0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;82H[K[11;6H[?12l[?25h[?25l0-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;81H[K[11;6H[?12l[?25h[?25l-487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;80H[K[11;6H[?12l[?25h[?25l487d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;79H[K[11;6H[?12l[?25h[?25l87d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;78H[K[11;6H[?12l[?25h[?25l7d-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;77H[K[11;6H[?12l[?25h[?25ld-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;76H[K[11;6H[?12l[?25h[?25l-8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;75H[K[11;6H[?12l[?25h[?25l8f59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;74H[K[11;6H[?12l[?25h[?25lf59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;73H[K[11;6H[?12l[?25h[?25l59-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;72H[K[11;6H[?12l[?25h[?25l9-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;71H[K[11;6H[?12l[?25h[?25l-b116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;70H[K[11;6H[?12l[?25h[?25lb116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;69H[K[11;6H[?12l[?25h[?25l116b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;68H[K[11;6H[?12l[?25h[?25l16b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;67H[K[11;6H[?12l[?25h[?25l6b4e09fe9 /var [18Cxfs     defaults [7C0 0[11;66H[K[11;6H[?12l[?25h[?25lb4e09fe9 /var [18Cxfs     defaults [7C0 0[11;65H[K[11;6H[?12l[?25h[?25l4e09fe9 /var [18Cxfs     defaults [7C0 0[11;64H[K[11;6H[?12l[?25h[?25le09fe9 /var [18Cxfs     defaults [7C0 0[11;63H[K[11;6H[?12l[?25h[?25l09fe9 /var [18Cxfs     defaults [7C0 0[11;62H[K[11;6H[?12l[?25h[?25l9fe9 /var [18Cxfs     defaults [7C0 0[11;61H[K[11;6H[?12l[?25h[?25lfe9 /var [18Cxfs     defaults [7C0 0[11;60H[K[11;6H[?12l[?25h[?25le9 /var [18Cxfs     defaults [7C0 0[11;59H[K[11;6H[?12l[?25h[?25l9 /var [18Cxfs     defaults [7C0 0[11;58H[K[11;6H[?12l[?25h[?25l /var [18Cxfs     defaults [7C0 0[11;57H[K[11;6H[?12l[?25h[?25la5fba1bf-ebb8-429c-affc-8674a7bd115f /var[7C   [9Cxfs     defaults[8C0 0[11;42H[?12l[?25h /[?25lar [18Cxfs     defaults [7C0 0[11;92H[K[11;44H[?12l[?25h[?25lr [18Cxfs     defaults [7C0 0[11;91H[K[11;44H[?12l[?25h[?25l [18Cxfs     defaults [7C0 0[11;90H[K[11;44H[?12l[?25h[?25lh[18C xfs     defaults[7C 0 0[11;45H[?12l[?25h[?25lo[18C xfs     defaults[7C 0 0[11;46H[?12l[?25h[?25lm[18C xfs     defaults[7C 0 0[11;47H[?12l[?25h[?25le[18C xfs     defaults[7C 0 0[11;48H[?12l[?25h[62;1H[K[11;47H[?25l[?12l[?25h[?25l[62;1H:[?12l[?25hx[?25l"/etc/fstab" 12L, 574C written
+[?1l>[?12l[?25h[?1049l]0;root@otuslinux:~[root@otuslinux ~]# mount -a
+]0;root@otuslinux:~[root@otuslinux ~]# ll /tmp
+total 36
+-rwx------.  1 root    root      836 май 12  2018 [0m[38;5;34mks-script-f5cTjE[0m
+-rwx------.  1 root    root     3361 май 12  2018 [38;5;34mks-script-Vef3rE[0m
+drwxr-xr-x. 18 root    root      238 авг 12 11:45 [38;5;27moldvar[0m
+drwx------   3 root    root       17 авг 12 14:15 [38;5;27msystemd-private-2d2be3f2edc24ba08ef869e1b314917f-chronyd.service-KpRfsJ[0m
+drwx------.  3 root    root       17 авг 12 11:36 [38;5;27msystemd-private-a686f9fbac494265b27a366546c8fcfa-chronyd.service-m6CTYP[0m
+drwx------.  3 root    root       17 авг 12 10:49 [38;5;27msystemd-private-fe3bbbd316414f45b26dc8dfe923aaa0-chronyd.service-oGH4r3[0m
+-rwx--x--x.  1 vagrant vagrant    75 авг 12 10:53 [38;5;34mvagrant-shell[0m
+-rw-r--r--.  1 root    root    22478 авг 12 10:52 vboxguest-Module.symvers
+-rw-------.  1 root    root        0 май 12  2018 yum.log
+]0;root@otuslinux:~[root@otuslinux ~]# cp -R /tmp/* /home
+]0;root@otuslinux:~[root@otuslinux ~]# ll
+total 16
+-rw-------. 1 root root 5763 май 12  2018 anaconda-ks.cfg
+-rw-------. 1 root root 5432 май 12  2018 original-ks.cfg
+]0;root@otuslinux:~[root@otuslinux ~]# ll /home/
+total 36
+-rwx------   1 root    root      836 авг 12 15:53 [0m[38;5;34mks-script-f5cTjE[0m
+-rwx------   1 root    root     3361 авг 12 15:53 [38;5;34mks-script-Vef3rE[0m
+drwxr-xr-x  18 root    root      238 авг 12 15:53 [38;5;27moldvar[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-2d2be3f2edc24ba08ef869e1b314917f-chronyd.service-KpRfsJ[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-a686f9fbac494265b27a366546c8fcfa-chronyd.service-m6CTYP[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-fe3bbbd316414f45b26dc8dfe923aaa0-chronyd.service-oGH4r3[0m
+drwx------.  3 vagrant vagrant    74 май 12  2018 [38;5;27mvagrant[0m
+-rwx--x--x   1 root    root       75 авг 12 15:53 [38;5;34mvagrant-shell[0m
+-rw-r--r--   1 root    root    22478 авг 12 15:53 vboxguest-Module.symvers
+-rw-------   1 root    root        0 авг 12 15:53 yum.log
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                       MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                          8:0    0   40G  0 disk 
+├─sda1                       8:1    0    1M  0 part 
+├─sda2                       8:2    0    1G  0 part 
+└─sda3                       8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00    253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01    253:1    0  1,5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol_Home 253:7    0    2G  0 lvm  /home
+sdb                          8:16   0   10G  0 disk 
+sdc                          8:32   0    2G  0 disk 
+sdd                          8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0    253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0   253:3    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sde                          8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1    253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1   253:5    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sdf                          8:80   0   40G  0 disk 
+sdg                          8:96   0   40G  0 disk 
+sdh                          8:112  0   40G  0 disk 
+sdi                          8:128  0   40G  0 disk 
+sdj                          8:144  0   40G  0 disk 
+sdk                          8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# df -h
+Filesystem                          Size  Used Avail Use% Mounted on
+/dev/mapper/VolGroup00-LogVol00     8,0G  1,6G  6,5G  20% /
+devtmpfs                            1,9G     0  1,9G   0% /dev
+tmpfs                               1,9G     0  1,9G   0% /dev/shm
+tmpfs                               1,9G  8,7M  1,9G   1% /run
+tmpfs                               1,9G     0  1,9G   0% /sys/fs/cgroup
+/dev/mapper/vg_var-lv_var           949M  650M  300M  69% /var
+tmpfs                               379M     0  379M   0% /run/user/1000
+/dev/mapper/VolGroup00-LogVol_Home  2,0G  733M  1,3G  36% /home
+tmpfs                               379M     0  379M   0% /run/user/0
+]0;root@otuslinux:~[root@otuslinux ~]# lvcreate -L 100MB -s -n home_snap /dev/VolGroup00/LogVol_Home
+  Rounding up size to full physical extent 128,00 MiB
+  Logical volume "home_snap" created.
+]0;root@otuslinux:~[root@otuslinux ~]# lsbl
+-bash: lsbl: command not found
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                               8:0    0   40G  0 disk 
+├─sda1                            8:1    0    1M  0 part 
+├─sda2                            8:2    0    1G  0 part 
+└─sda3                            8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00         253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01         253:1    0  1,5G  0 lvm  [SWAP]
+  ├─VolGroup00-LogVol_Home-real 253:8    0    2G  0 lvm  
+  │ ├─VolGroup00-LogVol_Home    253:7    0    2G  0 lvm  /home
+  │ └─VolGroup00-home_snap      253:10   0    2G  0 lvm  
+  └─VolGroup00-home_snap-cow    253:9    0  128M  0 lvm  
+    └─VolGroup00-home_snap      253:10   0    2G  0 lvm  
+sdb                               8:16   0   10G  0 disk 
+sdc                               8:32   0    2G  0 disk 
+sdd                               8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0         253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var               253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0        253:3    0  952M  0 lvm  
+  └─vg_var-lv_var               253:6    0  952M  0 lvm  /var
+sde                               8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1         253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var               253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1        253:5    0  952M  0 lvm  
+  └─vg_var-lv_var               253:6    0  952M  0 lvm  /var
+sdf                               8:80   0   40G  0 disk 
+sdg                               8:96   0   40G  0 disk 
+sdh                               8:112  0   40G  0 disk 
+sdi                               8:128  0   40G  0 disk 
+sdj                               8:144  0   40G  0 disk 
+sdk                               8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# rf[Km -f /home/
+ks-script-f5cTjE                                                         systemd-private-fe3bbbd316414f45b26dc8dfe923aaa0-chronyd.service-oGH4r3/
+ks-script-Vef3rE                                                         vagrant/
+oldvar/                                                                  vagrant-shell
+systemd-private-2d2be3f2edc24ba08ef869e1b314917f-chronyd.service-KpRfsJ/ vboxguest-Module.symvers
+systemd-private-a686f9fbac494265b27a366546c8fcfa-chronyd.service-m6CTYP/ yum.log
+[root@otuslinux ~]# rm -f /home/
+ks-script-f5cTjE                                                         systemd-private-fe3bbbd316414f45b26dc8dfe923aaa0-chronyd.service-oGH4r3/
+ks-script-Vef3rE                                                         vagrant/
+oldvar/                                                                  vagrant-shell
+systemd-private-2d2be3f2edc24ba08ef869e1b314917f-chronyd.service-KpRfsJ/ vboxguest-Module.symvers
+systemd-private-a686f9fbac494265b27a366546c8fcfa-chronyd.service-m6CTYP/ yum.log
+[root@otuslinux ~]# rm -f /home/ol[K[Kyum.log
+]0;root@otuslinux:~[root@otuslinux ~]# umount /home^C
+]0;root@otuslinux:~[root@otuslinux ~]# ^C
+]0;root@otuslinux:~[root@otuslinux ~]# lll[K
+total 16
+-rw-------. 1 root root 5763 май 12  2018 anaconda-ks.cfg
+-rw-------. 1 root root 5432 май 12  2018 original-ks.cfg
+]0;root@otuslinux:~[root@otuslinux ~]# ll /home
+total 36
+-rwx------   1 root    root      836 авг 12 15:53 [0m[38;5;34mks-script-f5cTjE[0m
+-rwx------   1 root    root     3361 авг 12 15:53 [38;5;34mks-script-Vef3rE[0m
+drwxr-xr-x  18 root    root      238 авг 12 15:53 [38;5;27moldvar[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-2d2be3f2edc24ba08ef869e1b314917f-chronyd.service-KpRfsJ[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-a686f9fbac494265b27a366546c8fcfa-chronyd.service-m6CTYP[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-fe3bbbd316414f45b26dc8dfe923aaa0-chronyd.service-oGH4r3[0m
+drwx------.  3 vagrant vagrant    74 май 12  2018 [38;5;27mvagrant[0m
+-rwx--x--x   1 root    root       75 авг 12 15:53 [38;5;34mvagrant-shell[0m
+-rw-r--r--   1 root    root    22478 авг 12 15:53 vboxguest-Module.symvers
+]0;root@otuslinux:~[root@otuslinux ~]# umount /home
+]0;root@otuslinux:~[root@otuslinux ~]# lvconvert --merge /dev/VolGroup00/home_snap
+  Merging of volume VolGroup00/home_snap started.
+  VolGroup00/LogVol_Home: Merged: 100,00%
+]0;root@otuslinux:~[root@otuslinux ~]# munt [K[K[K[Kount -a
+]0;root@otuslinux:~[root@otuslinux ~]# ll /home
+total 36
+-rwx------   1 root    root      836 авг 12 15:53 [0m[38;5;34mks-script-f5cTjE[0m
+-rwx------   1 root    root     3361 авг 12 15:53 [38;5;34mks-script-Vef3rE[0m
+drwxr-xr-x  18 root    root      238 авг 12 15:53 [38;5;27moldvar[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-2d2be3f2edc24ba08ef869e1b314917f-chronyd.service-KpRfsJ[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-a686f9fbac494265b27a366546c8fcfa-chronyd.service-m6CTYP[0m
+drwx------   3 root    root       17 авг 12 15:53 [38;5;27msystemd-private-fe3bbbd316414f45b26dc8dfe923aaa0-chronyd.service-oGH4r3[0m
+drwx------.  3 vagrant vagrant    74 май 12  2018 [38;5;27mvagrant[0m
+-rwx--x--x   1 root    root       75 авг 12 15:53 [38;5;34mvagrant-shell[0m
+-rw-r--r--   1 root    root    22478 авг 12 15:53 vboxguest-Module.symvers
+-rw-------   1 root    root        0 авг 12 15:53 yum.log
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                       MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                          8:0    0   40G  0 disk 
+├─sda1                       8:1    0    1M  0 part 
+├─sda2                       8:2    0    1G  0 part 
+└─sda3                       8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00    253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01    253:1    0  1,5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol_Home 253:7    0    2G  0 lvm  /home
+sdb                          8:16   0   10G  0 disk 
+sdc                          8:32   0    2G  0 disk 
+sdd                          8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0    253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0   253:3    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sde                          8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1    253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1   253:5    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sdf                          8:80   0   40G  0 disk 
+sdg                          8:96   0   40G  0 disk 
+sdh                          8:112  0   40G  0 disk 
+sdi                          8:128  0   40G  0 disk 
+sdj                          8:144  0   40G  0 disk 
+sdk                          8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# #cn[K[Kzfs
+]0;root@otuslinux:~[root@otuslinux ~]# 
+]0;root@otuslinux:~[root@otuslinux ~]# 
+]0;root@otuslinux:~[root@otuslinux ~]# clear
+[3;J[H[2J]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME                       MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                          8:0    0   40G  0 disk 
+├─sda1                       8:1    0    1M  0 part 
+├─sda2                       8:2    0    1G  0 part 
+└─sda3                       8:3    0   39G  0 part 
+  ├─VolGroup00-LogVol00    253:0    0    8G  0 lvm  /
+  ├─VolGroup00-LogVol01    253:1    0  1,5G  0 lvm  [SWAP]
+  └─VolGroup00-LogVol_Home 253:7    0    2G  0 lvm  /home
+sdb                          8:16   0   10G  0 disk 
+sdc                          8:32   0    2G  0 disk 
+sdd                          8:48   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_0    253:2    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_0   253:3    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sde                          8:64   0    1G  0 disk 
+├─vg_var-lv_var_rmeta_1    253:4    0    4M  0 lvm  
+│ └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+└─vg_var-lv_var_rimage_1   253:5    0  952M  0 lvm  
+  └─vg_var-lv_var          253:6    0  952M  0 lvm  /var
+sdf                          8:80   0   40G  0 disk 
+sdg                          8:96   0   40G  0 disk 
+sdh                          8:112  0   40G  0 disk 
+sdi                          8:128  0   40G  0 disk 
+sdj                          8:144  0   40G  0 disk 
+sdk                          8:160  0   40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# exit
+logout
+]0;vagrant@otuslinux:~[vagrant@otuslinux ~]$ exit
+logout
+Connection to 127.0.0.1 closed.
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3[00m$ cd[K[Kexit
+
+Script done on 2019-08-12 18:58:29+0300

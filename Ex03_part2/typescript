@@ -1,0 +1,853 @@
+Script started on 2019-08-13 08:49:11+0300
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3-part2[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3-part2[00m$ vagrant destroy  -f-y -f[Kssh[Kup && vagrant sshssh[K
+]0;vagrant@otuslinux:~[?1034h[vagrant@otuslinux ~]$ sudo -i
+]0;root@otuslinux:~[?1034h[root@otuslinux ~]# yum in[K[K[K[K[K[Kcet /etc/centos-release
+-bash: cet: command not found
+]0;root@otuslinux:~[root@otuslinux ~]# cet /etc/centos-release[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[1P[1@a
+CentOS Linux release 7.6.1810 (Core) 
+]0;root@otuslinux:~[root@otuslinux ~]# http://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cyhttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cuhttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cmhttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C http://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cihttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cnhttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cshttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cthttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cahttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clhttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Clhttp://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C http://download.zfsonlinux.org/epel/zfs-release.el7_6.noarch.rpm[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+Loaded plugins: fastestmirror
+zfs-release.el7_6.noarch.rpm                                                                                                                  | 5.4 kB  00:00:00     
+Examining /var/tmp/yum-root-GWCLHO/zfs-release.el7_6.noarch.rpm: zfs-release-1-6.el7.noarch
+Marking /var/tmp/yum-root-GWCLHO/zfs-release.el7_6.noarch.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package zfs-release.noarch 0:1-6.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================================================================================================
+ Package                               Arch                             Version                            Repository                                           Size
+=====================================================================================================================================================================
+Installing:
+ [1mzfs-release(B[m                           noarch                           1-6.el7                            /zfs-release.el7_6.noarch                           2.9 k
+
+Transaction Summary
+=====================================================================================================================================================================
+Install  1 Package
+
+Total size: 2.9 k
+Installed size: 2.9 k
+Is this ok [y/d/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : zfs-release-1-6.el7.noarch [                                                                                                                    ] 1/1  Installing : zfs-release-1-6.el7.noarch [###############################################################                                                     ] 1/1  Installing : zfs-release-1-6.el7.noarch [###############################################################################################################     ] 1/1  Installing : zfs-release-1-6.el7.noarch                                                                                                                        1/1 
+  Verifying  : zfs-release-1-6.el7.noarch                                                                                                                        1/1 
+
+Installed:
+  zfs-release.noarch 0:1-6.el7                                                                                                                                       
+
+Complete!
+]0;root@otuslinux:~[root@otuslinux ~]# vi /etc/yum.reop[K[Kpos.d/
+CentOS-Base.repo       CentOS-Debuginfo.repo  CentOS-Media.repo      CentOS-Vault.repo      
+CentOS-CR.repo         CentOS-fasttrack.repo  CentOS-Sources.repo    zfs.repo               
+[root@otuslinux ~]# vi /etc/yum.repos.d/
+CentOS-Base.repo       CentOS-Debuginfo.repo  CentOS-Media.repo      CentOS-Vault.repo      
+CentOS-CR.repo         CentOS-fasttrack.repo  CentOS-Sources.repo    zfs.repo               
+[root@otuslinux ~]# vi /etc/yum.repos.d/zfs.repo 
+[?1049h[?1h=[1;62r[?12;25h[?12l[?25h[27m[m[H[2J[?25l[62;1H"/etc/yum.repos.d/zfs.repo" 45L, 1225C[1;1H[zfs]
+name=ZFS on Linux for EL7 - dkms
+baseurl=http://download.zfsonlinux.org/epel/7.6/$basearch/
+enabled=1
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+
+[zfs-kmod]
+name=ZFS on Linux for EL7 - kmod
+baseurl=http://download.zfsonlinux.org/epel/7.6/kmod/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+
+[zfs-source]
+name=ZFS on Linux for EL7 - Source
+baseurl=http://download.zfsonlinux.org/epel/7.6/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+
+[zfs-testing]
+name=ZFS on Linux for EL7 - dkms - Testing
+baseurl=http://download.zfsonlinux.org/epel-testing/7.6/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+
+[zfs-testing-kmod]
+name=ZFS on Linux for EL7 - kmod - Testing
+baseurl=http://download.zfsonlinux.org/epel-testing/7.6/kmod/$basearch/
+enabled=0
+metadata_expire=7d
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+
+[zfs-testing-source]
+name=ZFS on Linux for EL7 - Testing Source
+baseurl=http://download.zfsonlinux.org/epel-testing/7.6/SRPMS/
+enabled=0
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-zfsonlinux
+[94m~                                                                                                                                                                    [47;1H~                                                                                                                                                                    [48;1H~                                                                                                                                                                    [49;1H~                                                                                                                                                                    [50;1H~                                                                                                                                                                    [51;1H~                                                                                                                                                                    [52;1H~                                                                                                                                                                    [53;1H~                                                                                                                                                                    [54;1H~                                                                                                                                                                    [55;1H~                                                                                                                                                                    [56;1H~                                                                                                                                                                    [57;1H~                                                                                                                                                                    [58;1H~                                                                                                                                                                    [59;1H~                                                                                                                                                                    [60;1H~                                                                                                                                                                    [61;1H~                                                                                                                                                                    [1;1H[?12l[?25h
+
+
+
+[4;1H[8C[?25l[m[62;1H[1m-- INSERT --[m[62;13H[K[4;9H[?12l[?25h1[?25l[4;9H[K[4;9H[?12l[?25h[?25l0[?12l[?25h[5;10H[6;10H[7;10H
+[9;10H[10;10H[11;10H[12;10H[?25l[12;9H[K[12;9H[?12l[?25h[?25l1[?12l[?25h[62;1H[K[12;9H[?25l[?12l[?25h[?25l[62;1H:[?12l[?25hx[?25l"/etc/yum.repos.d/zfs.repo" 45L, 1225C written
+[?1l>[?12l[?25h[?1049l]0;root@otuslinux:~[root@otuslinux ~]# yum i[Kinstall zfs
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.corbina.net
+ * extras: mirror.logol.ru
+ * updates: mirror.sale-dedic.com
+zfs-kmod                                                                                                                                      | 2.9 kB  00:00:00     
+zfs-kmod/x86_64/primary_db                                           0% [                                                          ]  0.0 B/s |    0 B  --:--:-- ETA zfs-kmod/x86_64/primary_db                                          53% [==============================-                           ]  0.0 B/s |  45 kB  --:--:-- ETA zfs-kmod/x86_64/primary_db                                                                                                                    |  84 kB  00:00:00     
+Resolving Dependencies
+--> Running transaction check
+---> Package zfs.x86_64 0:0.7.13-1.el7_6 will be installed
+--> Processing Dependency: zfs-kmod = 0.7.13 for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: spl = 0.7.13 for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libzpool2 = 0.7.13 for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libzfs2 = 0.7.13 for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libuutil1 = 0.7.13 for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libnvpair1 = 0.7.13 for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: sysstat for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libzpool.so.2()(64bit) for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libzfs_core.so.1()(64bit) for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libzfs.so.2()(64bit) for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libuutil.so.1()(64bit) for package: zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: libnvpair.so.1()(64bit) for package: zfs-0.7.13-1.el7_6.x86_64
+--> Running transaction check
+---> Package kmod-zfs.x86_64 0:0.7.13-1.el7_6 will be installed
+--> Processing Dependency: ksym(zone_get_hostid) = 0xba3e2d71 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(zio_arena) = 0xb0364551 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(z_uncompress) = 0xd8b5eb52 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(z_compress_level) = 0x55de2e28 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(xdrmem_create) = 0xddd4a3d3 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_set_pwd) = 0xf7b48661 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_seek) = 0xa25d7708 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_releasef) = 0x65f3602b for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_rdwr) = 0xda0b5604 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_openat) = 0x584f0fa4 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_open) = 0x6cd72a01 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_mode_to_vtype) = 0x5ecf6f91 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_getf) = 0x017c4698 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_getattr) = 0xa518c2ad for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_fsync) = 0xb7b69dab for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vn_close) = 0x19302b91 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vmem_size) = 0x29eec2f0 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(vcmn_err) = 0x52778ec7 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(tsd_set) = 0x1285cb78 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(tsd_get) = 0x3323ccb1 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(tsd_destroy) = 0x8eb0a41f for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(tsd_create) = 0x958b84e3 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_wait_outstanding) = 0x68c4f9da for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_wait_id) = 0x24bd0182 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_wait) = 0x2e2e322f for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_member) = 0xf12d1676 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_init_ent) = 0xa08322cc for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_dispatch_ent) = 0x5dbd6138 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_dispatch_delay) = 0xdb77dd01 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_dispatch) = 0x589fea99 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_destroy) = 0x6b220bcb for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_create) = 0xcd44eb00 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(taskq_cancel_id) = 0xd92839b8 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(system_taskq) = 0x05f08dbe for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(system_delay_taskq) = 0x6af554dd for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(strfree) = 0x1b8f1d1e for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(strdup) = 0xc810362f for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_vmem_zalloc) = 0x6c2c274e for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_vmem_free) = 0x0ff749bc for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_vmem_alloc) = 0xfe172afe for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_panic) = 0xbc32eee7 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_zalloc) = 0x9b0325e8 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_free) = 0x6d16801a for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_cache_set_move) = 0xe17fb160 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_cache_reap_now) = 0x83aa5282 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_cache_free) = 0xe5779a08 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_cache_destroy) = 0x0b51262a for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_cache_create) = 0xf0202554 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_cache_alloc) = 0xd1aa34d4 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(spl_kmem_alloc) = 0xb342d16a for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(rwsem_tryupgrade) = 0x4be94236 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(rootdir) = 0x0e7813a4 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(random_get_pseudo_bytes) = 0x2109bc3a for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(p0) = 0xbccac85e for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kstat_waitq_exit) = 0x6127b911 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kstat_waitq_enter) = 0xcc762837 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kstat_runq_exit) = 0xcc8e80f8 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kstat_runq_enter) = 0x150ddbd2 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kobj_read_file) = 0xa2724b1e for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kobj_open_file) = 0xa88e7496 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kobj_get_filesize) = 0x89291f9f for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kobj_close_file) = 0x16837e70 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kmem_vasprintf) = 0x064623de for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kmem_debugging) = 0x75907276 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(kmem_asprintf) = 0xaa65a555 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(groupmember) = 0x8a51e16a for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(ddi_strtoull) = 0xf68905fd for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(ddi_strtol) = 0x82fe53e1 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(ddi_copyout) = 0x431a8a2c for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(ddi_copyin) = 0xd8e07779 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(cv_timedwait_sig_hires) = 0x63aee8aa for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(cv_timedwait_hires) = 0x8da76a54 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crhold) = 0xbd6bcd08 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetuid) = 0x72cf8c8b for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetruid) = 0xce6d7d76 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetngroups) = 0xbaeceadd for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetgroups) = 0x3098be9f for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetgid) = 0x1b27ac37 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetfsuid) = 0x10761aa5 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crgetfsgid) = 0xe0b0dd84 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(crfree) = 0xf76b5740 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(cmn_err) = 0x82027a4c for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__thread_exit) = 0x3896a905 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__thread_create) = 0x47805038 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__kstat_set_raw_ops) = 0xbf5f302a for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__kstat_install) = 0xe4db3c03 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__kstat_delete) = 0x79478dcc for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__kstat_create) = 0x235e9bea for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_wait_sig) = 0x24f9a150 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_wait_io) = 0x1305f576 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_wait) = 0x3e43bb06 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_timedwait_sig) = 0xef8c32c0 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_signal) = 0xadd3247e for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_init) = 0x0f1e4497 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_destroy) = 0x459a3b05 for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: ksym(__cv_broadcast) = 0xb75ecbeb for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+--> Processing Dependency: spl-kmod for package: kmod-zfs-0.7.13-1.el7_6.x86_64
+---> Package libnvpair1.x86_64 0:0.7.13-1.el7_6 will be installed
+---> Package libuutil1.x86_64 0:0.7.13-1.el7_6 will be installed
+---> Package libzfs2.x86_64 0:0.7.13-1.el7_6 will be installed
+---> Package libzpool2.x86_64 0:0.7.13-1.el7_6 will be installed
+---> Package spl.x86_64 0:0.7.13-1.el7_6 will be installed
+---> Package sysstat.x86_64 0:10.1.5-17.el7_6.1 will be installed
+--> Processing Dependency: libsensors.so.4()(64bit) for package: sysstat-10.1.5-17.el7_6.1.x86_64
+--> Running transaction check
+---> Package kmod-spl.x86_64 0:0.7.13-1.el7_6 will be installed
+---> Package lm_sensors-libs.x86_64 0:3.4.0-6.20160601gitf9185e5.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================================================================================================
+ Package                                Arch                          Version                                                  Repository                       Size
+=====================================================================================================================================================================
+Installing:
+ zfs                                    x86_64                        0.7.13-1.el7_6                                           zfs-kmod                        416 k
+Installing for dependencies:
+ kmod-spl                               x86_64                        0.7.13-1.el7_6                                           zfs-kmod                        114 k
+ kmod-zfs                               x86_64                        0.7.13-1.el7_6                                           zfs-kmod                        896 k
+ libnvpair1                             x86_64                        0.7.13-1.el7_6                                           zfs-kmod                         31 k
+ libuutil1                              x86_64                        0.7.13-1.el7_6                                           zfs-kmod                         36 k
+ libzfs2                                x86_64                        0.7.13-1.el7_6                                           zfs-kmod                        131 k
+ libzpool2                              x86_64                        0.7.13-1.el7_6                                           zfs-kmod                        595 k
+ lm_sensors-libs                        x86_64                        3.4.0-6.20160601gitf9185e5.el7                           base                             42 k
+ spl                                    x86_64                        0.7.13-1.el7_6                                           zfs-kmod                         29 k
+ sysstat                                x86_64                        10.1.5-17.el7_6.1                                        updates                         315 k
+
+Transaction Summary
+=====================================================================================================================================================================
+Install  1 Package (+9 Dependent packages)
+
+Total download size: 2.5 M
+Installed size: 9.4 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(2/10): kmod-zfs-0.7.13-1.el7_6.x86_64.rpm                           0% [                                                          ]  0.0 B/s |    0 B  --:--:-- ETA (2/10): kmod-zfs-0.7.13-1.el7_6.x86_64.rpm                           1% [=                                                         ]  0.0 B/s |  46 kB  --:--:-- ETA (1/10): kmod-spl-0.7.13-1.el7_6.x86_64.rpm                                                                                                    | 114 kB  00:00:02     
+(3/10): libnvpair1-0.7.13-1.el7_6.x86_64.rpm                        13% [=======-                                                  ] 352 kB/s | 341 kB  00:00:06 ETA (2/10): libnvpair1-0.7.13-1.el7_6.x86_64.rpm                                                                                                  |  31 kB  00:00:00     
+(3/10): libuutil1-0.7.13-1.el7_6.x86_64.rpm                                                                                                   |  36 kB  00:00:00     
+(4/10): kmod-zfs-0.7.13-1.el7_6.x86_64.rpm                          34% [===================-                                      ] 430 kB/s | 889 kB  00:00:03 ETA (4/10): libzfs2-0.7.13-1.el7_6.x86_64.rpm                                                                                                     | 131 kB  00:00:00     
+(5/10): kmod-zfs-0.7.13-1.el7_6.x86_64.rpm                          46% [==========================-                               ] 459 kB/s | 1.2 MB  00:00:03 ETA (5/10): kmod-zfs-0.7.13-1.el7_6.x86_64.rpm                                                                                                    | 896 kB  00:00:03     
+(6/10): sysstat-10.1.5-17.el7_6.1.x86_64.rpm                                                                                                  | 315 kB  00:00:00     
+(7/10): lm_sensors-libs-3.4.0-6.20160601gitf9185e5.el7.x86_64.rpm                                                                             |  42 kB  00:00:00     
+(8/10): spl-0.7.13-1.el7_6.x86_64.rpm                                                                                                         |  29 kB  00:00:00     
+(10/10): zfs-0.7.13-1.el7_6.x86_64.rpm                              61% [===================================                       ] 481 kB/s | 1.6 MB  00:00:02 ETA (10/10): zfs-0.7.13-1.el7_6.x86_64.rpm                              68% [=======================================-                  ] 482 kB/s | 1.8 MB  00:00:01 ETA (9/10): zfs-0.7.13-1.el7_6.x86_64.rpm                                                                                                         | 416 kB  00:00:00     
+(10/10): libzpool2-0.7.13-1.el7_6.x86_64.rpm                        82% [===============================================-          ] 506 kB/s | 2.1 MB  00:00:00 ETA (10/10): libzpool2-0.7.13-1.el7_6.x86_64.rpm                        83% [================================================          ] 469 kB/s | 2.1 MB  00:00:00 ETA (10/10): libzpool2-0.7.13-1.el7_6.x86_64.rpm                        89% [===================================================-      ] 460 kB/s | 2.3 MB  00:00:00 ETA (10/10): libzpool2-0.7.13-1.el7_6.x86_64.rpm                        99% [=========================================================-] 477 kB/s | 2.5 MB  00:00:00 ETA (10/10): libzpool2-0.7.13-1.el7_6.x86_64.rpm                                                                                                  | 595 kB  00:00:02     
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                                398 kB/s | 2.5 MB  00:00:06     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libuutil1-0.7.13-1.el7_6.x86_64 [                                                                                                             ]  1/10  Installing : libuutil1-0.7.13-1.el7_6.x86_64 [##########################################################################################                   ]  1/10  Installing : libuutil1-0.7.13-1.el7_6.x86_64 [###########################################################################################################  ]  1/10  Installing : libuutil1-0.7.13-1.el7_6.x86_64                                                                                                                  1/10 
+  Installing : libnvpair1-0.7.13-1.el7_6.x86_64 [                                                                                                            ]  2/10  Installing : libnvpair1-0.7.13-1.el7_6.x86_64 [####################################################################################                        ]  2/10  Installing : libnvpair1-0.7.13-1.el7_6.x86_64 [##########################################################################################################  ]  2/10  Installing : libnvpair1-0.7.13-1.el7_6.x86_64                                                                                                                 2/10 
+  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [                                                                                                             ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [###                                                                                                          ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [######                                                                                                       ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#########                                                                                                    ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#############                                                                                                ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [################                                                                                             ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [###################                                                                                          ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [######################                                                                                       ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##########################                                                                                   ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#############################                                                                                ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [################################                                                                             ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [###################################                                                                          ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#######################################                                                                      ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##########################################                                                                   ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#############################################                                                                ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#################################################                                                            ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [####################################################                                                         ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#######################################################                                                      ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##########################################################                                                   ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##############################################################                                               ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#################################################################                                            ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [####################################################################                                         ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#######################################################################                                      ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [###########################################################################                                  ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##############################################################################                               ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#################################################################################                            ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#####################################################################################                        ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [########################################################################################                     ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [###########################################################################################                  ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##############################################################################################               ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [##################################################################################################           ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [#####################################################################################################        ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [########################################################################################################     ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64 [###########################################################################################################  ]  3/10  Installing : libzpool2-0.7.13-1.el7_6.x86_64                                                                                                                  3/10 
+  Installing : spl-0.7.13-1.el7_6.x86_64 [                                                                                                                   ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [###########                                                                                                        ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [########################################################                                                           ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [##########################################################                                                         ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [##################################################################################################                 ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [######################################################################################################             ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [########################################################################################################           ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64 [#################################################################################################################  ]  4/10  Installing : spl-0.7.13-1.el7_6.x86_64                                                                                                                        4/10 
+  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [                                                                                                              ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [##############                                                                                                ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [############################                                                                                  ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [#########################################                                                                     ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [########################################################                                                      ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [#######################################################################                                       ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [#####################################################################################                         ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [####################################################################################################          ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64 [############################################################################################################  ]  5/10  Installing : kmod-spl-0.7.13-1.el7_6.x86_64                                                                                                                   5/10 
+  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [                                                                                                               ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [#####################                                                                                          ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [###########################################                                                                    ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [#################################################################                                              ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [#######################################################################################                        ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [#######################################################################################################        ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64 [#############################################################################################################  ]  6/10  Installing : libzfs2-0.7.13-1.el7_6.x86_64                                                                                                                    6/10 
+  Installing : lm_sensors-libs-3.4.0-6.20160601gitf9185e5.el7.x86_64 [                                                                                       ]  7/10  Installing : lm_sensors-libs-3.4.0-6.20160601gitf9185e5.el7.x86_64 [###################################################################################### ]  7/10  Installing : lm_sensors-libs-3.4.0-6.20160601gitf9185e5.el7.x86_64                                                                                            7/10 
+  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [                                                                                                            ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [####                                                                                                        ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##########                                                                                                  ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###############                                                                                             ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [####################                                                                                        ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#########################                                                                                   ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###########################                                                                                 ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [################################                                                                            ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [######################################                                                                      ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##########################################                                                                  ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [################################################                                                            ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###################################################                                                         ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [########################################################                                                    ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#########################################################                                                   ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##############################################################                                              ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [################################################################                                            ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [######################################################################                                      ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [########################################################################                                    ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#########################################################################                                   ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##########################################################################                                  ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#############################################################################                               ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##############################################################################                              ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###############################################################################                             ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#################################################################################                           ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##################################################################################                          ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###################################################################################                         ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [####################################################################################                        ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#####################################################################################                       ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [######################################################################################                      ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#######################################################################################                     ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [########################################################################################                    ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#########################################################################################                   ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##########################################################################################                  ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###########################################################################################                 ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [############################################################################################                ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#############################################################################################               ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###############################################################################################             ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [################################################################################################            ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#################################################################################################           ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##################################################################################################          ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [###################################################################################################         ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [####################################################################################################        ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#####################################################################################################       ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [######################################################################################################      ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#######################################################################################################     ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [########################################################################################################    ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [#########################################################################################################   ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64 [##########################################################################################################  ]  8/10  Installing : sysstat-10.1.5-17.el7_6.1.x86_64                                                                                                                 8/10 
+  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [                                                                                                              ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#                                                                                                             ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###                                                                                                           ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#####                                                                                                         ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [######                                                                                                        ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########                                                                                                      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###########                                                                                                   ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [############                                                                                                  ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##############                                                                                                ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###############                                                                                               ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#################                                                                                             ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##################                                                                                            ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [####################                                                                                          ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#######################                                                                                       ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########################                                                                                      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#########################                                                                                     ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###########################                                                                                   ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [############################                                                                                  ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##############################                                                                                ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#################################                                                                             ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##################################                                                                            ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [####################################                                                                          ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#####################################                                                                         ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#######################################                                                                       ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########################################                                                                      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##########################################                                                                    ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#############################################                                                                 ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##############################################                                                                ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [################################################                                                              ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#################################################                                                             ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###################################################                                                           ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [####################################################                                                          ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#######################################################                                                       ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########################################################                                                      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##########################################################                                                    ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [############################################################                                                  ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#############################################################                                                 ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###############################################################                                               ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [################################################################                                              ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###################################################################                                           ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [####################################################################                                          ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [######################################################################                                        ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########################################################################                                      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#########################################################################                                     ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###########################################################################                                   ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#############################################################################                                 ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###############################################################################                               ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [################################################################################                              ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##################################################################################                            ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###################################################################################                           ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#####################################################################################                         ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########################################################################################                      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#########################################################################################                     ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###########################################################################################                   ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [############################################################################################                  ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##############################################################################################                ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###############################################################################################               ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#################################################################################################             ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###################################################################################################           ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#####################################################################################################         ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [#######################################################################################################       ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [########################################################################################################      ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [##########################################################################################################    ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [###########################################################################################################   ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64 [############################################################################################################  ]  9/10  Installing : kmod-zfs-0.7.13-1.el7_6.x86_64                                                                                                                   9/10 
+  Installing : zfs-0.7.13-1.el7_6.x86_64 [                                                                                                                   ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#                                                                                                                  ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##                                                                                                                 ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###                                                                                                                ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##########                                                                                                         ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [############                                                                                                       ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###################                                                                                                ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#######################                                                                                            ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [############################                                                                                       ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#################################                                                                                  ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##################################                                                                                 ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#####################################                                                                              ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [########################################                                                                           ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##############################################                                                                     ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [####################################################                                                               ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#######################################################                                                            ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [########################################################                                                           ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###############################################################                                                    ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###################################################################                                                ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#######################################################################                                            ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [########################################################################                                           ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##########################################################################                                         ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#############################################################################                                      ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##############################################################################                                     ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###############################################################################                                    ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [################################################################################                                   ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#################################################################################                                  ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##################################################################################                                 ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###################################################################################                                ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#####################################################################################                              ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [######################################################################################                             ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#######################################################################################                            ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [########################################################################################                           ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#########################################################################################                          ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##########################################################################################                         ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [############################################################################################                       ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#############################################################################################                      ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##############################################################################################                     ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###############################################################################################                    ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [################################################################################################                   ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#################################################################################################                  ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##################################################################################################                 ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [####################################################################################################               ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#####################################################################################################              ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [######################################################################################################             ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#######################################################################################################            ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [########################################################################################################           ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#########################################################################################################          ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [##########################################################################################################         ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [############################################################################################################       ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#############################################################################################################      ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [###############################################################################################################    ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [################################################################################################################   ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64 [#################################################################################################################  ] 10/10  Installing : zfs-0.7.13-1.el7_6.x86_64                                                                                                                       10/10 
+  Verifying  : kmod-spl-0.7.13-1.el7_6.x86_64                                                                                                                   1/10 
+  Verifying  : kmod-zfs-0.7.13-1.el7_6.x86_64                                                                                                                   2/10 
+  Verifying  : lm_sensors-libs-3.4.0-6.20160601gitf9185e5.el7.x86_64                                                                                            3/10 
+  Verifying  : spl-0.7.13-1.el7_6.x86_64                                                                                                                        4/10 
+  Verifying  : libzpool2-0.7.13-1.el7_6.x86_64                                                                                                                  5/10 
+  Verifying  : zfs-0.7.13-1.el7_6.x86_64                                                                                                                        6/10 
+  Verifying  : libuutil1-0.7.13-1.el7_6.x86_64                                                                                                                  7/10 
+  Verifying  : libzfs2-0.7.13-1.el7_6.x86_64                                                                                                                    8/10 
+  Verifying  : sysstat-10.1.5-17.el7_6.1.x86_64                                                                                                                 9/10 
+  Verifying  : libnvpair1-0.7.13-1.el7_6.x86_64                                                                                                                10/10 
+
+Installed:
+  zfs.x86_64 0:0.7.13-1.el7_6                                                                                                                                        
+
+Dependency Installed:
+  kmod-spl.x86_64 0:0.7.13-1.el7_6    kmod-zfs.x86_64 0:0.7.13-1.el7_6   libnvpair1.x86_64 0:0.7.13-1.el7_6                       libuutil1.x86_64 0:0.7.13-1.el7_6 
+  libzfs2.x86_64 0:0.7.13-1.el7_6     libzpool2.x86_64 0:0.7.13-1.el7_6  lm_sensors-libs.x86_64 0:3.4.0-6.20160601gitf9185e5.el7  spl.x86_64 0:0.7.13-1.el7_6       
+  sysstat.x86_64 0:10.1.5-17.el7_6.1 
+
+Complete!
+]0;root@otuslinux:~[root@otuslinux ~]# reboot
+Connection to 127.0.0.1 closed by remote host.
+Connection to 127.0.0.1 closed.
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3-part2[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3-part2[00m$ vagrant sshdestroy  -fssh[K
+Last login: Tue Aug 13 05:49:19 2019 from 10.0.2.2
+]0;vagrant@otuslinux:~[?1034h[vagrant@otuslinux ~]$ sudo -i
+]0;root@otuslinux:~[?1034h[root@otuslinux ~]# dmesg --[K[K| grep zfs
+]0;root@otuslinux:~[root@otuslinux ~]# lsmod | grep zfs
+[01;31m[Kzfs[m[K                  3564425  3 
+zunicode              331170  1 [01;31m[Kzfs[m[K
+zavl                   15236  1 [01;31m[Kzfs[m[K
+icp                   270148  1 [01;31m[Kzfs[m[K
+zcommon                73440  1 [01;31m[Kzfs[m[K
+znvpair                89131  2 [01;31m[Kzfs[m[K,zcommon
+spl                   102412  4 icp,[01;31m[Kzfs[m[K,zcommon,znvpair
+]0;root@otuslinux:~[root@otuslinux ~]# zpool --list
+unrecognized command '--list'
+usage: zpool command args ...
+where 'command' is one of the following:
+
+	create [-fnd] [-o property=value] ... 
+	    [-O file-system-property=value] ... 
+	    [-m mountpoint] [-R root] <pool> <vdev> ...
+	destroy [-f] <pool>
+
+	add [-fgLnP] [-o property=value] <pool> <vdev> ...
+	remove <pool> <device> ...
+
+	labelclear [-f] <vdev>
+
+	list [-gHLpPv] [-o property[,...]] [-T d|u] [pool] ... [interval [count]]
+	iostat [[[-c [script1,script2,...][-lq]]|[-rw]] [-T d | u] [-ghHLpPvy]
+	    [[pool ...]|[pool vdev ...]|[vdev ...]] [interval [count]]
+	status [-c [script1,script2,...]] [-gLPvxD][-T d|u] [pool] ... [interval [count]]
+
+	online <pool> <device> ...
+	offline [-f] [-t] <pool> <device> ...
+	clear [-nF] <pool> [device]
+	reopen <pool>
+
+	attach [-f] [-o property=value] <pool> <device> <new-device>
+	detach <pool> <device>
+	replace [-f] [-o property=value] <pool> <device> [new-device]
+	split [-gLnP] [-R altroot] [-o mntopts]
+	    [-o property=value] <pool> <newpool> [<device> ...]
+
+	scrub [-s | -p] <pool> ...
+
+	import [-d dir] [-D]
+	import [-d dir | -c cachefile] [-F [-n]] <pool | id>
+	import [-o mntopts] [-o property=value] ... 
+	    [-d dir | -c cachefile] [-D] [-f] [-m] [-N] [-R root] [-F [-n]] -a
+	import [-o mntopts] [-o property=value] ... 
+	    [-d dir | -c cachefile] [-D] [-f] [-m] [-N] [-R root] [-F [-n]]
+	    <pool | id> [newpool]
+	export [-af] <pool> ...
+	upgrade
+	upgrade -v
+	upgrade [-V version] <-a | pool ...>
+	reguid <pool>
+
+	history [-il] [<pool>] ...
+	events [-vHfc]
+
+	get [-Hp] [-o "all" | field[,...]] <"all" | property[,...]> <pool> ...
+	set <property=value> <pool> 
+	sync [pool] ...
+]0;root@otuslinux:~[root@otuslinux ~]# zpool --list[K[K[K[K[K[K
+anaconda-ks.cfg  .bash_history    .bash_logout     .bash_profile    .bashrc          .cshrc           original-ks.cfg  .ssh/            .tcshrc
+[root@otuslinux ~]# zpool 
+anaconda-ks.cfg  .bash_history    .bash_logout     .bash_profile    .bashrc          .cshrc           original-ks.cfg  .ssh/            .tcshrc
+[root@otuslinux ~]# zpool [K[K[K[K[K[Kyum install bash-completion
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirror.corbina.net
+ * extras: mirror.logol.ru
+ * updates: mirror.sale-dedic.com
+Package 1:bash-completion-2.1-6.el7.noarch already installed and latest version
+Nothing to do
+]0;root@otuslinux:~[root@otuslinux ~]# zpool list
+no pools available
+]0;root@otuslinux:~[root@otuslinux ~]# lsblk 
+NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+sda      8:0    0  40G  0 disk 
+└─sda1   8:1    0  40G  0 part /
+sdb      8:16   0  10G  0 disk 
+sdc      8:32   0   2G  0 disk 
+sdd      8:48   0   1G  0 disk 
+sde      8:64   0   1G  0 disk 
+sdf      8:80   0  40G  0 disk 
+sdg      8:96   0  40G  0 disk 
+sdh      8:112  0  40G  0 disk 
+sdi      8:128  0  40G  0 disk 
+sdj      8:144  0  40G  0 disk 
+sdk      8:160  0  40G  0 disk 
+]0;root@otuslinux:~[root@otuslinux ~]# parted /def/sd[Kf
+Error: Could not stat device /def/sf - No such file or directory.
+[?1034h                                                                                                                                                    Retry/Cancel? ^C
+]0;root@otuslinux:~[root@otuslinux ~]# ^C
+]0;root@otuslinux:~[root@otuslinux ~]# parted /def/sfdf
+Error: Could not stat device /def/sdf - No such file or directory.
+[?1034h                                                                                                                                                    Retry/Cancel? ^C
+]0;root@otuslinux:~[root@otuslinux ~]# ^C
+]0;root@otuslinux:~[root@otuslinux ~]# parted /def/sdf[1P/sdfv/sdf
+[?1034hGNU Parted 3.1
+Using /dev/sdf
+Welcome to GNU Parted! Type 'help' to view a list of commands.
+                                                                          (parted) p
+Error: /dev/sdf: unrecognised disk label
+                                                                          Model: ATA VBOX HARDDISK (scsi)
+Disk /dev/sdf: 42,9GB
+Sector size (logical/physical): 512B/512B
+Partition Table: unknown
+Disk Flags: 
+                                                                          (parted) q
+]0;root@otuslinux:~[root@otuslinux ~]# zp
+zpios  zpool  
+[root@otuslinux ~]# zp
+zpios  zpool  
+[root@otuslinux ~]# zpool create ^C
+]0;root@otuslinux:~[root@otuslinux ~]# ^C
+]0;root@otuslinux:~[root@otuslinux ~]# ll /dev/disk/by-id/ata-VBOX_HARDDISK_VB[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+total 0
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [0m[38;5;51mata-VBOX_HARDDISK_VB14f5d4e4-84be37fc[0m -> [48;5;232;38;5;11m../../sdh[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB1babcc53-dd48d14a[0m -> [48;5;232;38;5;11m../../sdg[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB2479f037-0ba81ae4[0m -> [48;5;232;38;5;11m../../sdj[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB2495fbc2-c7d26fc3[0m -> [48;5;232;38;5;11m../../sde[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB274c89d3-f9f2efa3[0m -> [48;5;232;38;5;11m../../sdk[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB63b12937-bf236d49[0m -> [48;5;232;38;5;11m../../sdc[0m
+lrwxrwxrwx. 1 root root  9 авг 13 06:11 [38;5;51mata-VBOX_HARDDISK_VB6571def6-3c7f615b[0m -> [48;5;232;38;5;11m../../sdf[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB7f91db22-0748654e[0m -> [48;5;232;38;5;11m../../sda[0m
+lrwxrwxrwx. 1 root root 10 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB7f91db22-0748654e-part1[0m -> [48;5;232;38;5;11m../../sda1[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VB801ef312-8aa64a59[0m -> [48;5;232;38;5;11m../../sdd[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VBa72dbbfc-6e81cc28[0m -> [48;5;232;38;5;11m../../sdb[0m
+lrwxrwxrwx. 1 root root  9 авг 13 05:52 [38;5;51mata-VBOX_HARDDISK_VBfade86a8-00fb78b6[0m -> [48;5;232;38;5;11m../../sdi[0m
+]0;root@otuslinux:~[root@otuslinux ~]# zpool create tank www.alv.me [K[K[K[K[K[K[K[K[K[K[Kata-VBOX_HARDDISK_VB6571def6-3c7f615b ata-VBOX_HARDDISK_VB1babcc53-dd48d14a ata-VBOX_HARDDISK_VB14f5d4e4-84be37fc[C[C[C[1@ [1@r[1@a[1@i[1@d[1@z[1@2[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C ata-VB OX_HARDDISK_VBfade86a8-00fb78b6 ata-VBOX_HARDDISK_VB2479f037-0ba81ae4
+]0;root@otuslinux:~[root@otuslinux ~]# zfs create tank/opt
+]0;root@otuslinux:~[root@otuslinux ~]# zpooll[K add tank cache ata-VBOX_HARDDISK_VB274c89d3-f9f2efa3
+]0;root@otuslinux:~[root@otuslinux ~]# zpool list
+NAME   SIZE  ALLOC   FREE  EXPANDSZ   FRAG    CAP  DEDUP  HEALTH  ALTROOT
+tank   199G   398K   199G         -     0%     0%  1.00x  ONLINE  -
+]0;root@otuslinux:~[root@otuslinux ~]# zfs 
+anaconda-ks.cfg  .bash_history    .bash_logout     .bash_profile    .bashrc          .cshrc           original-ks.cfg  .ssh/            .tcshrc
+[root@otuslinux ~]# zfs list
+NAME       USED  AVAIL  REFER  MOUNTPOINT
+tank       180K   115G  42,0K  /tank
+tank/opt  39,3K   115G  39,3K  /tank/opt
+]0;root@otuslinux:~[root@otuslinux ~]# zfs status
+unrecognized command 'status'
+usage: zfs command args ...
+where 'command' is one of the following:
+
+	create [-p] [-o property=value] ... <filesystem>
+	create [-ps] [-b blocksize] [-o property=value] ... -V <size> <volume>
+	destroy [-fnpRrv] <filesystem|volume>
+	destroy [-dnpRrv] <filesystem|volume>@<snap>[%<snap>][,...]
+	destroy <filesystem|volume>#<bookmark>
+
+	snapshot|snap [-r] [-o property=value] ... <filesystem|volume>@<snap> ...
+	rollback [-rRf] <snapshot>
+	clone [-p] [-o property=value] ... <snapshot> <filesystem|volume>
+	promote <clone-filesystem>
+	rename [-f] <filesystem|volume|snapshot> <filesystem|volume|snapshot>
+	rename [-f] -p <filesystem|volume> <filesystem|volume>
+	rename -r <snapshot> <snapshot>
+	bookmark <snapshot> <bookmark>
+
+	list [-Hp] [-r|-d max] [-o property[,...]] [-s property]...
+	    [-S property]... [-t type[,...]] [filesystem|volume|snapshot] ...
+
+	set <property=value> ... <filesystem|volume|snapshot> ...
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+	inherit [-rS] <property> <filesystem|volume|snapshot> ...
+	upgrade [-v]
+	upgrade [-r] [-V version] <-a | filesystem ...>
+	userspace [-Hinp] [-o field[,...]] [-s field] ...
+	    [-S field] ... [-t type[,...]] <filesystem|snapshot>
+	groupspace [-Hinp] [-o field[,...]] [-s field] ...
+	    [-S field] ... [-t type[,...]] <filesystem|snapshot>
+
+	mount
+	mount [-vO] [-o opts] <-a | filesystem>
+	unmount [-f] <-a | filesystem|mountpoint>
+	share <-a [nfs|smb] | filesystem>
+	unshare <-a [nfs|smb] | filesystem|mountpoint>
+
+	send [-DnPpRvLec] [-[i|I] snapshot] <snapshot>
+	send [-Lec] [-i snapshot|bookmark] <filesystem|volume|snapshot>
+	send [-nvPe] -t <receive_resume_token>
+	receive [-vnsFu] [-o <property>=<value>] ... [-x <property>] ...
+	    <filesystem|volume|snapshot>
+	receive [-vnsFu] [-o <property>=<value>] ... [-x <property>] ... 
+	    [-d | -e] <filesystem>
+	receive -A <filesystem|volume>
+
+	allow <filesystem|volume>
+	allow [-ldug] <"everyone"|user|group>[,...] <perm|@setname>[,...]
+	    <filesystem|volume>
+	allow [-ld] -e <perm|@setname>[,...] <filesystem|volume>
+	allow -c <perm|@setname>[,...] <filesystem|volume>
+	allow -s @setname <perm|@setname>[,...] <filesystem|volume>
+
+	unallow [-rldug] <"everyone"|user|group>[,...]
+	    [<perm|@setname>[,...]] <filesystem|volume>
+	unallow [-rld] -e [<perm|@setname>[,...]] <filesystem|volume>
+	unallow [-r] -c [<perm|@setname>[,...]] <filesystem|volume>
+	unallow [-r] -s @setname [<perm|@setname>[,...]] <filesystem|volume>
+
+	hold [-r] <tag> <snapshot> ...
+	holds [-r] <snapshot> ...
+	release [-r] <tag> <snapshot> ...
+	diff [-FHt] <snapshot> [snapshot|filesystem]
+
+Each dataset is of the form: pool/[dataset/]*dataset[@name]
+
+For the property list, run: zfs set|get
+
+For the delegated permission list, run: zfs allow|unallow
+]0;root@otuslinux:~[root@otuslinux ~]# zfs list
+NAME       USED  AVAIL  REFER  MOUNTPOINT
+tank       180K   115G  42,0K  /tank
+tank/opt  39,3K   115G  39,3K  /tank/opt
+]0;root@otuslinux:~[root@otuslinux ~]# zpool status
+  pool: tank
+ state: ONLINE
+  scan: none requested
+config:
+
+	NAME                                       STATE     READ WRITE CKSUM
+	tank                                       ONLINE       0     0     0
+	  raidz2-0                                 ONLINE       0     0     0
+	    ata-VBOX_HARDDISK_VB6571def6-3c7f615b  ONLINE       0     0     0
+	    ata-VBOX_HARDDISK_VB1babcc53-dd48d14a  ONLINE       0     0     0
+	    ata-VBOX_HARDDISK_VB14f5d4e4-84be37fc  ONLINE       0     0     0
+	    ata-VBOX_HARDDISK_VBfade86a8-00fb78b6  ONLINE       0     0     0
+	    ata-VBOX_HARDDISK_VB2479f037-0ba81ae4  ONLINE       0     0     0
+	cache
+	  ata-VBOX_HARDDISK_VB274c89d3-f9f2efa3    ONLINE       0     0     0
+
+errors: No known data errors
+]0;root@otuslinux:~[root@otuslinux ~]# ll[K[Klsblk 
+NAME   MAJ:MIN RM SIZE RO TYPE MOUNTPOINT
+sda      8:0    0  40G  0 disk 
+└─sda1   8:1    0  40G  0 part /
+sdb      8:16   0  10G  0 disk 
+sdc      8:32   0   2G  0 disk 
+sdd      8:48   0   1G  0 disk 
+sde      8:64   0   1G  0 disk 
+sdf      8:80   0  40G  0 disk 
+├─sdf1   8:81   0  40G  0 part 
+└─sdf9   8:89   0   8M  0 part 
+sdg      8:96   0  40G  0 disk 
+├─sdg1   8:97   0  40G  0 part 
+└─sdg9   8:105  0   8M  0 part 
+sdh      8:112  0  40G  0 disk 
+├─sdh1   8:113  0  40G  0 part 
+└─sdh9   8:121  0   8M  0 part 
+sdi      8:128  0  40G  0 disk 
+├─sdi1   8:129  0  40G  0 part 
+└─sdi9   8:137  0   8M  0 part 
+sdj      8:144  0  40G  0 disk 
+├─sdj1   8:145  0  40G  0 part 
+└─sdj9   8:153  0   8M  0 part 
+sdk      8:160  0  40G  0 disk 
+├─sdk1   8:161  0  40G  0 part 
+└─sdk9   8:169  0   8M  0 part 
+]0;root@otuslinux:~[root@otuslinux ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        40G  3,3G   37G   9% /
+devtmpfs        1,9G     0  1,9G   0% /dev
+tmpfs           1,9G     0  1,9G   0% /dev/shm
+tmpfs           1,9G  8,7M  1,9G   1% /run
+tmpfs           1,9G     0  1,9G   0% /sys/fs/cgroup
+tmpfs           379M     0  379M   0% /run/user/1000
+tmpfs           379M     0  379M   0% /run/user/0
+tank            115G     0  115G   0% /tank
+tank/opt        115G     0  115G   0% /tank/opt
+]0;root@otuslinux:~[root@otuslinux ~]# cp _R[K[K-Rp /opt*[C/*[C  /tank/opt/
+]0;root@otuslinux:~[root@otuslinux ~]# ll /tank/opt/VBoxGuestAdditions-5.2.32/
+total 46
+drwxr-xr-x. 2 root root     4 июл 12 08:32 [0m[38;5;27mbin[0m
+drwxr-xr-x. 2 root root     5 июл 12 08:32 [38;5;27minit[0m
+drwxr-xr-x. 2 root root     3 авг 13 05:47 [38;5;27minstaller[0m
+drwxr-xr-x. 2 root root     4 июл 12 08:32 [38;5;27mlib[0m
+-rw-r--r--. 1 root root 20516 июл 12 08:32 LICENSE
+drwxr-xr-x. 2 root root    38 июл 12 08:32 [38;5;27mother[0m
+-rwxr-xr-x. 1 root root 12487 авг 13 05:48 [38;5;34mroutines.sh[0m
+drwxr-xr-x. 2 root root     4 июл 12 08:32 [38;5;27msbin[0m
+drwxr-xr-x. 3 root root     3 июл 12 08:32 [38;5;27msrc[0m
+-rwxr-xr-x. 1 root root  3046 авг 13 05:48 [38;5;34muninstall.sh[0m
+]0;root@otuslinux:~[root@otuslinux ~]# ll /tank/opt/VBoxGuestAdditions-5.2.32/[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K[K
+total 3
+drwxr-xr-x. 9 root root 12 авг 13 05:48 [0m[38;5;27mVBoxGuestAdditions-5.2.32[0m
+]0;root@otuslinux:~[root@otuslinux ~]# rm -rf /opt/*
+]0;root@otuslinux:~[root@otuslinux ~]# ll /opt
+total 0
+]0;root@otuslinux:~[root@otuslinux ~]# zfs set mountpoint=/opt tank/opt
+]0;root@otuslinux:~[root@otuslinux ~]# ls
+anaconda-ks.cfg  original-ks.cfg
+]0;root@otuslinux:~[root@otuslinux ~]# ll /
+total 2097169
+lrwxrwxrwx.   1 root    root             7 июн  1 17:13 [0m[38;5;51mbin[0m -> [38;5;27musr/bin[0m
+dr-xr-xr-x.   4 root    root          4096 авг 13 05:51 [38;5;27mboot[0m
+drwxr-xr-x.  18 root    root          3600 авг 13 06:19 [38;5;27mdev[0m
+drwxr-xr-x.  80 root    root          8192 авг 13 05:52 [38;5;27metc[0m
+drwxr-xr-x.   3 root    root            21 июн  1 17:17 [38;5;27mhome[0m
+lrwxrwxrwx.   1 root    root             7 июн  1 17:13 [38;5;51mlib[0m -> [38;5;27musr/lib[0m
+lrwxrwxrwx.   1 root    root             9 июн  1 17:13 [38;5;51mlib64[0m -> [38;5;27musr/lib64[0m
+drwxr-xr-x.   2 root    root             6 апр 11  2018 [38;5;27mmedia[0m
+drwxr-xr-x.   2 root    root             6 апр 11  2018 [38;5;27mmnt[0m
+drwxr-xr-x.   3 root    root             3 авг 13 06:53 [38;5;27mopt[0m
+dr-xr-xr-x. 280 root    root             0 авг 13 05:59 [38;5;27mproc[0m
+dr-xr-x---.   3 root    root           170 авг 13 05:51 [38;5;27mroot[0m
+drwxr-xr-x.  24 root    root           800 авг 13 05:54 [38;5;27mrun[0m
+lrwxrwxrwx.   1 root    root             8 июн  1 17:13 [38;5;51msbin[0m -> [38;5;27musr/sbin[0m
+drwxr-xr-x.   2 root    root             6 апр 11  2018 [38;5;27msrv[0m
+-rw-------.   1 root    root    2147483648 июн  1 17:18 swapfile
+dr-xr-xr-x.  13 root    root             0 авг 13 05:52 [38;5;27msys[0m
+drwxr-xr-x.   2 root    root             2 авг 13 06:54 [38;5;27mtank[0m
+drwxrwxrwt.   8 root    root           225 авг 13 06:53 [48;5;10;38;5;16mtmp[0m
+drwxr-xr-x.  13 root    root           155 июн  1 17:13 [38;5;27musr[0m
+drwxr-xr-x.   2 vagrant vagrant        196 авг 13 05:44 [38;5;27mvagrant[0m
+drwxr-xr-x.  18 root    root           254 авг 13 05:45 [38;5;27mvar[0m
+]0;root@otuslinux:~[root@otuslinux ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        40G  3,3G   37G   9% /
+devtmpfs        1,9G     0  1,9G   0% /dev
+tmpfs           1,9G     0  1,9G   0% /dev/shm
+tmpfs           1,9G  8,7M  1,9G   1% /run
+tmpfs           1,9G     0  1,9G   0% /sys/fs/cgroup
+tmpfs           379M     0  379M   0% /run/user/1000
+tmpfs           379M     0  379M   0% /run/user/0
+tank            115G  128K  115G   1% /tank
+tank/opt        115G   17M  115G   1% /opt
+]0;root@otuslinux:~[root@otuslinux ~]# mount | grep /opt
+tank[01;31m[K/opt[m[K on [01;31m[K/opt[m[K type zfs (rw,seclabel,xattr,noacl)
+]0;root@otuslinux:~[root@otuslinux ~]# mount | grep /optdf -h[K[1Pll /[2Pszfs set mountpoint=/opt tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1P tank/opt[1Ptank/opt[1P tank/opt[1P tank/opt[1P tank/optg tank/opte tank/optt tank/opt
+bad property list: invalid property 'tank/opt'
+usage:
+	get [-rHp] [-d max] [-o "all" | field[,...]]
+	    [-t type[,...]] [-s source[,...]]
+	    <"all" | property[,...]> [filesystem|volume|snapshot|bookmark] ...
+
+The following properties are supported:
+
+	PROPERTY       EDIT  INHERIT   VALUES
+
+	available        NO       NO   <size>
+	clones           NO       NO   <dataset>[,...]
+	compressratio    NO       NO   <1.00x or higher if compressed>
+	createtxg        NO       NO   <uint64>
+	creation         NO       NO   <date>
+	defer_destroy    NO       NO   yes | no
+	filesystem_count  NO       NO   <count>
+	guid             NO       NO   <uint64>
+	logicalreferenced  NO       NO   <size>
+	logicalused      NO       NO   <size>
+	mounted          NO       NO   yes | no
+	origin           NO       NO   <snapshot>
+	receive_resume_token  NO       NO   <string token>
+	refcompressratio  NO       NO   <1.00x or higher if compressed>
+	referenced       NO       NO   <size>
+	snapshot_count   NO       NO   <count>
+	type             NO       NO   filesystem | volume | snapshot | bookmark
+	used             NO       NO   <size>
+	usedbychildren   NO       NO   <size>
+	usedbydataset    NO       NO   <size>
+	usedbyrefreservation  NO       NO   <size>
+	usedbysnapshots  NO       NO   <size>
+	userrefs         NO       NO   <count>
+	written          NO       NO   <size>
+	aclinherit      YES      YES   discard | noallow | restricted | passthrough | passthrough-x
+	acltype         YES      YES   noacl | posixacl
+	atime           YES      YES   on | off
+	canmount        YES       NO   on | off | noauto
+	casesensitivity  NO      YES   sensitive | insensitive | mixed
+	checksum        YES      YES   on | off | fletcher2 | fletcher4 | sha256 | sha512 | skein | edonr
+	compression     YES      YES   on | off | lzjb | gzip | gzip-[1-9] | zle | lz4
+	context         YES       NO   <selinux context>
+	copies          YES      YES   1 | 2 | 3
+	dedup           YES      YES   on | off | verify | sha256[,verify], sha512[,verify], skein[,verify], edonr,verify
+	defcontext      YES       NO   <selinux defcontext>
+	devices         YES      YES   on | off
+	dnodesize       YES      YES   legacy | auto | 1k | 2k | 4k | 8k | 16k
+	exec            YES      YES   on | off
+	filesystem_limit YES       NO   <count> | none
+	fscontext       YES       NO   <selinux fscontext>
+	logbias         YES      YES   latency | throughput
+	mlslabel        YES      YES   <sensitivity label>
+	mountpoint      YES      YES   <path> | legacy | none
+	nbmand          YES      YES   on | off
+	normalization    NO      YES   none | formC | formD | formKC | formKD
+	overlay         YES      YES   on | off
+	primarycache    YES      YES   all | none | metadata
+	quota           YES       NO   <size> | none
+	readonly        YES      YES   on | off
+	recordsize      YES      YES   512 to 1M, power of 2
+	redundant_metadata YES      YES   all | most
+	refquota        YES       NO   <size> | none
+	refreservation  YES       NO   <size> | none
+	relatime        YES      YES   on | off
+	reservation     YES       NO   <size> | none
+	rootcontext     YES       NO   <selinux rootcontext>
+	secondarycache  YES      YES   all | none | metadata
+	setuid          YES      YES   on | off
+	sharenfs        YES      YES   on | off | share(1M) options
+	sharesmb        YES      YES   on | off | sharemgr(1M) options
+	snapdev         YES      YES   hidden | visible
+	snapdir         YES      YES   hidden | visible
+	snapshot_limit  YES       NO   <count> | none
+	sync            YES      YES   standard | always | disabled
+	utf8only         NO      YES   on | off
+	version         YES       NO   1 | 2 | 3 | 4 | 5 | current
+	volblocksize     NO      YES   512 to 128k, power of 2
+	volmode         YES      YES   default | full | geom | dev | none
+	volsize         YES       NO   <size>
+	vscan           YES      YES   on | off
+	xattr           YES      YES   on | off | dir | sa
+	zoned           YES      YES   on | off
+	userused@...     NO       NO   <size>
+	groupused@...    NO       NO   <size>
+	userquota@...   YES       NO   <size> | none
+	groupquota@...  YES       NO   <size> | none
+	written@<snap>   NO       NO   <size>
+
+Sizes are specified in bytes with standard units such as K, M, G, etc.
+
+User-defined properties can be specified by using a name containing a colon (:).
+
+The {user|group}{used|quota}@ properties must be appended with
+a user or group specifier of one of these forms:
+    POSIX name      (eg: "matt")
+    POSIX id        (eg: "126829")
+    SMB name@domain (eg: "matt@sun")
+    SMB SID         (eg: "S-1-234-567-89")
+]0;root@otuslinux:~[root@otuslinux ~]# zfs get tank/optmount | grep /optdf -h[K[1Pll /[2Pszfs set mountpoint=/opt tank/opt[1P[1P[1P[1P[1P[1P[1P[1P[1P[1P[1@n[1@o[1@r[1@m[1@a[1@l[1@i[1@z[1@a[1@t[1@i[1@o[1@n[C[1P[1P[1P[1P tank/optf tank/opto tank/optr tank/optm tank/optD tank/opt
+cannot set property for 'tank/opt': 'normalization' is readonly
+]0;root@otuslinux:~[root@otuslinux ~]# zfs set normalization=formD tank/opt^C
+]0;root@otuslinux:~[root@otuslinux ~]# ^C
+]0;root@otuslinux:~[root@otuslinux ~]# ^C
+]0;root@otuslinux:~[root@otuslinux ~]# cp /tmp/* /opt
+cp: omitting directory ‘/tmp/systemd-private-a815e8a06aaa482187fee2965e7238ea-chronyd.service-5sh8Pp’
+]0;root@otuslinux:~[root@otuslinux ~]# ll /opt
+total 27
+-rwx--x--x. 1 root root    75 авг 13 06:58 [0m[38;5;34mvagrant-shell[0m
+drwxr-xr-x. 9 root root    12 авг 13 05:48 [38;5;27mVBoxGuestAdditions-5.2.32[0m
+-rw-r--r--. 1 root root 22478 авг 13 06:58 vboxguest-Module.symvers
+]0;root@otuslinux:~[root@otuslinux ~]# dd if=/dev/urandom of=/dev/null bs=100M count=5[1P[1P[1P[1P[1P[1P[1P[1P[1@o[1@p[1@t[1@/[1@f[1@i[1@l[1@e[1@1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C
+dd: warning: partial read (33554431 bytes); suggest iflag=fullblock
+0+5 records in
+0+5 records out
+167772155 bytes (168 MB) copied, 2,08043 s, 80,6 MB/s
+]0;root@otuslinux:~[root@otuslinux ~]# ll /opt
+total 163695
+-rw-r--r--. 1 root root 167772155 авг 13 06:59 file1
+-rwx--x--x. 1 root root        75 авг 13 06:58 [0m[38;5;34mvagrant-shell[0m
+drwxr-xr-x. 9 root root        12 авг 13 05:48 [38;5;27mVBoxGuestAdditions-5.2.32[0m
+-rw-r--r--. 1 root root     22478 авг 13 06:58 vboxguest-Module.symvers
+]0;root@otuslinux:~[root@otuslinux ~]# df -h[K[K[K[Ku -hs /opt
+176M	/opt
+]0;root@otuslinux:~[root@otuslinux ~]# du -hs /opt[4Pll[C[C[C[C[Cdd if=/dev/urandom of=/opt/file1 bs=100M count=5[K30[1P[1@2
+dd: warning: partial read (33554431 bytes); suggest iflag=fullblock
+0+30 records in
+0+30 records out
+1006632930 bytes (1,0 GB) copied, 18,7936 s, 53,6 MB/s
+]0;root@otuslinux:~[root@otuslinux ~]# dd if=/dev/urandom of=/opt/file2 bs=100M count=30[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cu -hs /opt[K
+1,1G	/opt
+]0;root@otuslinux:~[root@otuslinux ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        40G  3,3G   37G   9% /
+devtmpfs        1,9G     0  1,9G   0% /dev
+tmpfs           1,9G     0  1,9G   0% /dev/shm
+tmpfs           1,9G  8,6M  1,9G   1% /run
+tmpfs           1,9G     0  1,9G   0% /sys/fs/cgroup
+tmpfs           379M     0  379M   0% /run/user/1000
+tank            114G  128K  114G   1% /tank
+tank/opt        115G  1,1G  114G   1% /opt
+]0;root@otuslinux:~[root@otuslinux ~]# df -hu -hs /optd if=/dev/urandom of=/opt/file2 bs=100M count=30[C[1P[1@3[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[K[K100
+dd: warning: partial read (33554431 bytes); suggest iflag=fullblock
+0+100 records in
+0+100 records out
+3355443100 bytes (3,4 GB) copied, 90,568 s, 37,0 MB/s
+]0;root@otuslinux:~[root@otuslinux ~]# dd if=/dev/urandom of=/opt/file3 bs=100M count=100[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cf -h[Ku -hs /opt
+4,1G	/opt
+]0;root@otuslinux:~[root@otuslinux ~]# df -h
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1        40G  3,3G   37G   9% /
+devtmpfs        1,9G     0  1,9G   0% /dev
+tmpfs           1,9G     0  1,9G   0% /dev/shm
+tmpfs           1,9G  8,6M  1,9G   1% /run
+tmpfs           1,9G     0  1,9G   0% /sys/fs/cgroup
+tmpfs           379M     0  379M   0% /run/user/1000
+tank            111G     0  111G   0% /tank
+tank/opt        115G  4,2G  111G   4% /opt
+]0;root@otuslinux:~[root@otuslinux ~]# zfs snapshot /[Ktank./[K[K/opt@snap1
+]0;root@otuslinux:~[root@otuslinux ~]# zfs list
+NAME       USED  AVAIL  REFER  MOUNTPOINT
+tank      4,23G   111G  39,3K  /tank
+tank/opt  4,23G   111G  4,23G  /opt
+]0;root@otuslinux:~[root@otuslinux ~]# zfs list -t snapshot
+NAME             USED  AVAIL  REFER  MOUNTPOINT
+tank/opt@snap1     0B      -  4,23G  -
+]0;root@otuslinux:~[root@otuslinux ~]# zfs list -t snapshot[Ksnapshot tank/opt@snap1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cdf -h[Ku -hs /optd if=/dev/urandom of=/opt/file3 bs=100M count=100[1P[1@4
+dd: warning: partial read (33554431 bytes); suggest iflag=fullblock
+0+100 records in
+0+100 records out
+3355443100 bytes (3,4 GB) copied, 90,9536 s, 36,9 MB/s
+]0;root@otuslinux:~[root@otuslinux ~]# dd if=/dev/urandom of=/opt/file4 bs=100M count=100[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[30Pzfs list -t snapshot
+NAME             USED  AVAIL  REFER  MOUNTPOINT
+tank/opt@snap1  34,0K      -  4,23G  -
+]0;root@otuslinux:~[root@otuslinux ~]# rm /opt/
+file1                      file3                      vagrant-shell              vboxguest-Module.symvers   
+file2                      file4                      VBoxGuestAdditions-5.2.32/ 
+[root@otuslinux ~]# rm /opt/file3
+rm: remove regular file ‘/opt/file3’? y
+]0;root@otuslinux:~[root@otuslinux ~]# rm /opt/file3zfs list -t snapshot
+NAME             USED  AVAIL  REFER  MOUNTPOINT
+tank/opt@snap1  3,12G      -  4,23G  -
+]0;root@otuslinux:~[root@otuslinux ~]# ll /opt
+total 4418901
+-rw-r--r--. 1 root root  167772155 авг 13 06:59 file1
+-rw-r--r--. 1 root root 1006632930 авг 13 06:59 file2
+-rw-r--r--. 1 root root 3355443100 авг 13 07:04 file4
+-rwx--x--x. 1 root root         75 авг 13 06:58 [0m[38;5;34mvagrant-shell[0m
+drwxr-xr-x. 9 root root         12 авг 13 05:48 [38;5;27mVBoxGuestAdditions-5.2.32[0m
+-rw-r--r--. 1 root root      22478 авг 13 06:58 vboxguest-Module.symvers
+]0;root@otuslinux:~[root@otuslinux ~]# ll /optzfs list -t snapshot[7Prm /opt/file3zfs list -t snapshotdd if=/dev/urandom of=/opt/file4 bs=100M count=100[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[30Pzfs list -t snapshot[7Prm /opt/file3zfs list -t snapshot[13Pll /opt[Kll /optzfs list -t snapshot[7Prm /opt/file3zfs list -t snapshotdd if=/dev/urandom of=/opt/file4 bs=100M count=100[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[30Pzfs list -t snapshot[K -t snapshot[Ksnapshot tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1[1P tank/opt@snap1r tank/opt@snap1o tank/opt@snap1l tank/opt@snap1l tank/opt@snap1b tank/opt@snap1a tank/opt@snap1c tank/opt@snap1k tank/opt@snap1
+]0;root@otuslinux:~[root@otuslinux ~]# zfs rollback tank/opt@snap1[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[C[Cll /opt[K
+total 4418899
+-rw-r--r--. 1 root root  167772155 авг 13 06:59 file1
+-rw-r--r--. 1 root root 1006632930 авг 13 06:59 file2
+-rw-r--r--. 1 root root 3355443100 авг 13 07:01 file3
+-rwx--x--x. 1 root root         75 авг 13 06:58 [0m[38;5;34mvagrant-shell[0m
+drwxr-xr-x. 9 root root         12 авг 13 05:48 [38;5;27mVBoxGuestAdditions-5.2.32[0m
+-rw-r--r--. 1 root root      22478 авг 13 06:58 vboxguest-Module.symvers
+]0;root@otuslinux:~[root@otuslinux ~]# exit
+logout
+]0;vagrant@otuslinux:~[vagrant@otuslinux ~]$ exit
+logout
+Connection to 127.0.0.1 closed.
+]0;fyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9: ~/otus-linux/Ex3-part2[01;32mfyvaoldg@fyvaoldg-ProLiant-BL460c-Gen9[00m:[01;34m~/otus-linux/Ex3-part2[00m$ exit
+
+Script done on 2019-08-13 10:06:08+0300

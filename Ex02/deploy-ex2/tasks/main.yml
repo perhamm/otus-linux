@@ -1,0 +1,199 @@
+---
+# tasks file for deploy-ex2
+- name: Installing the required 
+  yum: name={{ item }} state=latest
+  with_items:
+      - mdadm
+      - smartmontools
+      - hdparm
+      - gdisk
+      - grub2
+
+
+
+
+
+- name: Creating Array level 10 n=8
+  shell: "mdadm --create /dev/md0 -l 10 -n 8 `for i  in {a..i}; do if [[ $(sfdisk -d /dev/sd$i 2>&1) == \"\" ]]; then echo -n  \"/dev/sd$i \";fi; done`"
+  register: "array_created"
+  changed_when: false
+  failed_when: false
+
+  
+- name: Creates directory
+  file:
+    path: "{{ item }}"
+    state: directory  
+  with_items:
+  - /etc/mdadm/
+  - /mnt/p1
+  - /mnt/p2
+  - /mnt/p3
+  - /mnt/p4
+  - /mnt/p5
+  
+- name: Create config
+  shell: "{{ item }}"
+  with_items:
+  - echo \"DEVICE partitions\" > /etc/mdadm/mdadm.conf 
+  - mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+  
+  
+- name: Create p1
+  parted:
+    label: gpt
+    state: present
+    device: /dev/md0
+    number: 1
+    name: p1
+    part_start: 0%
+    part_end: 20%
+    unit: '%'
+
+- name: Create a ext4 filesystem on /dev/md0p1
+  filesystem:
+    fstype: ext4
+    dev: /dev/md0p1
+    
+- name: Get p1 UUID.
+  shell: "blkid -o value -s UUID /dev/md0p1"
+  register: p1_uuid
+  
+- debug:
+    msg: "{{ p1_uuid.stdout }}"
+    
+- name: mount p1
+  mount:
+    path: "/mnt/p1"
+    src: "UUID={{ p1_uuid.stdout }}"
+    fstype: "ext4"
+
+    state: "mounted"
+
+
+- name: Create p2
+  parted:
+    label: gpt
+    state: present
+    device: /dev/md0
+    number: 2
+    name: p2
+    part_start: 20%
+    part_end: 40%
+    unit: '%'
+- name: Create a ext4 filesystem on /dev/md0p2
+  filesystem:
+    fstype: ext4
+    dev: /dev/md0p2
+    
+- name: Get p2 UUID.
+  shell: "blkid -o value -s UUID /dev/md0p2"
+  register: p2_uuid
+  
+- debug:
+    msg: "{{ p2_uuid.stdout }}"
+    
+- name: mount p2
+  mount:
+    path: "/mnt/p2"
+    src: "UUID={{ p2_uuid.stdout }}"
+    fstype: "ext4"
+
+    state: "mounted"
+    
+- name: Create p3
+  parted:
+    label: gpt
+    state: present
+    device: /dev/md0
+    number: 3
+    name: p3
+    part_start: 40%
+    part_end: 60%
+    unit: '%'
+
+- name: Create a ext4 filesystem on /dev/md0p3
+  filesystem:
+    fstype: ext4
+    dev: /dev/md0p3
+    
+- name: Get p3 UUID.
+  shell: "blkid -o value -s UUID /dev/md0p3"
+  register: p3_uuid
+  
+- debug:
+    msg: "{{ p3_uuid.stdout }}"
+    
+- name: mount p3
+  mount:
+    path: "/mnt/p3"
+    src: "UUID={{ p3_uuid.stdout }}"
+    fstype: "ext4"
+
+    state: "mounted"   
+ 
+- name: Create p4
+  parted:
+    label: gpt
+    state: present
+    device: /dev/md0
+    number: 4
+    name: p4
+    part_start: 60%
+    part_end: 80%
+    unit: '%'
+- name: Create a ext4 filesystem on /dev/md0p4
+  filesystem:
+    fstype: ext4
+    dev: /dev/md0p4
+    
+- name: Get p4 UUID.
+  shell: "blkid -o value -s UUID /dev/md0p4"
+  register: p4_uuid
+  
+- debug:
+    msg: "{{ p4_uuid.stdout }}"
+    
+- name: mount p4
+  mount:
+    path: "/mnt/p4"
+    src: "UUID={{ p4_uuid.stdout }}"
+    fstype: "ext4"
+
+    state: "mounted"
+    
+- name: Create p5
+  parted:
+    label: gpt
+    state: present
+    device: /dev/md0
+    number: 5
+    name: p5
+    part_start: 80%
+    part_end: 100%
+    unit: '%'
+
+- name: Create a ext4 filesystem on /dev/md0p5
+  filesystem:
+    fstype: ext4
+    dev: /dev/md0p5
+    
+- name: Get p5 UUID.
+  shell: "blkid -o value -s UUID /dev/md0p5"
+  register: p5_uuid
+  
+- debug:
+    msg: "{{ p5_uuid.stdout }}"
+    
+- name: mount p5
+  mount:
+    path: "/mnt/p5"
+    src: "UUID={{ p5_uuid.stdout }}"
+    fstype: "ext4"
+
+    state: "mounted"
+ 
+
+  
+  
+  

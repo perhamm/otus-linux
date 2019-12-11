@@ -1,0 +1,18 @@
+server {
+listen  {{ nginx_default_port }};
+
+access_log /var/log/nginx/default.access.log;
+
+root /usr/share/nginx/html;
+large_client_header_buffers 4 64k;
+client_body_buffer_size     10M;
+client_max_body_size        10M;
+
+
+location / {
+index index.php index.html index.htm;
+}
+
+
+
+}

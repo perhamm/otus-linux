@@ -1,0 +1,12 @@
+---
+# tasks file for deploy-ex2-part2
+- name: Installing the required 
+  yum: name={{ item }} state=latest
+  with_items:
+      - mdadm
+      - smartmontools
+      - hdparm
+      - gdisk
+      - grub2
+
+

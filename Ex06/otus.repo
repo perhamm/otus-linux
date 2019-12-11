@@ -1,0 +1,5 @@
+[otus]
+name=otus-linux
+baseurl=http://ec2-18-184-142-43.eu-central-1.compute.amazonaws.com/repo
+gpgcheck=0
+enabled=1

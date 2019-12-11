@@ -1,0 +1,85 @@
+---
+- name: Add users and set pam 
+  hosts: all
+  become: yes
+  vars:
+    day_of_the_week_1: 6
+    day_of_the_week_2: 7
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+    - name: Ensure group admin exists
+      group:
+        name: admin
+        state: present
+
+    - name: Add the users 
+      user:
+        name: "{{ item.name }}"
+        shell: /bin/bash
+        #python3 -c "from passlib.hash import sha512_crypt; import getpass; print(sha512_crypt.using(rounds=5000).hash(getpass.getpass()))"
+        password: '$6$EjGfUXDJLxByj3gN$.MHVu764KdyEjk1erPP0GZOewlyzchjlbA6snA44WTAxHb/NFlq9/7I3ZiprKF/bh7KZr.WI7TLCotwWdvMZg/'
+        groups:  "{{ item.groups }}"
+        append: yes
+        state: present
+      with_items:
+      - { name: user1, groups: "" }
+      - { name: user2, groups: "" }
+      - { name: admin, groups: "admin" }
+
+      
+    - name: Add group admin to sudo
+      lineinfile:
+        path: /etc/sudoers.d/admins
+        line: '%admin ALL=(ALL) NOPASSWD: ALL'
+        state: present
+        mode: 0440
+        create: yes
+        validate: 'visudo -cf %s'
+
+    - name: enale ssh password authentication
+      lineinfile: 
+        dest: /etc/ssh/sshd_config
+        regexp: '^#?PasswordAuthentication' 
+        line: 'PasswordAuthentication yes'
+        backrefs: yes
+      notify:
+      - restart sshd
+
+    - name: Add login script.
+      template:
+        src: test_login.sh.j2
+        dest: /usr/local/bin/test_login.sh
+        owner: root
+        group: root
+        mode: 0544
+
+
+
+    - name: Insert a new rule pam_exec.so with arguments
+      pamd:
+        name: sshd
+        type: account
+        control: required
+        module_path: pam_nologin.so
+        new_type: account
+        new_control: required
+        new_module_path: pam_exec.so
+        module_arguments: '/usr/local/bin/test_login.sh'
+        state: after
+      
+  handlers:
+  - name: restart sshd
+    service:
+      name: sshd
+      state: restarted

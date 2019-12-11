@@ -1,0 +1,46 @@
+---
+# tasks file for nginx
+
+- name: Enable nginx repo.
+  template:
+    src: nginx.repo.j2
+    dest: /etc/yum.repos.d/nginx.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure nginx is installed.
+  yum:
+    name: nginx
+    state: present
+    
+- name: Remove default nginx config file (if configured).
+  file:
+    path: /etc/nginx/conf.d/default.conf
+    state: absent
+  notify: restart nginx
+
+
+- name: Add managed deafult config files.
+  template:
+    src: server1.conf.j2
+    dest: /etc/nginx/conf.d/server1.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nginx
+  
+- name: Copy nginx configuration in place.
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: reload nginx
+
+- name: Ensure nginx service is running as configured.
+  service:
+    name: nginx
+    state: started
+    enabled: true
