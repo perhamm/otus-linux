@@ -23,7 +23,7 @@ rd.break<br>
 
 4. Сконфигурировать систему без отдельного раздела с /boot, а только с LVM<br>
 Добавляем новый диск, инициализируем с параметром --bootloaderareasize 1m, создаем новую дисковую группу и логический том, копируем на них систему, делаем chroot. Ставим пакет grub2 из указанного репозитория, пересобираем grub.cfg, правим  /etc/fstab, /etc/default/grub.<br>
-[пример](https://yadi.sk/i/tPBgyCykIQ_LmA)
+[результат по заданию со *](https://yadi.sk/i/tPBgyCykIQ_LmA)
 ```
 yum install xfsdump -y
 yum install grub2
