@@ -19,7 +19,7 @@ rd.break<br>
 
 3. Добавить модуль в initrd<br><br>
 В /usr/lib/dracut/modules.d/01test кладем [module-setup.sh](https://gist.github.com/lalbrekht/e51b2580b47bb5a150bd1a002f16ae85) и [test.sh](https://gist.github.com/lalbrekht/ac45d7a6c6856baea348e64fac43faf0), после чего пересобираем образ initrd <br>
-[пример](https://yadi.sk/i/lUDu8CgVYiWhWQ)
+[пример](https://yadi.sk/i/oVftP9Dc-iTlKQ)
 
 4. Сконфигурировать систему без отдельного раздела с /boot, а только с LVM<br>
 Добавляем новый диск, инициализируем с параметром --bootloaderareasize 1m, создаем новую дисковую группу и логический том, копируем на них систему, делаем chroot. Ставим пакет grub2 из указанного репозитория, пересобираем grub.cfg, правим  /etc/fstab, /etc/default/grub.<br>
