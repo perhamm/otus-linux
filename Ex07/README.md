@@ -17,7 +17,7 @@ rd.break<br>
 `mkinitrd -f -v /boot/initramfs-$(uname -r).img $(uname -r)`<br>
 [пример](https://yadi.sk/i/cxU1J-3IG2uweg)
 
-3. Добавить модуль в initrd<br><br>
+3. Добавить модуль в initrd<br>
 В /usr/lib/dracut/modules.d/01test кладем [module-setup.sh](https://gist.github.com/lalbrekht/e51b2580b47bb5a150bd1a002f16ae85) и [test.sh](https://gist.github.com/lalbrekht/ac45d7a6c6856baea348e64fac43faf0), после чего пересобираем образ initrd <br>
 [пример](https://yadi.sk/i/oVftP9Dc-iTlKQ)
 
