@@ -1,22 +1,22 @@
 
 
-1. Написать сервис, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова. Файл и слово должны задаваться в /etc/sysconfig.<br>
+1. *Написать сервис, который будет раз в 30 секунд мониторить лог на предмет наличия ключевого слова. Файл и слово должны задаваться в /etc/sysconfig.*<br>
    Сделал скрипт watchlog.sh, который мониторит фразу в логе и пишет в стандартный вывод дебаг информацию, а также найденные фразы с момента последнего запуска в ``` /var/log/watchlog.log ``` Номер строки и дата последнего запуска записываются во временный файл. Скрипт запускается раз в 30 секунд с помощью сервис юнита watchlog.service и таймера к нему watchlog.timer. Фраза и лог в ```/etc/sysconfig/watchlog ``` <br><br>
 ![пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/watch%20log.PNG)
 
 
-2. Из epel установить spawn-fcgi и переписать init-скрипт на unit-файл. Имя сервиса должно так же называться.<br>
+2. *Из epel установить spawn-fcgi и переписать init-скрипт на unit-файл. Имя сервиса должно так же называться.*<br>
 Получившийся файл переменных среды spawn-fcgi и юнит сервис spawn-fcgi.service разворачиваются и запускается автоматически ансиблом <br><br>
-[пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/fcgi.PNG)
+![пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/fcgi.PNG)
 
-3. Дополнить юнит-файл apache httpd возможностьб запустить несколько инстансов сервера с разными конфигамиd<br>
+3. *Дополнить юнит-файл apache httpd возможностьб запустить несколько инстансов сервера с разными конфигамиd*<br>
 Конфиги для httpd 1.conf 2.conf, файлы перменных серды httpd1 httpd2 и шаблон юнит файла httpd@ разворачиваются и запускается автоматически ансиблом. После запуска апачи доступны по адресам  http://192.168.11.101:8080/ и  http://192.168.11.101:9000/ <br><br>
-[пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/httpd%208080.PNG)<br><br>
-[пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/httpd%209000.PNG)
+![пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/httpd%208080.PNG)<br><br>
+![пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/httpd%209000.PNG)
 
-4. Скачать демо-версию Atlassian Jira и переписать основной скрипт запуска на unit-файл<br>
+4. *Скачать демо-версию Atlassian Jira и переписать основной скрипт запуска на unit-файл*<br>
 Скачиваем бинарник с сайта jira и с помощью файла ответов ставим jira. Затем используем jira.service для запуска. Доступна по порту http://192.168.11.101:8008 <br><br>
-[результат по заданию со *]([пример](https://github.com/perhamm/otus-linux/blob/master/Ex08/jira%208008.PNG)
+![результат по заданию со *](https://github.com/perhamm/otus-linux/blob/master/Ex08/jira%208008.PNG)
 <br>
 <br>
 ---
