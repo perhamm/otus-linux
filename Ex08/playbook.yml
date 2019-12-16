@@ -1,0 +1,102 @@
+---
+- name: Add users and set pam 
+  hosts: all
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+    
+    - name: Install a list of packages
+      yum:
+        name:
+          - spawn-fcgi
+          - php
+          - php-cli
+          - mod_fcgid
+          - httpd
+          - dejavu-sans-fonts
+          - fontconfig
+          - net-tools
+        state: present
+          
+    - name: Copy watchlog  in place and make executable
+      copy:
+        src: files/watchlog.sh
+        dest: /opt
+        owner: root
+        group: root
+        mode: 0744
+        
+    - name: Copy response.varfile
+      copy:
+        src: files/response.varfile
+        dest: /tmp
+        owner: root
+        group: root
+        mode: 0744
+        
+    - name: Download jira sd
+      get_url:
+        url: https://product-downloads.atlassian.com/software/jira/downloads/atlassian-servicedesk-4.5.1-x64.bin
+        dest: /tmp/atlassian-servicedesk-4.5.1-x64.bin
+        mode: 0744
+        validate_certs: no
+        
+    - name: Check file exists
+      stat:
+        path: /opt/atlassian/jira/bin/start-jira.sh
+      register: jira_exist
+    
+    - name: Install jira sd
+      shell: ./atlassian-servicedesk-4.5.1-x64.bin -q -varfile response.varfile response.varfile
+      args:
+        chdir: /tmp
+      when: jira_exist.stat.exists == False
+         
+    - name: Copy files in place
+      copy: 
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - { src: 'files/httpd@.service', dest: '/etc/systemd/system' }
+        - { src: 'files/spawn-fcgi.service', dest: '/etc/systemd/system' }
+        - { src: 'files/watchlog.service', dest: '/etc/systemd/system' }
+        - { src: 'files/watchlog.timer', dest: '/etc/systemd/system' }
+        - { src: 'files/spawn-fcgi', dest: '/etc/sysconfig/' }
+        - { src: 'files/watchlog', dest: '/etc/sysconfig/' }
+        - { src: 'files/httpd1', dest: '/etc/sysconfig/' }
+        - { src: 'files/httpd2', dest: '/etc/sysconfig/' }
+        - { src: 'files/jira.service', dest: '/etc/systemd/system' }
+        - { src: 'files/1.conf', dest: '/etc/httpd/conf' }
+        - { src: 'files/2.conf', dest: '/etc/httpd/conf' }
+      notify: start systemd unit
+        
+
+
+  handlers:
+  - name: start systemd unit
+    systemd:
+      daemon_reload: yes
+      name: "{{ item }}"
+      enabled: yes
+      state: started
+    with_items:
+      - 'httpd@1'
+      - 'httpd@2'
+      - 'watchlog.timer'
+      - 'spawn-fcgi'
+      - 'jira'
+      

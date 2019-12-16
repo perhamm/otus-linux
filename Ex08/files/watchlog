@@ -1,0 +1,2 @@
+WORD="session opened for user root"
+LOG=/var/log/secure

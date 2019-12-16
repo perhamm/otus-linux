@@ -1,0 +1,16 @@
+[Unit]
+Description=Atlassian Jira Service
+After=syslog.target network.target
+
+   
+
+[Service]
+Type=simple
+ExecStart=/opt/atlassian/jira/bin/start-jira.sh -fg
+ExecStop=/opt/atlassian/jira/bin/stop-jira.sh
+Restart=always
+RestartSec=3
+   
+
+[Install]
+WantedBy=multi-user.target
