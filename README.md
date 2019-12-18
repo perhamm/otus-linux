@@ -13,4 +13,5 @@
 [Ex09](https://github.com/perhamm/otus-linux/tree/master/Ex09) - Автоматизация администрирования  <br/>
 [Ex10](https://github.com/perhamm/otus-linux/tree/master/Ex10) - Пользователи и группы. Авторизация и аутентификация  <br/>
 [Ex13](https://github.com/perhamm/otus-linux/tree/master/Ex13) - Мониторинг и алертинг  <br/>
+[Ex14](https://github.com/perhamm/otus-linux/tree/master/Ex14) -  Резервное копирование  <br/>
 [Ex15](https://github.com/perhamm/otus-linux/tree/master/Ex15) - Docker  <br/>
