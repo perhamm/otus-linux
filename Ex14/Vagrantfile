@@ -1,0 +1,82 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = true
+  #config.vm.network "forwarded_port", guest: 80, host: 8080
+  #config.vm.synced_folder "../data", "/vagrant_data"
+  
+
+  config.vm.define "server", primary: true do |s|
+    s.vm.hostname = 'server'
+    s.vm.network "private_network", ip: "192.168.100.10"
+	s.vm.provider :virtualbox do |v|
+		v.name = "server"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+		disk1 = 'disk1.vdi'
+		unless File.exist?(disk1)
+			v.customize ['createhd', '--filename', disk1, '--size', 50 * 1024 * 1024]
+		end
+		v.customize ['storageattach', :id, '--storagectl', 'IDE', '--port', 1, '--device', 0, '--type', 'hdd', '--medium', disk1]
+    end
+	s.vm.provision "shell", inline: <<-SHELL
+	  cp /vagrant/bacula.repo /etc/yum.repos.d/
+	  yum install postgresql-server httpd net-tools bacula-postgresql  bacula-aligned baculum-common baculum-api baculum-api-httpd baculum-common baculum-web baculum-web-httpd -y
+	  postgresql-setup initdb
+	  systemctl enable --now postgresql.service
+      
+	  sudo -H -u postgres bash -c '/opt/bacula/scripts/create_postgresql_database'
+      sudo -H -u postgres bash -c '/opt/bacula/scripts/make_postgresql_tables'
+      sudo -H -u postgres bash -c '/opt/bacula/scripts/grant_postgresql_privileges'
+
+	  /bin/cp -rf /vagrant/bacula-dir.conf /opt/bacula/etc/
+	  /bin/cp -rf /vagrant/bacula-fd.conf /opt/bacula/etc/
+	  /bin/cp -rf /vagrant/bacula-sd.conf /opt/bacula/etc/
+	  /bin/cp -rf /vagrant/bconsole.conf /opt/bacula/etc/
+	  /bin/cp -rf /vagrant/httpd /etc/sudoers.d/httpd
+	  /bin/cp -rf /vagrant/pg_hba.conf  /var/lib/pgsql/data/pg_hba.conf
+	  /bin/cp -rf /vagrant/baculum /etc
+	  chown postgres:postgres /var/lib/pgsql/data/pg_hba.conf
+	  systemctl restart postgresql.service
+
+	  echo "192.168.100.10 server" >> /etc/hosts
+	  echo "192.168.100.11 client" >> /etc/hosts
+
+      chown -R apache /opt/bacula/etc
+	  chown -R apache /etc/baculum
+	  mkdir /mnt/backup
+	  chown -R bacula:bacula /mnt/backup/
+	  
+	  systemctl enable --now bacula-fs
+      systemctl enable --now bacula-fd
+      systemctl enable --now bacula-sd
+      systemctl enable --now bacula-dir
+	  setenforce 0
+	  sed -i s/^SELINUX=.*$/SELINUX=permissive/ /etc/selinux/config
+	  systemctl enable --now httpd
+    SHELL
+  end
+
+  config.vm.define "client" do |c|
+    c.vm.hostname = 'client'
+    c.vm.network "private_network", ip: "192.168.100.11"
+	c.vm.provider :virtualbox do |v|
+		v.name = "client"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+    end
+	c.vm.provision "shell", inline: <<-SHELL
+	  cp /vagrant/bacula.repo /etc/yum.repos.d/
+	  yum install bacula-client -y
+	  /bin/cp -rf /vagrant/bacula-fd.conf_client /opt/bacula/etc/bacula-fd.conf
+	  /bin/cp -rf /vagrant/bconsole.conf_client /opt/bacula/etc/bconsole.conf
+	  echo "192.168.100.10 server" >> /etc/hosts
+	  echo "192.168.100.11 client" >> /etc/hosts
+	  systemctl enable --now bacula-fd.service
+
+    SHELL
+  end
+
+  
+end
+

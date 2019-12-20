@@ -1,0 +1,13 @@
+[Bacula-Community]
+name=CentOS - Bacula - Community
+baseurl=https://bacula.org/packages/5bd703346c037/rpms/9.4.4/el7/x86_64/
+gpgcheck=0
+enabled=1
+sslverify=0
+
+[baculumrepo]
+name=Baculum CentOS repository
+baseurl=https://bacula.org/downloads/baculum/stable/centos
+gpgcheck=0
+enabled=1
+sslverify=0
