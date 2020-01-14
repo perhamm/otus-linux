@@ -1,0 +1,269 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+MACHINES = {
+:inetRouter => {
+        :box_name => "centos/6",
+        #:public => {:ip => '10.10.10.1', :adapter => 1},
+        :net => [
+                   {ip: '192.168.255.1', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
+                ]
+  },
+  :centralRouter => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.255.2', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "router-net"},
+                   {ip: '192.168.0.1', adapter: 3, netmask: "255.255.255.240", virtualbox__intnet: "dir-net"},
+                   {ip: '192.168.0.33', adapter: 4, netmask: "255.255.255.240", virtualbox__intnet: "hw-net"},
+                   {ip: '192.168.0.65', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "mgt-net"},
+                   {ip: '192.168.255.5', adapter: 6, netmask: "255.255.255.252", virtualbox__intnet: "office1-router-net"},
+                   {ip: '192.168.255.9', adapter: 7, netmask: "255.255.255.252", virtualbox__intnet: "office2-router-net"},
+                ]
+  },
+  
+  :centralServer => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.0.34', adapter: 2, netmask: "255.255.255.240", virtualbox__intnet: "hw-net"},
+                ]
+  },
+  
+  :centralUserDirector => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.0.2', adapter: 2, netmask: "255.255.255.240", virtualbox__intnet: "dir-net"},
+                ]
+  },
+  
+  :centralUserWiFiClient => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.0.66', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "mgt-net"},
+                ]
+  },
+  
+  :office1Router => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.255.6', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "office1-router-net"},
+                   {ip: '192.168.2.1', adapter: 3, netmask: "255.255.255.192", virtualbox__intnet: "office1-dev-net"},
+                   {ip: '192.168.2.65', adapter: 4, netmask: "255.255.255.192", virtualbox__intnet: "office1-test-net"},
+                   {ip: '192.168.2.129', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "office1-man-net"},
+                   {ip: '192.168.2.193', adapter: 6, netmask: "255.255.255.192", virtualbox__intnet: "office1-hw-net"},
+                ]
+  },
+  
+  :office1Server => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.2.194', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office1-hw-net"},
+                ]
+  },
+
+  :office1UserDev => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.2.2', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office1-dev-net"},
+                ]
+  },
+
+  :office1UserTest => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.2.66', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office1-test-net"},
+                ]
+  },
+
+  :office1UserManager => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.2.130', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office1-man-net"},
+                ]
+  },
+
+  :office2Router => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.255.10', adapter: 2, netmask: "255.255.255.252", virtualbox__intnet: "office2-router-net"},
+                   {ip: '192.168.1.1', adapter: 3, netmask: "255.255.255.192", virtualbox__intnet: "office2-dev-net"},
+                   {ip: '192.168.1.129', adapter: 4, netmask: "255.255.255.192", virtualbox__intnet: "office2-test-net"},
+                   {ip: '192.168.1.193', adapter: 5, netmask: "255.255.255.192", virtualbox__intnet: "office2-hw-net"},
+                ]
+  },
+  
+  :office2Server => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.1.194', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office2-hw-net"},
+                ]
+  },
+  
+  :office2UserDev => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.1.2', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office2-dev-net"},
+                ]
+  },
+
+  :office2UserTest => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.1.130', adapter: 2, netmask: "255.255.255.192", virtualbox__intnet: "office2-test-net"},
+                ]
+  },
+}
+
+Vagrant.configure("2") do |config|
+ 
+  config.vbguest.auto_update = false
+  
+  MACHINES.each do |boxname, boxconfig|
+
+    config.vm.define boxname do |box|
+
+        box.vm.box = boxconfig[:box_name]
+        box.vm.host_name = boxname.to_s
+
+        boxconfig[:net].each do |ipconf|
+          box.vm.network "private_network", ipconf
+        end
+        
+        if boxconfig.key?(:public)
+          box.vm.network "public_network", boxconfig[:public]
+        end
+
+        box.vm.provision "shell", inline: <<-SHELL
+          mkdir -p ~root/.ssh
+                cp ~vagrant/.ssh/auth* ~root/.ssh
+        SHELL
+        
+        case boxname.to_s
+        when "inetRouter"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            sysctl net.ipv4.conf.all.forwarding=1
+            iptables -t nat -A POSTROUTING ! -d 192.168.0.0/16 -o eth0 -j MASQUERADE
+            ip route add 192.168.0.0/16 via 192.168.255.2 dev eth1
+            SHELL
+        when "centralRouter"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.255.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            sysctl net.ipv4.conf.all.forwarding=1
+            ip route del default
+            ip route add default via 192.168.255.1 dev eth1
+            ip r add 192.168.2.0/24 via 192.168.255.6 dev eth5
+            ip r add 192.168.1.0/24 via 192.168.255.10 dev eth6
+            SHELL
+        when "centralServer"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.0.33" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.0.33 dev eth1
+            SHELL
+        when "centralUserDirector"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.0.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.0.1 dev eth1
+            SHELL
+        when "centralUserWiFiClient"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.0.65" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.0.65 dev eth1
+            SHELL
+        when "office1Router"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.255.5" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            sysctl net.ipv4.conf.all.forwarding=1
+            ip route del default
+            ip route add default via 192.168.255.5 dev eth1
+            ip r add 192.168.0.0/24 via 192.168.255.5 dev eth1
+            ip r add 192.168.1.0/24 via 192.168.255.5 dev eth1
+            SHELL
+        when "office1Server"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.2.193" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.2.193 dev eth1
+            SHELL
+        when "office1UserDev"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.2.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.2.1 dev eth1
+            SHELL
+        when "office1UserTest"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.2.65" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.2.65 dev eth1
+            SHELL
+        when "office1UserManager"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.2.129" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.2.129 dev eth1
+            SHELL
+        when "office2Router"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.255.9" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            sysctl net.ipv4.conf.all.forwarding=1
+            ip route del default
+            ip route add default via 192.168.255.9 dev eth1
+            ip r add 192.168.0.0/24 via 192.168.255.9 dev eth1
+            ip r add 192.168.2.0/24 via 192.168.255.9 dev eth1
+            SHELL
+        when "office2Server"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.1.193" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.1.193 dev eth1
+            SHELL
+        when "office2UserDev"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.1.1" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.1.1 dev eth1
+            SHELL
+        when "office2UserTest"
+          box.vm.provision "shell", run: "always", inline: <<-SHELL
+            echo "DEFROUTE=no" >> /etc/sysconfig/network-scripts/ifcfg-eth0 
+            echo "GATEWAY=192.168.1.129" >> /etc/sysconfig/network-scripts/ifcfg-eth1
+            systemctl restart network
+            ip route del default
+            ip route add default via 192.168.1.129 dev eth1
+            SHELL
+        end
+      end
+
+  end
+  
+  
+end
+
