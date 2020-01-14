@@ -1,0 +1,54 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = true
+
+	
+	
+  config.vm.define "elk" do |e|
+    e.vm.hostname = 'elk'
+    e.vm.network "private_network", ip: "192.168.100.12"
+	e.vm.provider :virtualbox do |v|
+		v.name = "elk"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "8192"]
+    end
+
+	e.vm.provision "ansible" do |ansible|
+        ansible.playbook = "elk.yml"
+	end
+	
+  end
+  
+  config.vm.define "web", primary: true do |w|
+    w.vm.hostname = 'web'
+    w.vm.network "private_network", ip: "192.168.100.10"
+	w.vm.provider :virtualbox do |v|
+		v.name = "web"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+
+    end
+
+	w.vm.provision "ansible" do |ansible|
+        ansible.playbook = "web.yml"
+	end
+	
+  end
+
+  config.vm.define "log" do |l|
+    l.vm.hostname = 'log'
+    l.vm.network "private_network", ip: "192.168.100.11"
+	l.vm.provider :virtualbox do |v|
+		v.name = "log"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+    end
+
+	l.vm.provision "ansible" do |ansible|
+        ansible.playbook = "rsyslog.yml"
+	end
+	
+  end
+  
+end
+

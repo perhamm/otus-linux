@@ -1,0 +1,156 @@
+---
+- name: Add users and set pam 
+  hosts: elk
+  become: yes
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+    - name: install rpm elastic
+      yum:
+        name: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.5.1-x86_64.rpm
+        validate_certs: no
+        state: present
+
+    - name: install rpm kibana
+      yum:
+        name: https://artifacts.elastic.co/downloads/kibana/kibana-7.5.1-x86_64.rpm
+        validate_certs: no
+        state: present
+    
+    - name: install rpm filebeat
+      yum:
+        name: https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.5.1-x86_64.rpm
+        validate_certs: no
+        state: present
+
+    - name: install rpm policycoreutils-python
+      yum:
+        name: policycoreutils-python
+        validate_certs: no
+        state: present
+        
+
+    - name: change elastic config
+      lineinfile: 
+        dest: /etc/elasticsearch/elasticsearch.yml
+        regexp: "{{ item.regexp }}" 
+        line: "{{ item.line }}"
+        backrefs: yes
+      with_items:
+        - { regexp: '^#cluster.name', line: 'cluster.name: elk' }
+        - { regexp: '^#node.name', line: 'node.name: elk' }
+        - { regexp: '^#network.host', line: 'network.host: 0.0.0.0' }
+        - { regexp: '^#cluster.initial_master_nodes', line: 'cluster.initial_master_nodes: ["elk"]' }
+      notify:
+      - restart elastic
+    
+    - name: change kibana config
+      lineinfile: 
+        dest: /etc/kibana/kibana.yml
+        regexp: "{{ item.regexp }}" 
+        line: "{{ item.line }}"
+        backrefs: yes
+      with_items:
+        - { regexp: '^#server.host', line: 'server.host: "0.0.0.0"' }
+      notify:
+      - restart kibana
+      
+    - name: change rsyslog config on elk
+      copy: 
+        src: elk-rsyslog.conf
+        dest: /etc/rsyslog.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+      - setup rsyslog
+      
+    - name: start rsyslog
+      service:
+        name: rsyslog
+        enabled: yes
+        state: started
+
+    - name: start elastic
+      service:
+        name: elasticsearch
+        enabled: yes
+        state: started
+        
+    - name: start kibana
+      service:
+        name: kibana
+        enabled: yes
+        state: started
+        
+        
+    - name: change filebeat config on elk
+      copy: 
+        src: elk-nginx.yml
+        dest: /etc/filebeat/modules.d/nginx.yml
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+      - setup filebeat
+
+    - name: start filebeat
+      service:
+        name: filebeat
+        enabled: yes
+        state: started
+    
+    - name: change rsyslog config on elk
+      copy: 
+        src: export.ndjson
+        dest: /home/vagrant/export.ndjso
+        owner: vagrant
+        group: vagrant
+        mode: '0644'
+      notify:
+      - setup kibana
+
+  handlers:
+  - name: restart elastic
+    service:
+      name: elasticsearch
+      state: restarted
+  - name: restart kibana
+    service:
+      name: kibana
+      state: restarted
+  - name: restart rsyslog
+    service:
+      name: rsyslog
+      state: restarted
+  - name: setup rsyslog
+    shell: |
+      mkdir /mnt/logging
+      semanage fcontext -a -t var_log_t '/mnt/logging(/.*)?'
+      restorecon -Rv /mnt/logging
+      systemctl restart rsyslog
+    args:
+      executable: /bin/bash
+  - name: setup filebeat
+    shell: |
+      filebeat modules enable nginx
+      filebeat setup -e
+      systemctl restart filebeat
+    args:
+      executable: /bin/bash
+  - name: setup kibana
+    shell: |
+      curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@/home/vagrant/export.ndjson
+      curl -X POST -H "Content-Type: application/json" -H "kbn-xsrf: true" -d '{"value":"2392bb10-3625-11ea-9fb3-977d545dcaca"}' http://localhost:5601/api/kibana/settings/defaultIndex
+    args:
+      executable: /bin/bash

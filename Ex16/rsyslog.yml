@@ -1,0 +1,67 @@
+---
+- name: Add users and set pam 
+  hosts: log
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+
+    - name: install rpm policycoreutils-python
+      yum:
+        name: policycoreutils-python
+        validate_certs: no
+        state: present
+
+    - name: change rsyslog config on log
+      copy: 
+        src: log-rsyslog.conf
+        dest: /etc/rsyslog.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+      - setup rsyslog
+      
+    - name: start rsyslog
+      service:
+        name: rsyslog
+        enabled: yes
+        state: started
+
+    - name: change auditd
+      copy: 
+        src: log-auditd.conf
+        dest: /etc/audit/auditd.conf 
+        owner: root
+        group: root
+        mode: '0640'
+      notify:
+      - setup auditd
+
+
+  handlers:
+  - name: restart rsyslog
+    service:
+      name: rsyslog
+      state: restarted
+  - name: setup rsyslog
+    shell: |
+      mkdir -p /mnt/logging/192.168.100.10
+      semanage fcontext -a -t var_log_t '/mnt/logging/192.168.100.10(/.*)?'
+      restorecon -Rv /mnt/logging/192.168.100.10/
+      systemctl restart rsyslog
+  - name: setup auditd
+    shell: |
+      systemctl daemon-reload
+      service auditd restart
