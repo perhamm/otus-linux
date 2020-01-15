@@ -1,0 +1,57 @@
+---
+- name: Playbook to configure IPA servers
+  hosts: server.test.local
+  become: true
+  vars:
+    ipaadmin_user: admin
+    ipadm_password: 123qweQWE
+    ipaadmin_password: 123qweQWE
+    ipaserver_domain: test.local
+    ipaserver_realm: TEST.LOCAL
+    ipaserver_install_packages: true
+    ipaserver_setup_firewalld: false
+    ipaserver_setup_dns: true
+    ipaserver_forwarders: 8.8.8.8
+    ipaserver_no_ui_redirect: true
+
+    
+    
+  pre_tasks:
+
+    - name: upgrade all packages
+      yum: name=* state=latest
+        
+        
+    - name: change hosts
+      copy: 
+        src: hosts
+        dest: /etc/hosts
+        owner: root
+        group: root
+        mode: '0644'
+        
+    - name: Put SELinux in permissive mode, logging actions that would be blocked.
+      selinux:
+        policy: targeted
+        state: permissive
+    
+  roles:
+  - role: ipaserver
+    state: present
+    
+  post_tasks:
+    - name: Add appuser
+      ipa_user:
+        name: appuser
+        state: present
+        givenname: appuser
+        sn: userovich
+        sshpubkey:
+        - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDIzUemjSzAkpPiweTo1AcGLfnE+StO+owUUEKw0YWTULAzSUxNq+VfFfArPe9z5YAR+j+SAkij3mxWHS7NhV6eF0ui9Wek2XBWRR0MDaabl2GNdWbwxvvmD+MD6M0/X0x43AbZGH/pNjgAdoFLewJDv9EHuYwSoL387m5J50UMsL/pD4P8Jipxk/cXX32H7tajM0ENYoGPCZ/1I8H+x+eAVMC1E53dt5mKhOsZ38mfJNmNm2ds/GoYQbVFU+KSeW4g+gHSt/W2Js/lLFa/WErsLvprBUW1nI6kjo85RdynBIHL6fPMCLApajn0TrMPMiVixJjLOk7FjR0nodPk46w/ appuser
+        password: 123qweQWE
+        krbpasswordexpiration:  20220121182022
+        ipa_host: server.test.local
+        ipa_user: admin
+        ipa_pass: 123qweQWE
+
+    
