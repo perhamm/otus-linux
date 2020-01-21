@@ -16,7 +16,7 @@
  - Для удобства использования поднят baculum. Через него можно позапускать Job бэкапа, но Job восстановления - только через консоль.  
 ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex14/screenshots/pic1.PNG)
 ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex14/screenshots/pic2.PNG)
- - Файлик с выводом команд и конфиги приложены в корне папки.
+ - Файлик с выводом команд и конфиги приложены ( list jobs and files.txt и bacula*.conf ).
 
 <br>
 
