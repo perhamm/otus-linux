@@ -1,0 +1,68 @@
+---
+- name: Setup
+  hosts: server1
+  become: yes
+
+    
+  
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1'
+        line: 'sslverify=0'
+        
+    - name: Add package
+      yum:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - openvpn
+        - iperf3
+        - easy-rsa
+        
+    - name: Put SELinux in permissive mode, logging actions that would be blocked.
+      selinux:
+        policy: targeted
+        state: permissive
+
+        
+    - name: edit sysctl ip_forward
+      sysctl:
+        name: net.ipv4.ip_forward
+        value: '1'
+        sysctl_set: yes
+        state: present
+        reload: yes
+
+
+    - name: copy config
+      copy: 
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
+        mode: '0644'
+      with_items:
+        - { src: 'openvpn-server1/', dest: '/etc/openvpn' }
+      notify:
+      - restart openvpn
+
+      
+    - name: daemon started
+      systemd:
+        name: openvpn@server
+        state: started
+        enabled: yes
+      
+      
+  handlers:
+  - name: restart openvpn
+    service:
+      name: openvpn@server
+      state: restarted
