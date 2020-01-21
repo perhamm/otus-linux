@@ -15,4 +15,9 @@
 [Ex13](https://github.com/perhamm/otus-linux/tree/master/Ex13) - Мониторинг и алертинг  <br/>
 [Ex14](https://github.com/perhamm/otus-linux/tree/master/Ex14) - Резервное копирование  <br/>
 [Ex15](https://github.com/perhamm/otus-linux/tree/master/Ex15) - Docker  <br/>
-[Ex16](https://github.com/perhamm/otus-linux/tree/master/Ex16) - Сбор и анализ логов <br/>
+[Ex18](https://github.com/perhamm/otus-linux/tree/master/Ex18) - Архитектура сетей <br/>
+[Ex19](https://github.com/perhamm/otus-linux/tree/master/Ex19) - LDAP. Централизованная авторизация и аутентификация <br/>
+[Ex20](https://github.com/perhamm/otus-linux/tree/master/Ex20) - Фильтрация трафика <br/>
+[Ex21](https://github.com/perhamm/otus-linux/tree/master/Ex21) - Статическая и динамическая маршрутизация <br/>
+[Ex24](https://github.com/perhamm/otus-linux/tree/master/Ex24) - Сетевые пакеты. VLAN'ы. LACP <br/>
+[Ex25](https://github.com/perhamm/otus-linux/tree/master/Ex25) - Мосты, туннели и VPN  <br/>
