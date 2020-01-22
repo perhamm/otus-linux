@@ -23,7 +23,7 @@ LDAP
  - git clone https://github.com/perhamm/otus-linux && cd otus-linux/Ex19 && vagrant up
 
 ## Как проверить работоспособность:
- - После отработки vagrant up ( может делть довольно долго ), необходимо в /etc/hosts на хотсе добавить запись 192.168.100.10 server.test.local 
+ - После отработки vagrant up ( может делть довольно долго ), необходимо в /etc/hosts на хосте добавить запись 192.168.100.10 server.test.local 
  - Можно перейти по ссылке https://server.test.local/ipa/ui/  ( user admin ; password  123qweQWE) и проверить статус FreeIPA: хосты, юзеры, ключи
  - В директории Ex19 выполнить chmod 0600 appuser ; chmod 0600 appuser.pub; ssh -o "StrictHostKeyChecking no"  -i appuser appuser@192.168.100.11 
  - В результате должны попасть без вода пароля на сервер client1.test.local
