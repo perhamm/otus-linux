@@ -24,7 +24,7 @@
 ## В процессе сделано:
  - Создан Vagrant file и несколько ansible плейбуков, поднимающих машины web c nginx, log с rsyslog и elk с elasticsearch и kibana. 
  - Примерная схема работы<br/><br/>
- ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex16/screenshots/elk.PNG) <br/><br/>
+ ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex16/sreenshots/elk.png) <br/><br/>
  - На маишне web: nginx шлет напрямую все логи в elk, локально только критичные, настроено правило auditd, следящее за изменениями конфига nginx и посылающее их сразу на сервер log, настроен rsyslog, переселыющий все события на сервер log ( можно оставить только критичные, но не стал для проверки )
  - На машине log: настроен rsyslog для передачи всех логов с web в папку /mnt/logging/192.168.100.10, настроен auditd для приема логов c web
  - На машине elk: настроен rsyslog для передачи логов nginx c web в папку /mnt/logging/192.168.100.10-nginx*, настроен filebeat для предобработки и пересылки логов nginx с помощью модуля напрямую в elasticsearch, настроен elasticsearch и kibana (http://192.168.100.12:5601/app/kibana)
@@ -36,10 +36,10 @@
 
 ## Как проверить работоспособность:
  - Перейти по адресам http://192.168.100.10 ( можнго погенерировать ошибки, перейдя по неверным адресам наподобие http://192.168.100.10/fsdfds )  и http://192.168.100.12:5601  с хостовой машины. Должны появится обработанные логи nginx в интерфейсе кибаны
- ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex16/screenshots/kibana.PNG)
+ ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex16/sreenshots/kibana.PNG)
  - В папке /mnt/logging/192.168.100.10 на машине log видны логи c web
  - В логах аудита на машине log присутствуют логи аудита с web
- ![Image 3](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex16/screenshots/auditd.PNG)
+ ![Image 3](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex16/sreenshots/auditd.PNG)
 <br>
 
 ---
