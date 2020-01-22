@@ -25,7 +25,7 @@
 
     - name: change rsyslog config on log
       copy: 
-        src: log-rsyslog.conf
+        src: files/log-rsyslog.conf
         dest: /etc/rsyslog.conf
         owner: root
         group: root
@@ -41,7 +41,7 @@
 
     - name: change auditd
       copy: 
-        src: log-auditd.conf
+        src: files/log-auditd.conf
         dest: /etc/audit/auditd.conf 
         owner: root
         group: root
@@ -61,7 +61,13 @@
       semanage fcontext -a -t var_log_t '/mnt/logging/192.168.100.10(/.*)?'
       restorecon -Rv /mnt/logging/192.168.100.10/
       systemctl restart rsyslog
+    args:
+      executable: /bin/bash
+      warn: no
   - name: setup auditd
     shell: |
       systemctl daemon-reload
       service auditd restart
+    args:
+      executable: /bin/bash
+      warn: no

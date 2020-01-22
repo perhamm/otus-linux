@@ -67,7 +67,7 @@
       
     - name: change rsyslog config on elk
       copy: 
-        src: elk-rsyslog.conf
+        src: files/elk-rsyslog.conf
         dest: /etc/rsyslog.conf
         owner: root
         group: root
@@ -96,7 +96,7 @@
         
     - name: change filebeat config on elk
       copy: 
-        src: elk-nginx.yml
+        src: files/elk-nginx.yml
         dest: /etc/filebeat/modules.d/nginx.yml
         owner: root
         group: root
@@ -109,17 +109,27 @@
         name: filebeat
         enabled: yes
         state: started
-    
-    - name: change rsyslog config on elk
+
+    - name: change kibana settings trigger
       copy: 
         src: export.ndjson
         dest: /home/vagrant/export.ndjso
         owner: vagrant
         group: vagrant
         mode: '0644'
-      notify:
-      - setup kibana
+      register: kibana_saved_config_changed
+        
+    - name: setup kibana
+      shell: |
+        curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@/vagrant/files/export.ndjson
+        curl -X POST -H "Content-Type: application/json" -H "kbn-xsrf: true" -d '{"value":"2392bb10-3625-11ea-9fb3-977d545dcaca"}' http://localhost:5601/api/kibana/settings/defaultIndex
+      args:
+        executable: /bin/bash
+        warn: no
+      when: kibana_saved_config_changed.changed
 
+      
+      
   handlers:
   - name: restart elastic
     service:
@@ -141,6 +151,7 @@
       systemctl restart rsyslog
     args:
       executable: /bin/bash
+      warn: no
   - name: setup filebeat
     shell: |
       filebeat modules enable nginx
@@ -148,9 +159,4 @@
       systemctl restart filebeat
     args:
       executable: /bin/bash
-  - name: setup kibana
-    shell: |
-      curl -X POST "localhost:5601/api/saved_objects/_import" -H "kbn-xsrf: true" --form file=@/home/vagrant/export.ndjson
-      curl -X POST -H "Content-Type: application/json" -H "kbn-xsrf: true" -d '{"value":"2392bb10-3625-11ea-9fb3-977d545dcaca"}' http://localhost:5601/api/kibana/settings/defaultIndex
-    args:
-      executable: /bin/bash
+      warn: no

@@ -35,7 +35,7 @@
 
     - name: change nginx conf
       copy: 
-        src: nginx.conf
+        src: files/nginx.conf
         dest: /etc/nginx/nginx.conf
         owner: root
         group: root
@@ -51,7 +51,7 @@
 
     - name: change rsyslog config on web
       copy: 
-        src: web-rsyslog.conf
+        src: files/web-rsyslog.conf
         dest: /etc/rsyslog.conf
         owner: root
         group: root
@@ -73,10 +73,10 @@
         group: root
         mode: '0640'
       with_items:
-        - { src: 'web-audit.rules', dest: '/etc/audit/rules.d/audit.rules' }
-        - { src: 'web-audisp-remote.conf', dest: '/etc/audisp/audisp-remote.conf' }
-        - { src: 'web-au-remote.conf', dest: '/etc/audisp/plugins.d/au-remote.conf' } 
-        - { src: 'web-auditd.conf', dest: '/etc/audit/auditd.conf' }
+        - { src: 'files/web-audit.rules', dest: '/etc/audit/rules.d/audit.rules' }
+        - { src: 'files/web-audisp-remote.conf', dest: '/etc/audisp/audisp-remote.conf' }
+        - { src: 'files/web-au-remote.conf', dest: '/etc/audisp/plugins.d/au-remote.conf' } 
+        - { src: 'files/web-auditd.conf', dest: '/etc/audit/auditd.conf' }
       notify:
       - setup auditd
 
@@ -94,3 +94,6 @@
     shell: |
       systemctl daemon-reload
       service auditd restart
+    args:
+      executable: /bin/bash
+      warn: no
