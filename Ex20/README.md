@@ -15,7 +15,7 @@
 
 - Сделан Vagrant file, раворачиваюший машины inetRouter, inetRouter2, centralRouter и centralServer. На centralServer разворачивается nginx на порту 80. На inetRouter - добавляются правила, запрещающие ssh коннекты по internal сети, но разрешается knocking последовательность 8881 7777 9991. Настраивается проброс порта 8080 хостовой машины на inetRouter2, и с него в свою очередь на nginx на порт 80. 
 <br/><br/>
- ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex20/screenshots/iptables.PNG) <br/><br/>
+ ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex20/screenshots/iptables.png) <br/><br/>
 
 
 ## Как запустить:
