@@ -20,5 +20,15 @@
 [Ex19](https://github.com/perhamm/otus-linux/tree/master/Ex19) - LDAP. Централизованная авторизация и аутентификация <br/>
 [Ex20](https://github.com/perhamm/otus-linux/tree/master/Ex20) - Фильтрация трафика <br/>
 [Ex21](https://github.com/perhamm/otus-linux/tree/master/Ex21) - Статическая и динамическая маршрутизация <br/>
+[Ex22](https://github.com/perhamm/otus-linux/tree/master/Ex22) - DNS/DHCP - настройка и обслуживание <br/>
 [Ex24](https://github.com/perhamm/otus-linux/tree/master/Ex24) - Сетевые пакеты. VLAN'ы. LACP <br/>
 [Ex25](https://github.com/perhamm/otus-linux/tree/master/Ex25) - Мосты, туннели и VPN  <br/>
+[Ex26](https://github.com/perhamm/otus-linux/tree/master/Ex26) - Web сервера   <br/>
+[Ex27](https://github.com/perhamm/otus-linux/tree/master/Ex27) - Почта: SMTP, IMAP, POP3  <br/>
+[Ex28](https://github.com/perhamm/otus-linux/tree/master/Ex28) - Mysql  <br/>
+[Ex29](https://github.com/perhamm/otus-linux/tree/master/Ex29) - MySQL - бэкап, репликация, кластер   <br/>
+[Ex30](https://github.com/perhamm/otus-linux/tree/master/Ex30) - PostgreSQL   <br/>
+[Ex31](https://github.com/perhamm/otus-linux/tree/master/Ex31) - PostgreSQL cluster  <br/>
+[Ex33](https://github.com/perhamm/otus-linux/tree/master/Ex33) - Динамический веб контент   <br/>
+[Ex34](https://github.com/perhamm/otus-linux/tree/master/Ex33) - Файловые хранилища - NFS, SMB, FTP   <br/>
+[Project](https://github.com/perhamm/otus-linux/tree/master/!Project) - Проект по теме: "Отказоустойчивая реализация хранилища файлов Seafile (высокопроизводительный аналог owncloud ) с Ceph в качестве бэкенда"  <br/>
