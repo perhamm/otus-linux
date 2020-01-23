@@ -49,7 +49,7 @@
         - { src: 'centralRouter/ifcfg-eth2', dest: '/etc/sysconfig/network-scripts/' } 
         - { src: 'centralRouter/ifcfg-eth3', dest: '/etc/sysconfig/network-scripts/' } 
         - { src: 'centralRouter/ifcfg-eth4', dest: '/etc/sysconfig/network-scripts/' } 
-        - { src: 'centralRouter/ifcfg-team0', dest: '/etc/sysconfig/network-scripts/' }
+        - { src: 'centralRouter/ifcfg-bond0', dest: '/etc/sysconfig/network-scripts/' }
       notify:
       - restart server
       

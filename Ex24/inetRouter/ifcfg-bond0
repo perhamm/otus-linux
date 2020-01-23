@@ -6,8 +6,8 @@ PREFIX=30
 DEFROUTE=yes
 IPV4_FAILURE_FATAL=no
 IPV6INIT=no
-NAME=team0
-DEVICE=team0
+NAME=bond0
+DEVICE=bond0
 ONBOOT=yes
-DEVICETYPE=Team
-TEAM_CONFIG='{"runner":{"name": "loadbalance"}}'
+TYPE=Bond
+BONDING_OPTS="mode=1 miimon=100 fail_over_mac=1"
