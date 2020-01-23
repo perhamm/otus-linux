@@ -82,7 +82,27 @@ r1# exit
  2:  172.20.20.1                                           1.053ms reached
      Resume: pmtu 1500 hops 2 back 2 
 ```
+Вернуть симметричность роутинга можно, например, повысив вес пути до 1000 в подсети 192.168.100.0/30 для интерфейса 192.168.100.1 роутера r3.
+```
+[root@r3 ~]# vtysh 
 
+Hello, this is Quagga (version 0.99.22.4).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+r3# configure  terminal  
+r3(config)# interface  eth3
+r3(config-if)# ip ospf  cost 1000
+r3(config-if)# exit
+r3(config)# exit
+r3# exit
+```
+```
+[root@r1 ~]# tracepath -n 172.20.20.1
+ 1?: [LOCALHOST]                                         pmtu 1500
+ 1:  172.20.20.1                                           0.615ms reached
+ 1:  172.20.20.1                                           0.547ms reached
+     Resume: pmtu 1500 hops 1 back 1 
+```
 
 ## Как запустить:
  - git clone https://github.com/perhamm/otus-linux && cd otus-linux/Ex21 && vagrant up
