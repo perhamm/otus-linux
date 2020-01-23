@@ -15,11 +15,11 @@ VPN
 - Сделан Vagrantfile и ansible плейбуки, раворачиваюшие 3 сервера. 
 - server1 - используется для подключения с хостовой машины к внутренним ресурсам этого сервера через файл конфигурации и ключи, лежащие в папке openvpn-server1/client (```sudo /usr/sbin/openvpn --config client01.ovpn```)
 <br/><br/>
- ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex25/screenshots/host-server1-openvpn.png) <br/><br/>
+ ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex25/screenshots/host-server1-openvpn.PNG) <br/><br/>
 - server2 и client соединены между собой тунелем, и нужны для тестрирования скорости соединения по tun/tap tcp/udp.
 Тестирование показало, что наибольшей скоростью обладает конфигурация c udp / tun 
 <br/><br/>
- ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex25/screenshots/tun-speed.png) <br/><br/>
+ ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex25/screenshots/tun-speed.PNG) <br/><br/>
 
 ## Как запустить:
  - git clone https://github.com/perhamm/otus-linux && cd otus-linux/Ex25 && vagrant up
