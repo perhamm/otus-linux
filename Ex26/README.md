@@ -34,11 +34,11 @@ https://nginx.org/ru/docs/http/ngx_http_headers_module.html
 - В конфиге проверяется наличие cookie access, если нет или не соответствует - редиректим на location, где устанавливается cookie, при это сохраняем в аргументе url изначальный URI запроса.
 - При переходе в location, где устанавливается cookie - добавляем  access=id, а также проверяем наличие аргумента url, если есть - редиректим по этому url, если нет - редиректим в корень.
 <br/><br/>
- ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex26/screenshots/1.PNG) <br/><br/>
+ ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex26/sreenshots/1.PNG) <br/><br/>
 <br/><br/>
- ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex26/screenshots/2.PNG) <br/><br/>
+ ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex26/sreenshots/2.PNG) <br/><br/>
  <br/><br/>
- ![Image 3](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex26/screenshots/3.PNG) <br/><br/>
+ ![Image 3](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex26/sreenshots/3.PNG) <br/><br/>
 
 ## Как запустить:
  - git clone https://github.com/perhamm/otus-linux && cd otus-linux/Ex26 && vagrant up
