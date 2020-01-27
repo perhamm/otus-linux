@@ -1,0 +1,52 @@
+---
+- name: Add users and set pam 
+  hosts: web
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+        
+    - name: install rpm nginx
+      yum:
+        name: nginx
+        validate_certs: no
+        state: present
+      notify:
+      - restart nginx
+      
+
+
+    - name: change nginx conf
+      copy: 
+        src: files/nginx.conf
+        dest: /etc/nginx/nginx.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify:
+      - restart nginx
+
+    - name: start nginx
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+
+
+  handlers:
+  - name: restart nginx
+    service:
+      name: nginx
+      enabled: yes
+      state: restarted
