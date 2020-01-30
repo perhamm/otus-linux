@@ -19,8 +19,8 @@
 192.168.100.10 test.local
 192.168.100.10 post.test.local
 ```
-- Видео с настройкой клиента - https://yadi.sk/i/1VjNmKfGh-pKsg
-- Видео с процессом отправки почты через telnet - https://yadi.sk/i/dJx4Wa0_asPoTA
+- Видео с настройкой клиента - <a href="https://yadi.sk/i/1VjNmKfGh-pKsg" target="_blank">Настройка клиента</a> 
+- Видео с процессом отправки почты через telnet - <a href="https://yadi.sk/i/dJx4Wa0_asPoTA" target="_blank">Отправка почты через telnet</a> 
 
 
 ## Как запустить:
