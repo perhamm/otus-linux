@@ -1,0 +1,30 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = true
+  config.vbguest.auto_update = false
+	
+	
+
+  
+  config.vm.define "post", primary: true do |w|
+    w.vm.hostname = 'post'
+    w.vm.network "private_network", ip: "192.168.100.10"
+	w.vm.provider :virtualbox do |v|
+		v.name = "post"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+
+    end
+
+	w.vm.provision "ansible" do |ansible|
+        ansible.playbook = "post.yml"
+	end
+	
+  end
+
+
+  
+end
+

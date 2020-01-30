@@ -1,0 +1,19 @@
+---
+- name: Add users and set pam 
+  hosts: post
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+        
