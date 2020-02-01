@@ -30,5 +30,5 @@
 [Ex30](https://github.com/perhamm/otus-linux/tree/master/Ex30) - PostgreSQL   <br/>
 [Ex31](https://github.com/perhamm/otus-linux/tree/master/Ex31) - PostgreSQL cluster  <br/>
 [Ex33](https://github.com/perhamm/otus-linux/tree/master/Ex33) - Динамический веб контент   <br/>
-[Ex34](https://github.com/perhamm/otus-linux/tree/master/Ex33) - Файловые хранилища - NFS, SMB, FTP   <br/>
+[Ex34](https://github.com/perhamm/otus-linux/tree/master/Ex34) - Файловые хранилища - NFS, SMB, FTP   <br/>
 [Project](https://github.com/perhamm/otus-linux/tree/master/!Project) - Проект по теме: "Отказоустойчивая реализация хранилища файлов Seafile (высокопроизводительный аналог owncloud ) с Ceph в качестве бэкенда"  <br/>
