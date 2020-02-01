@@ -1,0 +1,56 @@
+---
+- name: Install and configure
+  hosts: server
+  become: yes
+
+  pre_tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+    - name: Install a list of packages
+      yum:
+        name:
+          - net-tools
+        state: present
+        
+        
+    - name: daemon started
+      systemd:
+        name: firewalld
+        state: started
+        enabled: yes
+        
+    - name: enable firewalld rules 
+      firewalld:
+        port: "{{ item }}"
+        permanent: yes
+        state: enabled
+        zone: public
+        immediate: yes
+      with_items:
+        - 111/udp
+        - 2049/udp
+        - 111/tcp
+        - 2049/tcp
+        - 20048/udp
+        - 20048/tcp
+        
+        
+    - name: Change file ownership, group and permissions
+      file:
+        path: /mnt/upload
+        owner: nfsnobody
+        group: nfsnobody
+        state: directory
+        mode: '0774'
+        
+  roles:
+    - { role: ansible-role-nfs, nfs_rpcbind_state: started, nfs_rpcbind_enabled: true, nfs_exports: [/mnt/upload        192.168.100.21(rw)] }

@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "centos/7"
+  config.vm.box_check_update = true
+  config.vbguest.auto_update = false
+	
+	
+
+  
+  config.vm.define "server", primary: true do |w|
+    w.vm.hostname = 'server'
+    w.vm.network "private_network", ip: "192.168.100.20"
+	w.vm.provider :virtualbox do |v|
+		v.name = "server"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+
+    end
+
+	w.vm.provision "ansible" do |ansible|
+        ansible.playbook = "server.yml"
+		#ansible.verbose = "vvv"
+	end
+	
+  end
+
+  config.vm.define "client", primary: true do |w|
+    w.vm.hostname = 'client'
+    w.vm.network "private_network", ip: "192.168.100.21"
+	w.vm.provider :virtualbox do |v|
+		v.name = "client"
+		v.customize ["modifyvm", :id, "--cpus", 4, "--memory", "2048"]
+
+    end
+
+	w.vm.provision "ansible" do |ansible|
+        ansible.playbook = "client.yml"
+		#ansible.verbose = "vvv"
+	end
+	
+  end
+  
+end
+

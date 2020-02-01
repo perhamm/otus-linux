@@ -1,0 +1,51 @@
+---
+- name: Install and configure
+  hosts: client
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+
+    - name: Install a list of packages
+      yum:
+        name:
+          - nfs-utils
+          - net-tools
+        state: present
+        
+        
+    - name: daemon started
+      systemd:
+        name: rpcbind
+        state: started
+        enabled: yes
+        
+        
+    - name: Mount nfs
+      mount:
+        path: /mnt
+        src: 192.168.100.20:/mnt/upload
+        fstype: nfs
+        opts: rw,vers=3,proto=udp,timeo=600
+        state: present
+      notify:
+      - mount a
+        
+  handlers:
+  - name: mount a
+    shell: |
+      mount -a
+      exit 0
+    args:
+      warn: no
+      executable: /bin/bash
