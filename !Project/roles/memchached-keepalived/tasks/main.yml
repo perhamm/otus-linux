@@ -1,0 +1,28 @@
+---
+# tasks file for ansible-mariadb-galera-haproxy-keepalived
+
+- name: selinux permissive
+  selinux: policy=targeted state=permissive
+
+- name: firewalld stopped
+  service: name=firewalld state=stopped enabled=no
+
+- name: install keepalived
+  yum: name=keepalived state=present
+
+- name: deploy keepalived.conf.j2
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+  notify: restart-keepalived
+  when: inventory_hostname == groups['memcached'][0]
+  
+  
+- name: deploy keepalived.conf.j2
+  template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+  notify: restart-keepalived
+  vars:
+    master_or_slave: BACKUP
+    priority: '98'
+  when: inventory_hostname == groups['memcached'][1]
+
+- name: start and enable keepalived
+  service: name=keepalived state=started enabled=yes

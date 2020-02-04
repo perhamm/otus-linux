@@ -1,0 +1,28 @@
+global_defs {
+  router_id {{ ansible_hostname }}
+}
+
+vrrp_script chk_memcached {
+    script "killall -0 memcached && exit 0 || exit 1"
+    interval 1
+    weight -5
+}
+
+
+vrrp_instance VI_1 {
+   state {{ master_or_slave }}
+   interface {{ keepalived['interface'] }}
+   virtual_router_id {{ keepalived['virtual_router_id'] }}
+   priority {{ priority }}
+   advert_int {{ keepalived['advert_int'] }}
+   authentication {
+        auth_type PASS
+        auth_pass {{ keepalived['auth_pass'] }}
+   }
+   virtual_ipaddress {
+        {{ keepalived['virtual_ip'] }} dev {{ keepalived['interface'] }}
+   }
+   track_script {
+        chk_memcached
+   }
+}

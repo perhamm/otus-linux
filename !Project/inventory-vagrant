@@ -1,0 +1,36 @@
+galera1 ansible_ssh_host=127.0.0.1 ansible_port=2201 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/galera1/virtualbox/private_key'
+galera2 ansible_ssh_host=127.0.0.1 ansible_port=2202 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/galera2/virtualbox/private_key'
+galera3 ansible_ssh_host=127.0.0.1 ansible_port=2203 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/galera3/virtualbox/private_key'
+ceph1 ansible_ssh_host=127.0.0.1 ansible_port=2204 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/ceph1/virtualbox/private_key'
+ceph2 ansible_ssh_host=127.0.0.1 ansible_port=2205 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/ceph2/virtualbox/private_key'
+ceph3 ansible_ssh_host=127.0.0.1 ansible_port=2206 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/ceph3/virtualbox/private_key'
+memcached1 ansible_ssh_host=127.0.0.1 ansible_port=2207 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/memcached1/virtualbox/private_key'
+memcached2 ansible_ssh_host=127.0.0.1 ansible_port=2208 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/memcached2/virtualbox/private_key'
+seafile1 ansible_ssh_host=127.0.0.1 ansible_port=2209 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/seafile1/virtualbox/private_key'
+seafile2 ansible_ssh_host=127.0.0.1 ansible_port=2210 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/seafile2/virtualbox/private_key'
+seafilebg1 ansible_ssh_host=127.0.0.1 ansible_port=2211 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/seafilebg1/virtualbox/private_key'
+seafilebg2 ansible_ssh_host=127.0.0.1 ansible_port=2212 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/seafilebg2/virtualbox/private_key'
+lb1 ansible_ssh_host=127.0.0.1 ansible_port=2213 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/lb1/virtualbox/private_key'
+lb2 ansible_ssh_host=127.0.0.1 ansible_port=2214 ansible_ssh_user='vagrant' ansible_ssh_private_key_file='.vagrant/machines/lb2/virtualbox/private_key'
+
+
+[galera_cluster]
+galera[1:3]
+
+
+[ceph_cluster]
+ceph[1:3]
+
+
+[memcached]
+memcached[1:2]
+
+
+[mons]
+ceph[1:3]
+ 
+[osds]
+ceph[1:3]
+ 
+[mgrs]
+ceph[1:3]

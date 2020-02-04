@@ -1,0 +1,340 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+
+MACHINES = {
+  :galera1 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.1', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+  :galera2 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.2', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+  
+  :galera3 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.3', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+
+  :ceph1 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.4', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.64.4', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "ceph-net"},
+                ],
+		:disks => {
+		:sata2 => {
+                        :dfile => './sata21.vdi',
+                        :size => 10240, # Megabytes
+			:port => 2
+		},
+		:sata3 => {
+                        :dfile => './sata31.vdi',
+                        :size => 10240, # Megabytes
+			:port => 3
+		},
+		:sata4 => {
+                        :dfile => './sata41.vdi',
+                        :size => 10240, # Megabytes
+			:port => 4
+		}}
+  },
+
+  :ceph2 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.5', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.64.5', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "ceph-net"},
+                ],
+		:disks => {
+		:sata2 => {
+                        :dfile => './sata22.vdi',
+                        :size => 10240, # Megabytes
+			:port => 2
+		},
+		:sata3 => {
+                        :dfile => './sata32.vdi',
+                        :size => 10240, # Megabytes
+			:port => 3
+		},
+		:sata4 => {
+                        :dfile => './sata42.vdi',
+                        :size => 10240, # Megabytes
+			:port => 4
+		}}
+  },
+  
+  :ceph3 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.6', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.64.6', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "ceph-net"},
+                ],
+		:disks => {
+		:sata2 => {
+                        :dfile => './sata23.vdi',
+                        :size => 10240, # Megabytes
+			:port => 2
+		},
+		:sata3 => {
+                        :dfile => './sata33.vdi',
+                        :size => 10240, # Megabytes
+			:port => 3
+		},
+		:sata4 => {
+                        :dfile => './sata43.vdi',
+                        :size => 10240, # Megabytes
+			:port => 4
+		}}
+  },
+
+  :memcached1 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.7', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+  
+  :memcached2 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.8', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+  
+  :seafile1 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.9', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.64.9', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "ceph-net"},
+                ]
+  },
+  
+  
+  :seafile2 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.10', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.64.10', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "ceph-net"},
+                ]
+  },
+  
+  
+  :seafilebg1 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.11', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+  
+  :seafilebg2 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.12', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                ]
+  },
+  
+  :lb1 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.13', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.62.2', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "public-net"},
+                ]
+  },
+  
+  :lb2 => {
+        :box_name => "centos/7",
+        :net => [
+                   {ip: '192.168.63.14', adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "internal-net"},
+                   {ip: '192.168.62.3', adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "public-net"},
+                ]
+  },
+  
+}
+
+Vagrant.configure("2") do |config|
+ 
+  config.vbguest.auto_update = false
+  
+  MACHINES.each do |boxname, boxconfig|
+
+    config.vm.define boxname do |box|
+
+        box.vm.box = boxconfig[:box_name]
+        box.vm.host_name = boxname.to_s
+
+        boxconfig[:net].each do |ipconf|
+            box.vm.network "private_network", ipconf
+        end
+        
+        
+        
+
+        box.vm.provision "shell", inline: <<-SHELL
+          mkdir -p ~root/.ssh
+                cp ~vagrant/.ssh/auth* ~root/.ssh
+        SHELL
+        
+        case boxname.to_s
+          when "galera1"
+            box.vm.hostname = "galera1"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "galera1"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2201, id: "ssh", host_ip: '127.0.0.1'
+          when "galera2"
+            box.vm.hostname = "galera2"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "galera2"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2202, id: "ssh", host_ip: '127.0.0.1'
+          when "galera3"
+            box.vm.hostname = "galera3"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "galera3"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2203, id: "ssh", host_ip: '127.0.0.1'
+          when "ceph1"
+            box.vm.hostname = "ceph1"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "ceph1"
+                needsController = false
+			boxconfig[:disks].each do |dname, dconf|
+			  unless File.exist?(dconf[:dfile])
+				v.customize ['createhd', '--filename', dconf[:dfile], '--size', dconf[:size]]
+                                needsController =  true
+                          end
+
+		    end
+                  if needsController == true
+                     v.customize ["storagectl", :id, "--name", "SATA", "--add", "sata" ]
+                     boxconfig[:disks].each do |dname, dconf|
+                         v.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', dconf[:port], '--device', 0, '--type', 'hdd', '--medium', dconf[:dfile]]
+                     end
+                  end
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2204, id: "ssh", host_ip: '127.0.0.1'
+          when "ceph2"
+            box.vm.hostname = "ceph2"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "ceph2"
+                needsController = false
+			boxconfig[:disks].each do |dname, dconf|
+			  unless File.exist?(dconf[:dfile])
+				v.customize ['createhd', '--filename', dconf[:dfile], '--size', dconf[:size]]
+                                needsController =  true
+                          end
+
+		    end
+                  if needsController == true
+                     v.customize ["storagectl", :id, "--name", "SATA", "--add", "sata" ]
+                     boxconfig[:disks].each do |dname, dconf|
+                         v.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', dconf[:port], '--device', 0, '--type', 'hdd', '--medium', dconf[:dfile]]
+                     end
+                  end
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2205, id: "ssh", host_ip: '127.0.0.1'
+          when "ceph3"
+            box.vm.hostname = "ceph3"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "ceph3"
+                needsController = false
+			boxconfig[:disks].each do |dname, dconf|
+			  unless File.exist?(dconf[:dfile])
+				v.customize ['createhd', '--filename', dconf[:dfile], '--size', dconf[:size]]
+                                needsController =  true
+                          end
+
+		    end
+                  if needsController == true
+                     v.customize ["storagectl", :id, "--name", "SATA", "--add", "sata" ]
+                     boxconfig[:disks].each do |dname, dconf|
+                         v.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', dconf[:port], '--device', 0, '--type', 'hdd', '--medium', dconf[:dfile]]
+                     end
+                  end
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2206, id: "ssh", host_ip: '127.0.0.1'
+          when "memcached1"
+            box.vm.hostname = "memcached1"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "memcached1"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2207, id: "ssh", host_ip: '127.0.0.1'
+          when "memcached2"
+            box.vm.hostname = "memcached2"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "memcached2"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2208, id: "ssh", host_ip: '127.0.0.1'
+          when "seafile1"
+            box.vm.hostname = "seafile1"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "seafile1"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2209, id: "ssh", host_ip: '127.0.0.1'
+          when "seafile2"
+            box.vm.hostname = "seafile2"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "seafile2"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2210, id: "ssh", host_ip: '127.0.0.1'
+          when "seafilebg1"
+            box.vm.hostname = "seafilebg1"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "seafilebg1"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2211, id: "ssh", host_ip: '127.0.0.1'
+          when "seafilebg2"
+            box.vm.hostname = "seafilebg2"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "seafilebg2"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2212, id: "ssh", host_ip: '127.0.0.1'
+          when "lb1"
+            box.vm.hostname = "lb1"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "lb1"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2213, id: "ssh", host_ip: '127.0.0.1'
+          when "lb2"
+            box.vm.hostname = "lb2"
+            box.vm.provider :virtualbox do |v|
+                v.customize ["modifyvm", :id, "--cpus", 2, "--memory", "4096"]
+                v.name = "lb2"
+            end
+            box.vm.network "forwarded_port", adapter: 1, guest: 22, host: 2214, id: "ssh", host_ip: '127.0.0.1'
+            box.vm.provision "ansible" do |ansible|
+            ansible.limit = "all"
+            ansible.inventory_path = "./inventory-vagrant"
+            ansible.playbook = "cluster.yml"
+            ansible.become = "true"
+            ansible.verbose = "v"
+          end
+        end
+      end
+
+  end
+  
+  
+end
+

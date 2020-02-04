@@ -1,0 +1,34 @@
+---
+- hosts: galera_cluster
+  become: true
+  roles:
+    - { role: security, tags: [ 'setup' ] }
+    - { role: galera_repos, tags: [ 'setup', 'packages' ] }
+    - { role: galera_packages, tags: [ 'setup', 'packages' ] }
+    #- { role: galera_privs, tags: [ 'auth' ] }
+    - { role: galera_conf, tags: [ 'config' ] }
+
+    
+- hosts: galera_cluster
+  become: true
+  roles:
+    - galera_bootstrap
+    
+- hosts: galera_cluster
+  become: true
+  roles:
+    - mariadb-galera-haproxy-keepalived
+    
+    
+    
+- hosts: memcached
+  become: true
+  roles:
+    - ansible-role-memcached
+    
+    
+    
+- hosts: memcached
+  become: true
+  roles:
+    - memchached-keepalived

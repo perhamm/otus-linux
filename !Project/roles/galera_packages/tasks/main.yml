@@ -1,0 +1,19 @@
+---
+
+
+  
+- name: Install MariaDB server packages
+  yum: 
+    name:
+      - MariaDB-server
+      - MariaDB-client
+      - rsync
+      - policycoreutils-python
+      - net-tools
+      - tcpdump
+    state: present
+
+
+
+- name: Install MySQL-python
+  yum: name=MySQL-python state=present

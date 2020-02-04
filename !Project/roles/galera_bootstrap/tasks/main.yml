@@ -1,0 +1,32 @@
+---
+- name: Enshure MariaDB stopped
+  service: name=mariadb state=stopped
+  become: yes
+  when: inventory_hostname == groups['galera_cluster'][0]
+
+- name: Bootstrap first MariaDB Galera cluster node
+  shell: galera_new_cluster
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
+  when: inventory_hostname == groups['galera_cluster'][0]
+
+  
+- name: Enshure MariaDB started
+  service: name=mariadb state=started daemon_reload=yes
+  become: yes
+  when: inventory_hostname == groups['galera_cluster'][1]
+
+  
+- name: Enshure MariaDB started
+  service: name=mariadb state=started daemon_reload=yes
+  become: yes
+  when: inventory_hostname == groups['galera_cluster'][2]
+  
+  
+- name: Enshure MariaDB enabled daemon_reload=yes
+  become: yes
+  service: name=mariadb enabled=yes
+
+  
