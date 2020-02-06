@@ -50,6 +50,7 @@
         - python-boto
         - python-pillow
         - python-requests
+        - expect
     state: present
      
       
@@ -104,23 +105,27 @@
     src: "{{ item.src }}"
     dest: "{{ item.dest }}"
   with_items:
-        - { src: 'files/seafile.conf', dest: '/data/haiwen' }
-        - { src: 'files/seafevents.conf', dest: '/data/haiwen' }
+        - { src: 'files/seafile.conf', dest: '/data/haiwen/conf' }
+        - { src: 'files/seafevents.conf', dest: '/data/haiwen/conf' }
         - { src: 'files/add_backet.py', dest: '/data/haiwen' }
   when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
   
 - name: Bootstrap 
   shell: |
+    cd /data/haiwen
     radosgw-admin user create --uid=seafile --display-name="Sea File" --email=admin@seafile.local
     access_key=$(radosgw-admin user info --uid=seafile | grep access_key | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
     secret_key=$(radosgw-admin user info --uid=seafile | grep secret_key | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
     string_key="key_id = $access_key"
     string_password="key = $secret_key"
-    sed -i 's/^\(key_id\s*=\s*\).*$/\'"$string_key"'/' /data/haiwen/conf/seafile.conf
-    sed -i 's/^\(key\s*=\s*\).*$/\'"$string_password"'/' /data/haiwen/conf/seafile.conf
+    sed -i 's/^\(key_id\s*=\s*\).*$/'"$string_key"'/' /data/haiwen/conf/seafile.conf
+    sed -i 's/^\(key\s*=\s*\).*$/'"$string_password"'/' /data/haiwen/conf/seafile.conf
+    sed -i 's/^\(SERVICE_URL\s*=\s*\).*$/SERVICE_URL\ =\ http:\/\/192.168.62.100/' /data/haiwen/conf/ccnet.conf
     chmod +x /data/haiwen/add_backet.py
     /data/haiwen/add_backet.py $access_key $secret_key
-    echo -e "AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'\nCACHES = {\n    'default': {\n        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',\n        'LOCATION': '192.168.63.16:11211',\n    },\n    'locmem': {        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',\n    },\n}\nCOMPRESS_CACHE_BACKEND = 'locmem'"  >> /data/haiwen/conf/seahub_settings.py
+    echo -e "AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'\nCACHES = {\n    'default': {\n        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',\n        'LOCATION': '192.168.63.16:11211',\n    },\n    'locmem': {        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',\n    },\n}\nCOMPRESS_CACHE_BACKEND = 'locmem'\n"  >> /data/haiwen/conf/seahub_settings.py
+    echo -e "SERVICE_URL = 'http://192.168.62.100'\n"   >> /data/haiwen/conf/seahub_settings.py
+    echo -e "FILE_SERVER_ROOT = 'http://192.168.62.100/seafhttp'\n"   >> /data/haiwen/conf/seahub_settings.py
   args:
     executable: /bin/bash
     chdir: /root
@@ -141,18 +146,60 @@
     enabled: yes
   when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
   
+- name: Bootstrap 
+  shell: |
+    expect -c "spawn /data/haiwen/seafile-server-latest/reset-admin.sh; expect -re \"E-mail address:\"; send \"admin@seafile.local\r\"; expect -re \"Password:\"; send \"123qweQWE\r\"; expect -re  \"Password .*\"; send \"123qweQWE\r\";expect eof"
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
 - pause:
     minutes: 1
   when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
   
+- name: fetch local ssh key from root user
+  shell: |
+    rm -rf /root/.ssh/id*
+    ssh-keygen -t rsa -f /root/.ssh/id_rsa -q -P "" > /dev/null
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
   
   
-- name: Transfer file from server1 to server2
-  synchronize:
-    src: /data/haiwen
-    dest: /data/haiwen
-    mode: pull
-  delegate_to: groups['seafile'][1]
+- name: fetch local ssh key from root user
+  shell: |
+    cat /root/.ssh/id_rsa.pub
+  register: sshkeys
+  changed_when: false
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+- name: Set sshkeys global
+  set_fact: sshkeys_global="{{ sshkeys.stdout }}"
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+
+  
+- debug: msg="{{ hostvars['seafile1']['sshkeys_global'] }}"
+  when: bootstraped.stat.exists == False
+  
+  
+- name: deploy ssh key to remote server
+  authorized_key:
+    user: "root"
+    key: "{{ hostvars['seafile1']['sshkeys_global'] }}"
+  delegate_to: seafile2
+  when: inventory_hostname == groups['seafile'][1] and bootstraped.stat.exists == False
+  
+- name: rsync
+  shell: |
+    rsync -e 'ssh -p 22 -o StrictHostKeyChecking=no' -avzp /data/haiwen  root@192.168.63.10:/data/ > /dev/null
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
   when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
   
 

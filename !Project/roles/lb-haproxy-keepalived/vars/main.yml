@@ -7,7 +7,7 @@ keepalived:
   priority: 100
   advert_int: 1
   auth_pass: 1111
-  virtual_ip: 192.168.62.1/24
+  virtual_ip: 192.168.62.100/24
 
 haproxy:
   frontend_port: 80

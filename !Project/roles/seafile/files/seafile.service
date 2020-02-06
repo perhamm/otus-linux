@@ -11,7 +11,8 @@ ExecStart=/data/haiwen/seafile-server-latest/seafile.sh start
 ExecStop=/data/haiwen/seafile-server-latest/seafile.sh stop
 User=root
 Group=root
-
+Restart=always
+RestartSec=3
 
 
 [Install]

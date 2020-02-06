@@ -52,7 +52,5 @@ lb2
 seafile1
 seafile2
 
-
-[seafilebg]
-seafilebg1
-seafilebg2
+[grafana-server]
+ceph1
