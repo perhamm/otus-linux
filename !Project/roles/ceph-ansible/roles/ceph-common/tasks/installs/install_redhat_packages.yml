@@ -14,6 +14,16 @@
   register: result
   until: result is succeeded
   when: ansible_distribution == 'CentOS'
+  
+- name: disable ssl for repo epel
+  lineinfile: 
+    dest: /etc/yum.repos.d/epel.repo
+    insertafter: 'enabled=1' 
+    line: 'sslverify=0'
+  register: result
+  until: result is succeeded
+  when: ansible_distribution == 'CentOS'
+
 
 - name: install redhat ceph packages
   package:

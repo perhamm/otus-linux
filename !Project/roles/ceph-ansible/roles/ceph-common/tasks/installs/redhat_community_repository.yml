@@ -6,18 +6,19 @@
   until: result is succeeded
   tags: with_pkg
 
-- name: configure red hat ceph community repository stable key
-  rpm_key:
-    key: "{{ ceph_stable_key }}"
-    state: present
-  register: result
-  until: result is succeeded
+#- name: configure red hat ceph community repository stable key
+#  rpm_key:
+#    key: "{{ ceph_stable_key }}"
+#    state: present
+ # register: result
+ # until: result is succeeded
 
 - name: configure red hat ceph stable community repository
   yum_repository:
     name: ceph_stable
     description: Ceph Stable $basearch repo
-    gpgcheck: yes
+    sslverify: no
+    gpgcheck: no
     state: present
     gpgkey: "{{ ceph_stable_key }}"
     baseurl: "{{ ceph_mirror }}/rpm-{{ ceph_stable_release }}/{{ ceph_stable_redhat_distro }}/$basearch"
@@ -30,7 +31,8 @@
   yum_repository:
     name: ceph_stable_noarch
     description: Ceph Stable noarch repo
-    gpgcheck: yes
+    gpgcheck: no
+    sslverify: no
     state: present
     gpgkey: "{{ ceph_stable_key }}"
     baseurl: "{{ ceph_mirror }}/rpm-{{ ceph_stable_release }}/{{ ceph_stable_redhat_distro }}/noarch"

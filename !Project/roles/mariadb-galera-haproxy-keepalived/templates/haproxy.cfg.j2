@@ -9,12 +9,9 @@ global
    stats   socket /var/lib/haproxy/stats
 
 defaults
-   mode    http
+   mode    tcp
    log     global
-   option  httplog
    option  dontlognull
-   option  http-server-close
-   option  forwardfor except 127.0.0.0/8
    option  redispatch
    retries 3
    timeout http-request    10s
@@ -28,11 +25,15 @@ defaults
 
 frontend fe
    bind *:{{ haproxy['frontend_port'] }}
+   default_backend be
 
 backend be
-   balance roundrobin
+   balance source
+   mode tcp
+   option tcpka
+   option tcp-check
 {% for backend_host in haproxy['backend_host'] %}
-   server be{{ backend_host['id'] }} {{ backend_host['host'] }}:{{ backend_host['port'] }} check
+   server be{{ backend_host['id'] }} {{ backend_host['host'] }}:{{ backend_host['port'] }} check port {{ backend_host['port'] }} weight 1
 {% endfor %}
 
 listen stats :{{ haproxy['stats']['port'] }}

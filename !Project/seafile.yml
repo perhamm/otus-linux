@@ -1,0 +1,8 @@
+---
+- hosts: seafile
+  become: true
+  roles:
+    - seafile
+
+
+    

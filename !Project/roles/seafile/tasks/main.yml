@@ -1,0 +1,197 @@
+---
+# tasks file for seafile
+- name: selinux permissive
+  selinux: policy=targeted state=permissive
+
+- name: firewalld stopped
+  service: name=firewalld state=stopped enabled=no
+  
+  
+- name: Add epel-release repo
+  yum:
+    name: epel-release
+    state: present
+        
+- name: disable ssl for repo epel
+  lineinfile: 
+    dest: /etc/yum.repos.d/epel.repo
+    insertafter: 'enabled=1' 
+    line: 'sslverify=0'
+
+    
+- name: copy config
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+        - { src: 'files/nux-dextop.repo', dest: '/etc/yum.repos.d/' }
+    
+- name: Install a list of packages
+  yum:
+    name:
+        - python-pip
+        - python-virtualenv
+        - python-setuptools
+        - nginx
+        - git
+        - net-tools
+        - java-1.7.0-openjdk
+        - poppler-utils
+        - python-setuptools
+        - python-imaging 
+        - MySQL-python 
+        - mariadb-server 
+        - python-memcached 
+        - python-ldap 
+        - python-urllib3
+        - ffmpeg 
+        - ffmpeg-devel 
+        - python-requests
+        - python-boto
+        - python-pillow
+        - python-requests
+    state: present
+     
+      
+
+        
+        
+        
+      
+- name: Create a directory if it does not exist
+  file:
+    path: /data/haiwen/
+    state: directory
+
+- name: check if file exists
+  stat: 
+    path: /data/haiwen/seafile-server-latest
+  register: bootstraped
+  
+    
+    
+- name: Unarchive a file that needs to be downloaded 
+  unarchive:
+    src: 'files/seafile-pro-server_7.0.13_x86-64.tar.gz'
+    dest: /data/haiwen/
+    validate_certs: no
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+  
+- name: Bootstrap 
+  shell: |
+    cd /data/haiwen
+    ./seafile-pro-server-7.0.13/setup-seafile-mysql.sh  auto -n seafile -i 192.168.62.1 -o 192.168.63.15 -t 4306 -r 123qweQWE -u root  -w 123qweQWE  -q 192.168.63.15
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+
+- name: copy config
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+        - { src: 'files/nginx.conf', dest: '/etc/nginx/nginx.conf' }
+        - { src: 'files/seafile_nginx.conf', dest: '/etc/nginx/conf.d/' }
+        - { src: 'files/seafile.service', dest: '/etc/systemd/system/' }
+        - { src: 'files/seahub.service', dest: '/etc/systemd/system/' }
+        
+
+- name: copy config
+  copy: 
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+        - { src: 'files/seafile.conf', dest: '/data/haiwen' }
+        - { src: 'files/seafevents.conf', dest: '/data/haiwen' }
+        - { src: 'files/add_backet.py', dest: '/data/haiwen' }
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+- name: Bootstrap 
+  shell: |
+    radosgw-admin user create --uid=seafile --display-name="Sea File" --email=admin@seafile.local
+    access_key=$(radosgw-admin user info --uid=seafile | grep access_key | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
+    secret_key=$(radosgw-admin user info --uid=seafile | grep secret_key | awk '{print $2}' | sed 's/"//g' | sed 's/,//g')
+    string_key="key_id = $access_key"
+    string_password="key = $secret_key"
+    sed -i 's/^\(key_id\s*=\s*\).*$/\'"$string_key"'/' /data/haiwen/conf/seafile.conf
+    sed -i 's/^\(key\s*=\s*\).*$/\'"$string_password"'/' /data/haiwen/conf/seafile.conf
+    chmod +x /data/haiwen/add_backet.py
+    /data/haiwen/add_backet.py $access_key $secret_key
+    echo -e "AVATAR_FILE_STORAGE = 'seahub.base.database_storage.DatabaseStorage'\nCACHES = {\n    'default': {\n        'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',\n        'LOCATION': '192.168.63.16:11211',\n    },\n    'locmem': {        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',\n    },\n}\nCOMPRESS_CACHE_BACKEND = 'locmem'"  >> /data/haiwen/conf/seahub_settings.py
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+- name: daemon started
+  systemd:
+    name: seafile
+    state: started
+    enabled: yes
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+
+- name: daemon started
+  systemd:
+    name: seahub
+    state: started
+    enabled: yes
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+- pause:
+    minutes: 1
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+  
+  
+- name: Transfer file from server1 to server2
+  synchronize:
+    src: /data/haiwen
+    dest: /data/haiwen
+    mode: pull
+  delegate_to: groups['seafile'][1]
+  when: inventory_hostname == groups['seafile'][0] and bootstraped.stat.exists == False
+  
+
+- name: daemon started
+  systemd:
+    name: seafile
+    state: started
+    enabled: yes
+  when: inventory_hostname == groups['seafile'][0]
+
+- name: daemon started
+  systemd:
+    name: seahub
+    state: started
+    enabled: yes
+  when: inventory_hostname == groups['seafile'][0]
+  
+
+- name: daemon started
+  systemd:
+    name: seafile
+    state: started
+    enabled: yes
+  when: inventory_hostname == groups['seafile'][1]
+
+- name: daemon started
+  systemd:
+    name: seahub
+    state: started
+    enabled: yes
+  when: inventory_hostname == groups['seafile'][1]
+  
+- name: daemon started
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
+  
+  
+  
+
+

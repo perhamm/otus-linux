@@ -1,0 +1,18 @@
+[Unit]
+Description=Seafile hub
+After=network.target seafile.service
+
+
+
+[Service]
+Type=forking
+# change start to start-fastcgi if you want to run fastcgi
+ExecStart=/data/haiwen/seafile-server-latest/seahub.sh start
+ExecStop=/data/haiwen/seafile-server-latest/seahub.sh stop
+User=root
+Group=root
+
+
+
+[Install]
+WantedBy=multi-user.target

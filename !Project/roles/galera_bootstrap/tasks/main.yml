@@ -1,8 +1,13 @@
 ---
+- name: check if file exists
+  stat: 
+    path: /root/bootstrap
+  register: bootstraped
+  
 - name: Enshure MariaDB stopped
   service: name=mariadb state=stopped
   become: yes
-  when: inventory_hostname == groups['galera_cluster'][0]
+  when: inventory_hostname == groups['galera_cluster'][0] and bootstraped.stat.exists == False
 
 - name: Bootstrap first MariaDB Galera cluster node
   shell: galera_new_cluster
@@ -10,23 +15,37 @@
     executable: /bin/bash
     chdir: /root
   become: yes
-  when: inventory_hostname == groups['galera_cluster'][0]
+  when: inventory_hostname == groups['galera_cluster'][0] and bootstraped.stat.exists == False
 
   
 - name: Enshure MariaDB started
   service: name=mariadb state=started daemon_reload=yes
   become: yes
-  when: inventory_hostname == groups['galera_cluster'][1]
+  when: inventory_hostname == groups['galera_cluster'][1] and bootstraped.stat.exists == False
 
   
 - name: Enshure MariaDB started
   service: name=mariadb state=started daemon_reload=yes
   become: yes
-  when: inventory_hostname == groups['galera_cluster'][2]
+  when: inventory_hostname == groups['galera_cluster'][2] and bootstraped.stat.exists == False
   
   
 - name: Enshure MariaDB enabled daemon_reload=yes
   become: yes
-  service: name=mariadb enabled=yes
+  service: name=mariadb enabled=yes 
+  when: bootstraped.stat.exists == False
+  
+- name: Bootstrap first MariaDB Galera cluster node
+  shell: |
+    mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '123qweQWE';"
+  args:
+    executable: /bin/bash
+    chdir: /root
+  become: yes
+  when: inventory_hostname == groups['galera_cluster'][0] and bootstraped.stat.exists == False
+  
+- name: Disable repeat bootstrap
+  become: yes
+  file: path=/root/bootstrap state=touch
 
   

@@ -6,6 +6,14 @@
 
 - name: firewalld stopped
   service: name=firewalld state=stopped enabled=no
+  
+  
+- sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    state: present
+    reload: yes
 
 - name: install keepalived
   yum: name=keepalived state=present

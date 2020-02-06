@@ -1,0 +1,18 @@
+[Unit]
+Description=Seafile
+# add mysql.service or postgresql.service depending on your database to the line below
+After=network.target
+
+
+
+[Service]
+Type=forking
+ExecStart=/data/haiwen/seafile-server-latest/seafile.sh start
+ExecStop=/data/haiwen/seafile-server-latest/seafile.sh stop
+User=root
+Group=root
+
+
+
+[Install]
+WantedBy=multi-user.target

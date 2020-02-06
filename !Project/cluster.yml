@@ -32,3 +32,16 @@
   become: true
   roles:
     - memchached-keepalived
+    
+    
+- hosts: memcached
+  become: true
+  roles:
+    - memchached-keepalived
+    
+- hosts: lb
+  become: true
+  roles:
+    - lb-haproxy-keepalived
+    
+    

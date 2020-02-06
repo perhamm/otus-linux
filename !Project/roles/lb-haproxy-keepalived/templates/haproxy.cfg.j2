@@ -2,7 +2,7 @@ global
    log     127.0.0.1 local2
    chroot  /var/lib/haproxy
    pidfile /var/run/haproxy.pid
-   maxconn 4000
+   maxconn 4096
    user    haproxy
    group   haproxy
    daemon
@@ -28,11 +28,16 @@ defaults
 
 frontend fe
    bind *:{{ haproxy['frontend_port'] }}
+   default_backend be
 
 backend be
-   balance roundrobin
+   mode http
+   option httplog
+   option dontlognull
+   option forwardfor
+   cookie SERVERID insert indirect nocache
 {% for backend_host in haproxy['backend_host'] %}
-   server be{{ backend_host['id'] }} {{ backend_host['host'] }}:{{ backend_host['port'] }} check
+   server be{{ backend_host['id'] }} {{ backend_host['host'] }}:{{ backend_host['port'] }} check port 11001 cookie be{{ backend_host['id'] }}
 {% endfor %}
 
 listen stats :{{ haproxy['stats']['port'] }}
