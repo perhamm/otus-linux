@@ -1,3 +1,4 @@
 *.vdi
 *.retry
 *.vagrant
+*.tar.gz
