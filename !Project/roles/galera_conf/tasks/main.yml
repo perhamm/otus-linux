@@ -1,5 +1,41 @@
 ---
+
+- name: be sure firewalld is disabled
+  systemd: name=firewalld enabled=no
+
+
+- name: be sure firewalld is stopped
+  systemd: name=firewalld state=stopped
+  
+  
 - name: Add galera configuration
   template: src=galera.cnf.j2 dest=/etc/my.cnf.d/galera.cnf
     owner=root group=root mode=0644
   notify: Restart MariaDB Galera cluster
+  vars: 
+    node_number: '1'
+  when: inventory_hostname == groups['galera_cluster'][0]
+  
+  
+- name: Add galera configuration
+  template: src=galera.cnf.j2 dest=/etc/my.cnf.d/galera.cnf
+    owner=root group=root mode=0644
+  notify: Restart MariaDB Galera cluster
+  vars: 
+    node_number: '2'
+  when: inventory_hostname == groups['galera_cluster'][1]
+  
+  
+  
+- name: Add galera configuration
+  template: src=galera.cnf.j2 dest=/etc/my.cnf.d/galera.cnf
+    owner=root group=root mode=0644
+  notify: Restart MariaDB Galera cluster
+  vars: 
+    node_number: '3'
+  when: inventory_hostname == groups['galera_cluster'][2]
+  
+  
+- name: Add hosts
+  template: src=hosts.j2 dest=/etc/hosts
+    owner=root group=root mode=0644
