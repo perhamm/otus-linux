@@ -16,7 +16,7 @@ Seafile это web-приложение для размещения файлов
 
 Схема получившегося стенда:
 
- ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex18/screenshots/1.PNG)
+ ![Image 1](https://raw.githubusercontent.com/perhamm/otus-linux/master/!Project/sreenshots/1.png)
 
 
 
@@ -37,7 +37,7 @@ ansible-playbook -i inventory-proxmox seafile.yml
 Машины необходимо предсоздать со следующими параметрами:
 
 Также необходима машина для интернета в vlan 3065 с адресом 192.168.65.254 и включенным dns  worward. Её надо будет указывать в качестве DG, с неё же можно разворачивать плейбуки.
- ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/Ex18/screenshots/2.PNG)
+ ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/!Project/sreenshots/2.png)
 
 
 ## Как проверить
