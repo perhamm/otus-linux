@@ -3,7 +3,7 @@
 
 keepalived:
   interface: eth2
-  virtual_router_id: 51
+  virtual_router_id: 71
   priority: 100
   advert_int: 1
   auth_pass: 1111
