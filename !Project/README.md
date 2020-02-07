@@ -37,9 +37,13 @@ ansible-playbook -i inventory-proxmox seafile.yml
 Машины необходимо предсоздать со следующими параметрами:
 
 Также необходима машина для интернета в vlan 3065 с адресом 192.168.65.254 и включенным dns  worward. Её надо будет указывать в качестве DG, с неё же можно разворачивать плейбуки.
- ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/!Project/sreenshots/2.png)
+ ![Image 2](https://raw.githubusercontent.com/perhamm/otus-linux/master/!Project/sreenshots/2.PNG)
 
 
 ## Как проверить
-- http://192.168.62.100/  admin@seafile.local  123qweQWE
+- http://192.168.62.100/  Основной интерфейс seafile. Логин/пароль admin@seafile.local  123qweQWE - в случае использования Vagrant доступен с хоста, если используется Proxmox - надо добавить vlan 3062 на клиентскую машину, или подсоединится через ssh к любой виртуальной машине и настроить динамиеское прокидывание портов 
+- http://192.168.63.15:9000/   Haproxy galera.  Логин пароль admin  password - только если доступен vlan 3063 на клиентской машине, для Vagrant - только динамиеское прокидывание портов
+- http://192.168.62.100:9000/ Haproxy лоад балансеров.  Логин пароль admin  password
+- http://192.168.63.17:8443/#/dashboard - Дашбоард ceph Логин пароль admin admin
+
 ---
