@@ -34,7 +34,7 @@ cd otus-linux/\!Project/
 ansible-playbook -i inventory-proxmox seafile.yml
 ```
 Предварительно нужно установить pip и ansible версии 2.8.8.
-Машины необходимо предсоздать со следующими параметрами:
+Машины необходимо предсоздать со следующими параметрами: <br/>
  ![Image 3](https://raw.githubusercontent.com/perhamm/otus-linux/master/!Project/sreenshots/3.PNG)
 
 Также необходима машина для интернета в vlan 3065 с адресом 192.168.65.254 и включенным dns  worward. Её надо будет указывать в качестве DG, с неё же можно разворачивать плейбуки.
