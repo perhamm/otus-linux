@@ -1,0 +1,73 @@
+---
+- name: Add users and set pam 
+  hosts: master
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+        
+    - name: "Add Percona yum repository"
+      yum:
+        name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+        state: present
+        validate_certs : no
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+        
+    - name: Install percona - server
+      yum:
+        name:
+          - Percona-Server-server-57
+        state: present
+        
+    - name: copy config 
+      copy:
+        src: "{{ item }}"
+        dest: /etc/my.cnf.d
+      with_fileglob:
+        - conf.d/*
+      notify:
+      - restart mysqld
+        
+    - name: start mysqld
+      service:
+        name: mysqld
+        state: started
+        enabled: yes
+        
+        
+
+    - name: mysql setup
+      shell: |
+        password=$(cat /var/log/mysqld.log | grep 'root@localhost:' | awk '{print $11}')
+        echo -e "[client]\n\ruser=root\n\rpassword=$password" > /home/vagrant/my.cnf
+        id=1
+        mysql --defaults-file=/home/vagrant/my.cnf  -e "ALTER USER USER() IDENTIFIED BY 'fsdfl890423JKGHJ.,.sfsdKHK';" --connect-expired-password
+        if [ $? -eq 0 ]; then  id=0; fi
+        password='fsdfl890423JKGHJ.,.sfsdKHK'
+        echo -e "[client]\n\ruser=root\n\rpassword=$password" > /home/vagrant/my.cnf
+        if [ $id -eq 0 ]; then  mysql --defaults-file=/home/vagrant/my.cnf -e "CREATE DATABASE bet;" ; mysql --defaults-file=/home/vagrant/my.cnf -D bet < /vagrant/bet.dmp;       mysql --defaults-file=/home/vagrant/my.cnf  -e  "CREATE USER 'repl'@'%' IDENTIFIED BY 'OtusLinux2020\!';";     mysql --defaults-file=/home/vagrant/my.cnf  -e  "GRANT REPLICATION SLAVE ON *.* TO 'repl'@'%' IDENTIFIED BY 'OtusLinux2020\!';" ;        mysqldump  --defaults-file=/home/vagrant/my.cnf --all-databases --triggers --routines --master-data --ignore-table=bet.events_on_demand --ignore-table=bet.v_same_event  > /home/vagrant/master.sql; fi
+      args:
+        warn: no
+        executable: /bin/bash
+        
+    - name: Store file into /tmp
+      fetch:
+        src: /home/vagrant/master.sql
+        dest: .
+        
+  handlers:
+  - name: restart mysqld
+    service:
+      name: mysqld
+      enabled: yes
+      state: restarted

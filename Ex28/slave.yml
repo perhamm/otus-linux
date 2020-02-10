@@ -1,0 +1,82 @@
+---
+- name: Add users and set pam 
+  hosts: slave
+  become: yes
+
+    
+  tasks:
+    - name: Add epel-release repo
+      yum:
+        name: epel-release
+        state: present
+        
+        
+    - name: "Add Percona yum repository"
+      yum:
+        name: https://repo.percona.com/yum/percona-release-latest.noarch.rpm
+        state: present
+        validate_certs : no
+        
+    - name: disable ssl for repo epel
+      lineinfile: 
+        dest: /etc/yum.repos.d/epel.repo
+        insertafter: 'enabled=1' 
+        line: 'sslverify=0'
+        
+    - name: Install percona - server
+      yum:
+        name:
+          - Percona-Server-server-57
+        state: present
+        
+    - name: copy config 
+      copy:
+        src: "{{ item }}"
+        dest: /etc/my.cnf.d
+      with_fileglob:
+        - conf.d/*
+
+        
+    - name: set id
+      replace: 
+        path: /etc/my.cnf.d/01-base.cnf
+        regexp: 'server-id \= 1' 
+        replace: 'server-id = 2'
+
+    - name: set replicate-ignore-table
+      replace: 
+        path: /etc/my.cnf.d/05-binlog.cnf
+        regexp: '#replicate-ignore-table' 
+        replace: 'replicate-ignore-table'
+        
+    - name: start mysqld
+      service:
+        name: mysqld
+        state: started
+        enabled: yes
+        
+
+
+    - name: mysql setup
+      shell: |
+        password=$(cat /var/log/mysqld.log | grep 'root@localhost:' | awk '{print $11}')
+        echo -e "[client]\n\ruser=root\n\rpassword=$password" > /home/vagrant/my.cnf
+        id=1
+        mysql --defaults-file=/home/vagrant/my.cnf  -e "ALTER USER USER() IDENTIFIED BY 'fsdfl890423JKGHJ.,.sfsdKHK';" --connect-expired-password
+        if [ $? -eq 0 ]; then  id=0; fi
+        password='fsdfl890423JKGHJ.,.sfsdKHK'
+        echo -e "[client]\n\ruser=root\n\rpassword=$password" > /home/vagrant/my.cnf
+        if [ $id -eq 0 ]; then  mysql --defaults-file=/home/vagrant/my.cnf -D bet < /vagrant/master.sql; mysql --defaults-file=/home/vagrant/my.cnf -e "CHANGE MASTER TO MASTER_HOST = '192.168.100.10', MASTER_PORT = 3306, MASTER_USER = 'repl', MASTER_PASSWORD = 'OtusLinux2020\!', MASTER_AUTO_POSITION = 1;" ;     mysql --defaults-file=/home/vagrant/my.cnf -e "START SLAVE;"; fi
+      args:
+        warn: no
+        executable: /bin/bash
+
+        
+
+        
+  handlers:
+  - name: restart mysqld
+    service:
+      name: mysqld
+      enabled: yes
+      state: restarted
