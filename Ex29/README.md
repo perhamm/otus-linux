@@ -23,7 +23,7 @@ mysql cluster
  - ``` docker logs -f innodb-cluster_mysql-shell_1 ```
  - Должно появится сообщение о окончании процесса установки :)
  - ```docker exec -ti innodb-cluster_mysql-shell_1  /bin/bash```
- - В контейнере запустиь
+ - В контейнере запустить
    -  ``` mysqlsh -h mysql-router -P 6447 --password="mysql" ```
    -  ```dba.getCluster().status();``` - должен показать статус
    -  ``` \sql ``` - переключаемся на sql
