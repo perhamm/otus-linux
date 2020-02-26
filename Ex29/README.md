@@ -11,7 +11,7 @@ mysql cluster
 ## В процессе сделано:
 - Сделан кастомный образ, запускающий скрипт mysql-shell/run.sh и впадающий в sleep. Докерфайл приложен. Скрипт запускает переданные ему в параметрах js/sql, либо просто запускает переданные комманды.
 - Сделан docker-compose
-- В docker-compose создаются 3 контейнера с mysql, запускактся mysql-shell и обрабатываются скрипты из папки /innodb-cluster/scripts, потом запускается mysql-router
+- В docker-compose создаются 3 контейнера с mysql, запускается mysql-shell и обрабатываются скрипты из папки /innodb-cluster/scripts, потом запускается mysql-router
 
 
 
